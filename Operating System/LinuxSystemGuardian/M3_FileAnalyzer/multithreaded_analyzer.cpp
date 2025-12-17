@@ -8,8 +8,6 @@
 
 using namespace std;
 
-// --- Shared Data and Synchronization ---
-
 // Global structure to hold shared results
 struct AnalysisResults {
     long total_chars;
@@ -23,10 +21,9 @@ AnalysisResults shared_results = {0, 0, 0, 0};
 // Mutex lock to protect access to the shared_results structure
 pthread_mutex_t mutex_lock;
 
-// The search term specified for this run
+
 const string SEARCH_TERM = "threads"; // The term to count occurrences of
 
-// --- Data Structure for Thread Input ---
 
 // Structure passed to each thread containing its specific analysis section
 struct ThreadData {
@@ -35,8 +32,6 @@ struct ThreadData {
 
 
 // --- Thread Function ---
-
-// This function is executed by each thread
 void* analyze_section(void* arg) {
     ThreadData* data = (ThreadData*)arg;
     stringstream ss(data->content_section);
@@ -51,7 +46,7 @@ void* analyze_section(void* arg) {
     // Process the content line by line
     while (getline(ss, line)) {
         local_lines++;
-        local_chars += line.length() + 1; // +1 for the newline character
+        local_chars += line.length() + 1; 
         
         string word;
         stringstream line_stream(line);
@@ -59,16 +54,13 @@ void* analyze_section(void* arg) {
         // Process the line word by word
         while (line_stream >> word) {
             local_words++;
-            // Simple check for the search term (case sensitive)
             if (word.find(SEARCH_TERM) != string::npos) {
                 local_term_occurrences++;
             }
         }
     }
 
-    // --- Critical Section: Combining Results using Mutex ---
-    
-    // Acquire the lock before accessing shared_results
+    // Critical Section
     pthread_mutex_lock(&mutex_lock);
 
     // Update the shared global counters (Critical Section)
@@ -85,11 +77,9 @@ void* analyze_section(void* arg) {
 
 
 // --- Main Program ---
-
 int main(int argc, char* argv[]) {
     cout << "--- Linux System Guardian: Multithreaded File Analyzer ---" << endl;
-    
-    // Check for correct command line usage (input file)
+
     if (argc < 2) {
         cerr << "Usage: " << argv[0] << " <input_file>" << endl;
         return 1;
@@ -112,7 +102,7 @@ int main(int argc, char* argv[]) {
     file.read(&file_content[0], file_size);
     file.close();
 
-    // Determine the number of threads (e.g., 4 threads)
+    // Determine the number of threads
     int num_threads = 4;
     pthread_t threads[num_threads];
     vector<ThreadData> thread_data(num_threads);
@@ -133,7 +123,7 @@ int main(int argc, char* argv[]) {
         int start = i * section_size;
         int end = (i == num_threads - 1) ? file_content.length() : (i + 1) * section_size;
         
-        // Ensure the split doesn't happen mid-word by finding the next newline
+      
         if (i < num_threads - 1 && end < file_content.length()) {
             end = file_content.find('\n', end);
             if (end == string::npos) {

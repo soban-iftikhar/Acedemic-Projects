@@ -1,91 +1,113 @@
 #!/bin/bash
 
-# Define the directory where the executables and scripts are located
+# Define the directory where the script is located
 BASE_DIR=$(dirname "$0")
 
-echo "==================================================="
-echo "=== Linux System Guardian: Full Project Execution ==="
-echo "==================================================="
-
-# --- 0. PREP: Ensure all scripts are executable ---
-echo "--- 0. Setting permissions for scripts ---"
+# --- 1. SETUP AND COMPILATION ---
+echo "--- Preparing System Guardian Modules ---"
 chmod +x "$BASE_DIR/M1_SystemSnapshot/system_snapshot.sh"
 chmod +x "$BASE_DIR/M2_ProcessManager/child_task.sh"
 chmod +x "$BASE_DIR/M4_IPC/ipc_cleanup.sh"
-echo "Permissions set."
-sleep 1
+mkdir -p "$BASE_DIR/logs"
 
-# --- 1. SETUP AND COMPILATION ---
-# ... (Compilation block remains the same)
-
-echo "--- 1. Compiling C/C++ Modules ---"
-# Compile Module 2 (Make sure process_manager.cpp is updated with the correct path!)
-echo "Compiling Module 2 (Process Manager)..."
+# Compile all modules
 g++ "$BASE_DIR/M2_ProcessManager/process_manager.cpp" -o "$BASE_DIR/M2_ProcessManager/manager_exe"
-if [ $? -ne 0 ]; then echo "Error compiling M2. Aborting."; exit 1; fi
-
-# Compile Module 3
-echo "Compiling Module 3 (Multithreaded File Analyzer)..."
 g++ "$BASE_DIR/M3_FileAnalyzer/multithreaded_analyzer.cpp" -o "$BASE_DIR/M3_FileAnalyzer/analyzer_exe" -pthread
-if [ $? -ne 0 ]; then echo "Error compiling M3. Aborting."; exit 1; fi
-
-# Compile Module 4
-echo "Compiling Module 4 (IPC Sender/Receiver)..."
 gcc "$BASE_DIR/M4_IPC/ipc_sender.c" -o "$BASE_DIR/M4_IPC/sender_exe"
 gcc "$BASE_DIR/M4_IPC/ipc_receiver.c" -o "$BASE_DIR/M4_IPC/receiver_exe"
-if [ $? -ne 0 ]; then echo "Error compiling M4. Aborting."; exit 1; fi
 
-echo "Compilation successful."
-sleep 1
+show_menu() {
+    
+    echo "==================================================="
+    echo "       LINUX SYSTEM GUARDIAN - MASTER MENU"
+    echo "==================================================="
+    echo "1) Module 1: System Snapshot (Bash/Monitoring)"
+    echo "2) Module 2: Process Manager (C++/Fork/Exec)"
+    echo "3) Module 3: File Analyzer (C++/Pthreads/Mutex)"
+    echo "4) Module 4: IPC (C/Message Queues)"
+    echo "5) Run All Modules (Full Demonstration)"
+    echo "6) Exit"
+    echo "==================================================="
+}
 
-# --- 2. EXECUTE MODULE 1: System Snapshot (Bash) ---
-# ... (Execution block for M1 remains the same)
-echo ""
-echo "==================== M O D U L E   1 ===================="
-echo "Demonstrates: Shell Scripting, System Monitoring"
-"$BASE_DIR/M1_SystemSnapshot/system_snapshot.sh"
-echo "--- M1 Complete ---"
-sleep 2
+print_header() {
+    echo ""
+    echo "***************************************************"
+    echo " STARTED: $1 "
+    echo "***************************************************"
+    echo ""
+}
 
 
-# --- 3. EXECUTE MODULE 2: Process Manager (C++/fork) ---
-# ... (Execution block for M2 remains the same)
-echo ""
-echo "==================== M O D U L E   2 ===================="
-echo "Demonstrates: Process Creation, Synchronization, Program Replacement"
-"$BASE_DIR/M2_ProcessManager/manager_exe"
-echo "--- M2 Complete ---"
-sleep 2
+print_footer() {
+    echo ""
+    echo "***************************************************"
+    echo " COMPLETED: $1 "
+    echo "***************************************************"
+    echo ""
+}
 
-# --- 4. EXECUTE MODULE 3: Multithreaded Analyzer (C++/pthreads) ---
-# ... (Execution block for M3 remains the same)
-echo ""
-echo "==================== M O D U L E   3 ===================="
-echo "Demonstrates: Multithreading, Concurrency, Mutex Locks"
-"$BASE_DIR/M3_FileAnalyzer/analyzer_exe" "$BASE_DIR/M3_FileAnalyzer/sample_text.txt"
-echo "--- M3 Complete ---"
-sleep 2
+run_module_1() {
+    print_header "MODULE 1 - SYSTEM SNAPSHOT"
+    "$BASE_DIR/M1_SystemSnapshot/system_snapshot.sh"
+    print_footer "MODULE 1"
+}
 
-# --- 5. EXECUTE MODULE 4: IPC Message Queue (C/System V) ---
-# ... (Execution block for M4 remains the same)
-echo ""
-echo "==================== M O D U L E   4 ===================="
-echo "Demonstrates: Inter-Process Communication (IPC), Message Queues"
-echo "Running Sender (P1) -> Placing messages on queue..."
-"$BASE_DIR/M4_IPC/sender_exe"
-echo ""
-echo "Running Receiver (P2) -> Reading messages from queue..."
-"$BASE_DIR/M4_IPC/receiver_exe"
-echo "--- M4 Complete ---"
-sleep 2
+run_module_2() {
+    print_header "MODULE 2 - PROCESS MANAGER"
+    "$BASE_DIR/M2_ProcessManager/manager_exe"
+    print_footer "MODULE 2"
+}
 
-# --- 6. CLEANUP ---
-# ... (Cleanup block remains the same)
-echo ""
-echo "====================== C L E A N U P ======================"
-"$BASE_DIR/M4_IPC/ipc_cleanup.sh"
-echo "Cleanup finished."
+run_module_3() {
+    print_header "MODULE 3 - MULTITHREADED ANALYZER"
+    "$BASE_DIR/M3_FileAnalyzer/analyzer_exe" "$BASE_DIR/M3_FileAnalyzer/sample_text.txt"
+    print_footer "MODULE 3"
+}
 
-echo "==================================================="
-echo "=== All Modules Executed Successfully. Check logs/ folder for output. ==="
-echo "==================================================="
+run_module_4() {
+    print_header "MODULE 4 - IPC DEMONSTRATION"
+    echo "[Sender] Sending messages to the kernel queue..."
+    "$BASE_DIR/M4_IPC/sender_exe"
+    echo ""
+    echo "[Receiver] Retrieving messages from the kernel queue..."
+    "$BASE_DIR/M4_IPC/receiver_exe"
+    echo ""
+    "$BASE_DIR/M4_IPC/ipc_cleanup.sh"
+    print_footer "MODULE 4"
+}
+
+while true; do
+    show_menu
+    read -p "Select an option [1-6]: " choice
+    case "$choice" in
+        1)
+            run_module_1
+            ;;
+        2)
+            run_module_2
+            ;;
+        3)
+            run_module_3
+            ;;
+        4)
+            run_module_4
+            ;;
+        5)
+            print_header "RUN ALL MODULES"
+            run_module_1
+            run_module_2
+            run_module_3
+            run_module_4
+            print_footer "RUN ALL MODULES"
+            ;;
+        6)
+            echo "Exiting System Guardian. Goodbye!"
+            break
+            ;;
+        *)
+            echo "Invalid option. Please choose 1-6."
+            sleep 1
+            ;;
+    esac
+done
