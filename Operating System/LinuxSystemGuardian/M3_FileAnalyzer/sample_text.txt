@@ -1,0 +1,7 @@
+Operating System Concepts
+This file is for demonstrating multithreading.
+Each thread will count a portion of the statistics.
+We must use mutex locks to ensure accurate counts when
+multiple threads access shared resources like total characters,
+total words, and total lines.
+The primary concept is parallelism.
