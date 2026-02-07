@@ -1,7 +1,43 @@
-Operating System Concepts
-This file is for demonstrating multithreading.
-Each thread will count a portion of the statistics.
-We must use mutex locks to ensure accurate counts when
-multiple threads access shared resources like total characters,
-total words, and total lines.
-The primary concept is parallelism.
+Operating System Concepts - Multithreading Edge Cases Test
+This file is for demonstrating multithreading and threads in action.
+Each thread will count a portion of the statistics with precision.
+
+Threads: The Foundation of Parallelism
+Modern operating systems rely heavily on threads to manage concurrent execution.
+Multiple threads can execute simultaneously, sharing the same memory space.
+We must use mutex locks to ensure accurate counts when threads access shared resources.
+
+Edge Case 1: Beginning of File
+threads appear at the start of sentences and in the middle of threads.
+Threads (capitalized) should not match because search is case-sensitive.
+Thread management is crucial for performance.
+
+Edge Case 2: Multiple Occurrences Per Line
+threads threads threads appear three times consecutively here.
+The word threads should be counted each time it appears threads independently threads here.
+
+Edge Case 3: Empty Lines and Whitespace
+
+
+Edge Case 4: Single Character Lines
+a
+I
+x
+
+Edge Case 5: Punctuation and Special Characters
+threads, threads. threads! threads?
+"threads" (in quotes) and 'threads' (in single quotes).
+threads:the;threads-critical;threads.important
+
+Edge Case 6: Very Long Line
+This is a very long line that contains the word threads multiple times: threads appears here, threads appears there, and threads appears everywhere in this comprehensive test line designed to verify that word counting works correctly across extended content.
+
+Edge Case 7: Words Containing Search Term
+threading is not threads because it contains extra characters.
+freeThreads, unthreads, and mythreads are not pure thread matches.
+threadsafe is not the same as threads alone.
+
+Edge Case 8: End of File
+The final line demonstrates threads at the end of document.
+Last occurrence: threads.
+threads
