@@ -1,9 +1,3 @@
-"""
-Agentic Micro-Decision Advisor (AMDA) - Fuzzy Logic Enhanced
-A lightweight, single-agent AI system that recommends micro-actions 
-based on user context and fuzzy utility-based decision making.
-"""
-
 from dataclasses import dataclass, field
 from typing import Dict, List, Tuple, Optional
 from enum import Enum
@@ -13,8 +7,6 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl 
 
 # ENUMS AND DATA STRUCTURES
-
-
 class BeliefLabel(Enum):
     """Symbolic labels for discrete beliefs."""
     LOW = 0.0
@@ -22,8 +14,9 @@ class BeliefLabel(Enum):
     HIGH = 1.0
 
 
-class Action(Enum):
-    """Action space: micro-actions the agent can recommend."""
+class Action(Enum):    
+    """Possible actions the agent can recommend."""
+
     STUDY = "study"
     DO_EASY_TASK = "do_easy_task"
     GYM = "gym"
@@ -38,8 +31,8 @@ class Action(Enum):
 class Belief:
     """Represents a single belief with symbolic and numeric value."""
     name: str
-    value: str  # symbolic: 'low', 'medium', 'high', or numeric string
-    numeric_strength: float  # [0.0, 1.0]
+    value: str  
+    numeric_strength: float  
     
     def __repr__(self):
         return f"Belief({self.name}={self.value})"
@@ -47,10 +40,8 @@ class Belief:
 
 @dataclass
 class Rule:
-    """
-    Production rule: preconditions → utility deltas.
-    Preconditions must now return the FUZZY ACTIVATION STRENGTH [0.0, 1.0].
-    """
+    """Production rule with fuzzy preconditions and utility effects."""
+
     name: str
     preconditions: callable  # function(beliefs_dict) -> float (activation strength)
     effects: Dict[Action, float]  # action -> delta contribution
@@ -70,9 +61,8 @@ class UtilityScore:
         return f"{self.action.value}: {self.total_utility:.2f}"
 
 
-# ============================================================================
+
 # AGENTIC MICRO-DECISION ADVISOR
-# ============================================================================
 
 class AMDA:
     """Main AMDA Agent: perceive → reason → act → explain."""
@@ -95,36 +85,27 @@ class AMDA:
             Action.PLAN_NEXT_STEPS: 0.5,
         }
         
-        # NEW: Setup fuzzy logic components (must run before initializing rules)
         self.fuzzy_antecedents = self._setup_fuzzy_control()
-
-        # Initialize rule set
         self.rules: List[Rule] = self._initialize_rules()
     
-    # ========================================================================
+
     # FUZZY LOGIC SETUP
-    # ========================================================================
     
     def _setup_fuzzy_control(self):
         """
         Defines the universe of discourse and membership functions (MFs) 
         for all input variables.
         """
-        # All beliefs are scaled [0.0, 1.0]. We use a universe of [0, 10] for better MF definition.
         
-        # Generic Antecedent for level-based inputs (Energy, Stress, Fatigue, Focus, Mood)
         level_universe = np.arange(0, 11, 1)
         level = ctrl.Antecedent(level_universe, 'level')
-        
-        # Time Available (e.g., [0, 120] minutes, normalized to [0, 10])
+
         time_universe = np.arange(0, 11, 1)
         time_norm = ctrl.Antecedent(time_universe, 'time_norm')
-        
-        # Deadline Status
+
         deadline_universe = np.arange(0, 11, 1)
         deadline = ctrl.Antecedent(deadline_universe, 'deadline')
 
-        # Mood (separate antecedent to support bad/okay/good labels)
         mood_universe = np.arange(0, 11, 1)
         mood = ctrl.Antecedent(mood_universe, 'mood')
 
@@ -160,7 +141,7 @@ class AMDA:
         Computes the degree of membership for a belief value in a specific fuzzy set.
         Returns a float [0.0, 1.0].
         """
-        # Scale belief value from [0.0, 1.0] to [0.0, 10.0] for the MFs
+
         val = belief_dict.get(b_name, 0.0) * 10 
         
         if b_name in ['physical_fatigue', 'energy_level', 'stress_level', 'mental_focus', 'mood']:
@@ -172,13 +153,11 @@ class AMDA:
         else:
             return 0.0
 
-        # `fuzz.interp_membership` calculates the degree of membership (µ)
         return fuzz.interp_membership(antecedent.universe, antecedent[f_set_name].mf, val)
 
-    # ========================================================================
+
     # RULE DEFINITIONS (FUZZY PRECONDITIONS)
-    # ========================================================================
-    
+   
     def _initialize_rules(self) -> List[Rule]:
         """Define all production rules that shape utilities using Fuzzy Activation."""
         rules = []
@@ -190,7 +169,7 @@ class AMDA:
         # Rule 1: Deadline urgency
         rules.append(Rule(
             name="deadline_urgency",
-            # FUZZY ACTIVATION: Degree to which deadline is 'near' OR 'urgent' (T-conorm / max)
+          
             preconditions=lambda b: np.fmax(_mem('deadline_status', 'near', b), 
                                              _mem('deadline_status', 'urgent', b)),
             effects={Action.STUDY: +0.8, Action.PLAN_NEXT_STEPS: +0.3},
@@ -201,14 +180,14 @@ class AMDA:
         # Rule 2: High fatigue
         rules.append(Rule(
             name="high_fatigue",
-            # FUZZY ACTIVATION: Degree to which fatigue is 'high'
+        
             preconditions=lambda b: _mem('physical_fatigue', 'high', b),
             effects={Action.DEEP_REST: +0.9, Action.STUDY: -0.4},
             weight=2.0,
             description="High fatigue prioritizes recovery (Fuzzy)"
         ))
         
-        # Rule 3: Low energy + short time (FUZZY AND: T-norm / min)
+        # Rule 3: Low energy + short time 
         rules.append(Rule(
             name="low_energy_short_time",
             preconditions=lambda b: np.fmin(
@@ -220,7 +199,7 @@ class AMDA:
             description="Short windows with low energy suit easy tasks (Fuzzy)"
         ))
         
-        # Rule 4: High focus + available time (FUZZY AND: T-norm / min)
+        # Rule 4: High focus + available time 
         rules.append(Rule(
             name="high_focus_time",
             preconditions=lambda b: np.fmin(
@@ -243,7 +222,7 @@ class AMDA:
             description="High stress suggests breaks and relaxation (Fuzzy)"
         ))
         
-        # Rule 6: Physical exercise readiness (FUZZY AND: T-norm / min)
+        # Rule 6: Physical exercise readiness (
         rules.append(Rule(
             name="exercise_readiness",
             preconditions=lambda b: np.fmin(
@@ -270,7 +249,7 @@ class AMDA:
         # Rule 8: Bad mood → rest or gentle activity
         rules.append(Rule(
             name="bad_mood_care",
-            # Mood uses bad/okay/good MFs; use 'bad' instead of the previous 'low'
+            
             preconditions=lambda b: _mem('mood', 'bad', b),
             effects={Action.DEEP_REST: +0.3, Action.RELAX_ACTIVITY: +0.3, 
                     Action.STUDY: -0.3},
@@ -278,7 +257,7 @@ class AMDA:
             description="Low mood calls for self-care (Fuzzy)"
         ))
         
-        # Rule 9: Planning when uncertain (FUZZY AND: T-norm / min)
+        # Rule 9: Planning when uncertain 
         rules.append(Rule(
             name="planning_clarity",
             preconditions=lambda b: np.fmin(
@@ -292,15 +271,13 @@ class AMDA:
         
         return rules
     
-    # ========================================================================
-    # PERCEPTION: INPUT → BELIEFS (UNCHANGED MAPPING)
-    # ========================================================================
+
+    # PERCEPTION: INPUT → BELIEFS 
     
     def perceive(self, user_input: Dict[str, str]) -> None:
         """Convert user inputs into internal belief representation."""
         self.beliefs.clear()
-        
-        # Map string inputs to numeric beliefs [0.0, 1.0]
+
         belief_mapping = {
             'energy_level': self._map_level,
             'stress_level': self._map_level,
@@ -310,7 +287,7 @@ class AMDA:
             'deadline_status': self._map_deadline,
         }
         
-        # Process time_available: normalize to [0.0, 1.0] (max 120 min)
+        # Process time_available:
         time_val = float(user_input.get('time_available', 30))
         time_norm = min(time_val / 120.0, 1.0)
         
@@ -330,8 +307,6 @@ class AMDA:
             numeric_strength=time_norm
         )
     
-    # NOTE: The mapping functions are kept for the string-to-numeric conversion
-    # They return crisp values [0.0, 1.0], which the fuzzy system then uses.
     def _map_level(self, label: str) -> float:
         """Map 'low'/'medium'/'high' to [0.0, 1.0]."""
         mapping = {'low': 0.0, 'medium': 0.5, 'high': 1.0}
@@ -347,9 +322,8 @@ class AMDA:
         mapping = {'none': 0.0, 'near': 0.5, 'urgent': 1.0}
         return mapping.get(label.lower(), 0.0)
     
-    # ========================================================================
+
     # INFERENCE: FUZZY ACTIVATION → UTILITY DELTAS
-    # ========================================================================
     
     def _compute_utilities(self) -> Dict[Action, UtilityScore]:
         """
@@ -358,7 +332,7 @@ class AMDA:
         """
         scores = {}
         
-        # Build numeric belief dict for rule evaluation (values are [0.0, 1.0])
+        # Build numeric belief dict for rule evaluation 
         belief_dict = {b.name: b.numeric_strength for b in self.beliefs.values()}
         
         for action in Action:
@@ -394,10 +368,8 @@ class AMDA:
         
         return scores
     
-    # ========================================================================
-    # DECISION: ARGMAX WITH TIE-BREAKING (UNCHANGED)
-    # ========================================================================
-    
+
+    # DECISION: ARGMAX WITH TIE-BREAKING 
 
     def _resolve_decision(self, scores: Dict[Action, UtilityScore]) -> Tuple[Action, UtilityScore]:
         """
@@ -412,7 +384,7 @@ class AMDA:
         contenders = [s for s in sorted_scores if abs(s.total_utility - best.total_utility) <= epsilon]
         
         if len(contenders) > 1:
-            # Apply tie-breakers
+            
             # Priority 1: Health/rest actions
             health_priority = [Action.DEEP_REST, Action.SHORT_BREAK, Action.RELAX_ACTIVITY]
             health_contenders = [s for s in contenders if s.action in health_priority]
@@ -436,8 +408,7 @@ class AMDA:
         return best.action, best
 
     
-    # =ITICAL SECTIONS (UNCHANGED)
-    
+    # EXPLANATION: XAI NARRATIVE GENERATION    
     def _generate_explanation(self, action: Action, score: UtilityScore) -> str:
         """Generate human-readable explanation for chosen action."""
         lines = []
@@ -474,21 +445,20 @@ class AMDA:
         suggestions = {
             Action.STUDY: "Focus on deep work; minimize distractions for 45+ minutes.",
             Action.DO_EASY_TASK: "Tackle a small, low-barrier task to build momentum.",
-            Action.GYM: "Hit the gym or exercise for 30–60 minutes. Great timing!",
-            Action.SHORT_BREAK: "Step away for 5–10 minutes. Stretch, hydrate, reset.",
+            Action.GYM: "Hit the gym or exercise for 30-60 minutes. Great timing!",
+            Action.SHORT_BREAK: "Step away for 5-10 minutes. Stretch, hydrate, reset.",
             Action.DEEP_REST: "Prioritize sleep or deep rest. Your body needs recovery.",
             Action.RELAX_ACTIVITY: "Engage in something enjoyable: music, reading, hobby.",
             Action.AVOID_DISTRACTIONS: "Silence notifications and work in a focused space.",
-            Action.PLAN_NEXT_STEPS: "Spend 10–15 minutes clarifying your next 3 priorities.",
+            Action.PLAN_NEXT_STEPS: "Spend 10-15 minutes clarifying your next 3 priorities.",
         }
         lines.append(f"\nSuggestion: {suggestions.get(action, 'Take the recommended action.')}")
         lines.append(f"{'='*70}\n")
         
         return "\n".join(lines)
     
-    # ========================================================================
-    # MAIN AGENT LOOP (UNCHANGED)
-    # ========================================================================
+
+    # MAIN AGENT LOOP 
     
     def decide(self, user_input: Dict[str, str]) -> Tuple[Action, str]:
         """
@@ -511,9 +481,8 @@ class AMDA:
         
         return chosen_action, explanation
     
-    # ========================================================================
-    # UTILITY: DEBUG AND ANALYSIS (UNCHANGED)
-    # ========================================================================
+
+    # UTILITY: DEBUG AND ANALYSIS 
     
     def print_utility_table(self, user_input: Dict[str, str]) -> None:
         """Print detailed utility breakdown for all actions (for analysis)."""
@@ -537,9 +506,7 @@ class AMDA:
         print(f"{'='*70}\n")
 
 
-# ============================================================================
-# DEMO & INTERACTIVE LOOP (UNCHANGED)
-# ============================================================================
+# DEMO & INTERACTIVE LOOP 
 
 def get_user_input() -> Dict[str, str]:
     """Prompt user for beliefs interactively."""
@@ -712,7 +679,7 @@ def main():
 
 
 if __name__ == '__main__':
-    # Check for library presence before running
+    
     try:
         main()
     except ImportError:
