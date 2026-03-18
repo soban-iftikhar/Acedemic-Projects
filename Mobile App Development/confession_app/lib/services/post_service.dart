@@ -15,6 +15,7 @@ class PostService extends ChangeNotifier {
     required String userId,
     required String content,
     String? imageUrl,
+    bool userIsAnonymous = true,
   }) async {
     try {
       if (content.trim().isEmpty) throw Exception('Content cannot be empty');
@@ -27,6 +28,7 @@ class PostService extends ChangeNotifier {
         imageUrl: imageUrl,
         createdAt: DateTime.now(),
         status: _checkContentForModeration(content) ? PostStatus.flagged : PostStatus.active,
+        userWasAnonymous: userIsAnonymous,
       );
 
       _posts.insert(0, newPost); // Add to top of list

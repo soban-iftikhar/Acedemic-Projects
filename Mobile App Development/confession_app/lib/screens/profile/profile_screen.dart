@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth_service.dart';
 import '../../services/post_service.dart';
+import '../../models/post.dart' show Post, PostStatus;
 import '../auth/login_screen.dart';
 import 'edit_profile_screen.dart';
 import '../../widgets/post_card.dart';
@@ -39,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final isOwnProfile = targetUser.id == authService.currentUser?.id;
 
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         title: const Text('Profile'),
         elevation: 0,
@@ -80,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             // Profile header
             Container(
               padding: const EdgeInsets.all(24),
-              color: Colors.deepPurple[50],
+              color: Colors.grey[850],
               child: Column(
                 children: [
                   // Avatar
@@ -139,8 +141,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     decoration: BoxDecoration(
                       color: targetUser.isAnonymous
-                          ? Colors.blue[100]
-                          : Colors.green[100],
+                          ? Colors.blue[900]
+                          : Colors.green[900],
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
@@ -148,8 +150,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         fontSize: 12,
                         color: targetUser.isAnonymous
-                            ? Colors.blue[700]
-                            : Colors.green[700],
+                            ? Colors.blue[200]
+                            : Colors.green[200],
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -270,10 +272,4 @@ class _StatItem extends StatelessWidget {
       ],
     );
   }
-}
-
-class PostStatus {
-  static const String active = 'active';
-  static const String flagged = 'flagged';
-  static const String deleted = 'deleted';
 }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../models/post.dart';
 import '../services/post_service.dart';
 import '../services/auth_service.dart';
+import '../screens/profile/profile_screen.dart';
 
 class PostCard extends StatefulWidget {
   final Post post;
@@ -38,8 +39,19 @@ class _PostCardState extends State<PostCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header: Author info and options
-              Row(
-                children: [
+              GestureDetector(
+                onTap: !widget.post.userWasAnonymous
+                    ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ProfileScreen(userId: widget.post.userId),
+                          ),
+                        );
+                      }
+                    : null,
+                child: Row(
+                  children: [
                   CircleAvatar(
                     backgroundColor: Colors.deepPurple[100],
                     child: Text(
@@ -56,15 +68,15 @@ class _PostCardState extends State<PostCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          user?.isAnonymous == false
-                              ? (user?.fullName ?? 'Anonymous User')
-                              : 'Anonymous',
+                          widget.post.userWasAnonymous
+                              ? 'Anonymous'
+                              : (user?.fullName ?? 'Anonymous User'),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                           ),
                         ),
-                        if (user?.isAnonymous == false)
+                        if (!widget.post.userWasAnonymous)
                           Text(
                             user?.university ?? '',
                             style: TextStyle(
@@ -119,6 +131,7 @@ class _PostCardState extends State<PostCard> {
                     ],
                   ),
                 ],
+                ),
               ),
               const SizedBox(height: 12),
 
@@ -238,11 +251,4 @@ class _PostCardState extends State<PostCard> {
       return '${(difference.inDays / 7).floor()}w ago';
     }
   }
-}
-
-class PostStatus {
-  static const String active = 'active';
-  static const String flagged = 'flagged';
-  static const String suspended = 'suspended';
-  static const String deleted = 'deleted';
 }
