@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}{% if challenge %}Edit{% else %}Add{% endif %} Challenge{% endblock %}
+{% block content %}
+<div class="row mb-4 fi">
+  <div class="col">
+    <div class="sec-hdr mb-1">// challenge editor</div>
+    <h2 class="pg-title">{% if challenge %}Edit{% else %}New{% endif %} <span style="color:var(--green);">Challenge</span></h2>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="ctf-card p-4 fi1">
+      <form method="POST">
+        {% if not challenge %}
+        <div class="mb-3">
+          <label class="form-label">Slug (unique ID, no spaces)</label>
+          <input type="text" name="slug" class="form-control ctf-input" placeholder="e.g. sqli2" required>
+        </div>
+        {% endif %}
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input type="text" name="title" class="form-control ctf-input" value="{{ challenge['title'] if challenge else '' }}" required>
+        </div>
+        <div class="row g-3 mb-3">
+          <div class="col-md-4">
+            <label class="form-label">Category</label>
+            <input type="text" name="category" class="form-control ctf-input" value="{{ challenge['category'] if challenge else '' }}" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Difficulty</label>
+            <select name="difficulty" class="form-control ctf-input">
+              <option {% if challenge and challenge['difficulty']=='Easy' %}selected{% endif %}>Easy</option>
+              <option {% if challenge and challenge['difficulty']=='Medium' %}selected{% endif %}>Medium</option>
+              <option {% if challenge and challenge['difficulty']=='Hard' %}selected{% endif %}>Hard</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Points</label>
+            <input type="number" name="points" class="form-control ctf-input" value="{{ challenge['points'] if challenge else 100 }}" required>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-control ctf-input" rows="4" required>{{ challenge['description'] if challenge else '' }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Hint</label>
+          <input type="text" name="hint" class="form-control ctf-input" value="{{ challenge['hint'] if challenge else '' }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Flag</label>
+          <input type="text" name="flag" class="form-control ctf-input" value="{{ challenge['flag'] if challenge else 'flag{...}' }}" required>
+        </div>
+        {% if challenge %}
+        <div class="mb-4 d-flex align-items-center gap-2">
+          <label class="form-label mb-0">Active</label>
+          <input type="checkbox" name="active" {% if challenge['active'] %}checked{% endif %} style="accent-color:var(--green);width:16px;height:16px;">
+        </div>
+        {% endif %}
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn-ctf flex-grow-1" style="padding:.5rem;display:block;text-align:center;">SAVE CHALLENGE</button>
+          <a href="/admin/challenges" class="btn-ctf btn-cyan" style="padding:.5rem 1.2rem;">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

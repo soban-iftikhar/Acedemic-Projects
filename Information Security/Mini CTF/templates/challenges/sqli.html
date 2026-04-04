@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Login Bypass{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <div class="sec-hdr mb-1">// challenge 01 // injection</div>
+    <h2 class="pg-title">Legacy <span style="color:var(--green);">Login Portal</span></h2>
+    <p style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--muted);margin-top:4px;">ACME Corp internal system — v1.0.2</p>
+  </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+  <div class="col-md-5">
+    <div class="fi1">
+      <div class="t-header">
+        <div class="t-dot" style="background:#ff5f57;"></div>
+        <div class="t-dot" style="background:#febc2e;"></div>
+        <div class="t-dot" style="background:#28c840;"></div>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);margin-left:8px;">acme-internal-login.php</span>
+      </div>
+      <div style="background:#000;border:1px solid #1a2a1a;border-top:none;border-radius:0 0 4px 4px;padding:1.5rem;">
+        <div style="text-align:center;margin-bottom:1.2rem;">
+          <span style="font-family:'Orbitron',monospace;font-size:.95rem;color:#777;"><i class="fa fa-lock me-2"></i>SECURE LOGIN</span>
+        </div>
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control ctf-input" placeholder="username" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control ctf-input" placeholder="password">
+          </div>
+          <button type="submit" class="btn btn-ctf w-100">LOGIN</button>
+        </form>
+        {% if error %}
+        <div class="alert alert-danger mt-3 mb-0" style="font-size:.82rem;">{{ error }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if query_shown %}
+    <div class="ctf-card p-3 mt-3 fi">
+      <div class="sec-hdr mb-2">// query executed</div>
+      <div class="terminal-solo" style="font-size:.78rem;max-height:70px;">{{ query_shown }}</div>
+    </div>
+    {% endif %}
+
+    {% if success %}
+    <div class="ctf-card p-4 mt-3 fi" style="border-color:rgba(0,255,65,.5);">
+      <div class="sec-hdr mb-2">// access granted</div>
+      <div class="flag-box">{{ success }}</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--muted);margin-top:.8rem;">
+        Go back and submit this flag on the <a href="/challenge/sqli" style="color:var(--green);">challenge page</a>
+      </p>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="col-md-4">
+    <div class="ctf-card p-3 fi2">
+      <div class="sec-hdr mb-3">// vulnerability intel</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#667;line-height:1.9;">
+        The login passes input <span style="color:var(--red);">directly</span> into SQL:<br><br>
+        <span style="color:var(--cyan);">SELECT * FROM users<br>WHERE username='<span style="color:var(--yellow);">INPUT</span>'<br>AND password='<span style="color:var(--yellow);">INPUT</span>'</span><br><br>
+        Make the WHERE clause <span style="color:var(--green);">always true</span>.<br><br>
+        Try entering a single quote <span style="color:var(--yellow);">'</span> and see what happens.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

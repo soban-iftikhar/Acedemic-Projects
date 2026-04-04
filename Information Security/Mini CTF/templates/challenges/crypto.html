@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Encoded Message{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <div class="sec-hdr mb-1">// challenge 07 // cryptography</div>
+    <h2 class="pg-title">Intercepted <span style="color:var(--purple);">Transmission</span></h2>
+  </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+  <div class="col-md-7">
+    <div class="ctf-card p-4 fi1">
+      <div class="sec-hdr mb-2">// intercepted ciphertext</div>
+      <div class="terminal-solo" style="font-size:1rem;letter-spacing:3px;text-align:center;padding:1.4rem;">{{ encoded }}</div>
+    </div>
+
+    <div class="ctf-card p-4 mt-3 fi2">
+      <div class="sec-hdr mb-3">// decode and submit</div>
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">Decoded flag</label>
+          <input type="text" name="decoded" class="form-control ctf-input"
+                 placeholder="flag{...}" value="{{ user_input }}" autocomplete="off">
+        </div>
+        <button type="submit" class="btn-ctf w-100" style="display:block;text-align:center;padding:.45rem;">
+          <i class="fa fa-key me-2"></i>SUBMIT DECODED FLAG
+        </button>
+      </form>
+
+      {% if decoded is not none %}
+      <div class="mt-3">
+        <div class="sec-hdr mb-1">// rot13 result</div>
+        <div class="terminal-solo" style="font-size:.88rem;letter-spacing:1px;">{{ decoded }}</div>
+      </div>
+      {% endif %}
+
+      {% if correct is not none %}
+      <div class="mt-3">
+        {% if correct %}
+        <div class="alert alert-success">
+          <i class="fa fa-check me-2"></i>Correct decode! Submit this flag on the
+          <a href="/challenge/crypto" style="color:var(--green);font-weight:bold;">challenge page</a>.
+        </div>
+        {% else %}
+        <div class="alert alert-danger">
+          <i class="fa fa-times me-2"></i>Incorrect. Keep decoding.
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="ctf-card p-3 mt-3 fi3">
+      <div class="sec-hdr mb-3">// cipher reference — rot13 / caesar shift=13</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:#667;line-height:2;">
+        <span style="color:var(--muted);">Plain: &nbsp;</span><span style="color:var(--green);">A B C D E F G H I J K L M</span><br>
+        <span style="color:var(--muted);">Cipher:</span><span style="color:var(--cyan);"> N O P Q R S T U V W X Y Z</span><br><br>
+        Numbers <span style="color:var(--yellow);">&amp; symbols</span> are <span style="color:var(--green);">unchanged</span>.<br>
+        Apply the same shift to <span style="color:var(--yellow);">decode</span> as to encode.
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

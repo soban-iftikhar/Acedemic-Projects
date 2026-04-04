@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height:82vh;">
+  <div class="col-md-5 col-lg-4">
+    <div class="text-center mb-4 fi">
+      <div style="font-family:'Orbitron',monospace;font-size:2.4rem;font-weight:900;color:var(--green);text-shadow:0 0 20px rgba(0,255,65,.8);">MINI<span style="color:var(--cyan);">CTF</span></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:3px;margin-top:5px;">AUTHENTICATE TO PROCEED</div>
+    </div>
+    <div class="ctf-card p-4 fi1">
+      <div class="sec-hdr mb-4">// terminal login</div>
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" name="username" class="form-control ctf-input" placeholder="enter username" autocomplete="off" required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control ctf-input" placeholder="enter password" required>
+        </div>
+        <button type="submit" class="btn btn-ctf w-100"><i class="fa fa-terminal me-2"></i>ACCESS SYSTEM</button>
+      </form>
+    </div>
+    <div class="text-center mt-3 fi2">
+      <a href="/auth/register" style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:var(--muted);text-decoration:none;">
+        No account? <span style="color:var(--green);">Register here</span>
+      </a>
+    </div>
+    <div class="ctf-card p-3 mt-3 fi2" style="border-color:#1a1a2e;">
+      <div class="sec-hdr mb-2">// demo credentials</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:#556;line-height:1.9;">
+        Admin  -> <span style="color:var(--yellow);">admin</span> / <span style="color:var(--yellow);">Admin@1337</span><br>
+        Player -> <span style="color:var(--cyan);">player1</span> / <span style="color:var(--cyan);">player123</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

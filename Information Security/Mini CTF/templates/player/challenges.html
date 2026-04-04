@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Challenges{% endblock %}
+{% block content %}
+<div class="row mb-4 fi align-items-center">
+  <div class="col">
+    <div class="sec-hdr mb-1">// challenge board</div>
+    <h2 class="pg-title">Active <span style="color:var(--green);">Challenges</span></h2>
+  </div>
+  <div class="col-auto">
+    <span style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:var(--muted);">
+      {{ solved_ids|length }}/{{ challenges|length }} solved
+    </span>
+  </div>
+</div>
+<div class="row g-3">
+  {% for ch in challenges %}
+  <div class="col-md-6 col-lg-4 fi">
+    <div class="ctf-card p-3 h-100 position-relative d-flex flex-column" style="{% if ch['id'] in solved_ids %}border-color:rgba(0,255,65,.3);{% endif %}">
+      {% if ch['id'] in solved_ids %}
+      <div class="solved-pin"><i class="fa fa-check-circle"></i></div>
+      {% endif %}
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <span class="cat-pill">{{ ch['category'] }}</span>
+        <span class="bdg diff-{{ ch['difficulty']|lower }}">{{ ch['difficulty'] }}</span>
+      </div>
+      <h5 style="font-family:'Orbitron',monospace;font-size:.88rem;margin:.5rem 0;color:{% if ch['id'] in solved_ids %}var(--green){% else %}#ddd{% endif %};">{{ ch['title'] }}</h5>
+      <p style="font-size:.85rem;color:#667;line-height:1.5;margin-bottom:1rem;flex-grow:1;">{{ ch['description'][:110] }}...</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <span style="font-family:'Share Tech Mono',monospace;color:var(--yellow);">+{{ ch['points'] }} pts</span>
+        <a href="/challenge/{{ ch['slug'] }}" class="btn-ctf {% if ch['id'] in solved_ids %}btn-cyan{% endif %}" style="padding:.3rem 1rem;font-size:.78rem;">
+          {% if ch['id'] in solved_ids %}REVIEW{% else %}ATTACK{% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Activity Logs{% endblock %}
+{% block content %}
+<div class="row mb-4 fi align-items-center">
+  <div class="col">
+    <div class="sec-hdr mb-1">// intrusion detection system</div>
+    <h2 class="pg-title">Activity <span style="color:var(--red);">Logs</span></h2>
+  </div>
+</div>
+<div class="ctf-card p-3 fi1">
+  <div class="t-header">
+    <div class="t-dot" style="background:#ff5f57;"></div>
+    <div class="t-dot" style="background:#febc2e;"></div>
+    <div class="t-dot" style="background:#28c840;"></div>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);margin-left:8px;">ids.log — last 300 events</span>
+  </div>
+  <div class="terminal" style="max-height:600px;">{% for log in logs %}[{{ log['timestamp'] }}] {% if log['username'] %}{{ log['username'] }}{% else %}ANON{% endif %} | IP:{{ log['ip_address'] or 'N/A' }} | {{ log['action'] }}{% if log['payload'] %} | {{ log['payload'] }}{% endif %}
+{% endfor %}{% if not logs %}No logs yet.{% endif %}</div>
+</div>
+{% endblock %}
