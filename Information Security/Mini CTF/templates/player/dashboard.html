@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row mb-4 fi align-items-center">
   <div class="col">
-    <div class="sec-hdr mb-1">// operator dashboard</div>
+    <h1 class="sec-hdr mb-1">Operator Dashboard</h1>
     <h2 class="pg-title">Welcome back, <span style="color:var(--green);">{{ session.username }}</span></h2>
   </div>
 </div>
@@ -36,15 +36,15 @@
 </div>
 
 <div class="ctf-card p-3 mb-4 fi2">
-  <div class="sec-hdr mb-2">// progress</div>
+  <h2 class="sec-hdr mb-2">Progress</h2>
   {% set pct = ((solved_ids|length / total) * 100)|int if total > 0 else 0 %}
-  <div style="background:#0a0a0a;border-radius:2px;height:7px;overflow:hidden;">
-    <div style="height:100%;width:{{ pct }}%;background:linear-gradient(90deg,var(--green),var(--cyan));box-shadow:0 0 8px rgba(0,255,65,.4);transition:width 1s ease;"></div>
+  <div style="background:#E5E7EB;border-radius:12px;height:12px;overflow:hidden;position:relative;">
+    <div style="height:100%;width:{{ pct }}%;background:linear-gradient(90deg,var(--violet),var(--pink));box-shadow:0 2px 8px rgba(124,58,237,0.3);transition:width 0.8s ease;border-radius:12px;"></div>
   </div>
-  <div style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);margin-top:5px;">{{ pct }}% complete — {{ solved_ids|length }}/{{ total }} challenges pwned</div>
+  <div style="font-family:'Inter',sans-serif;font-size:.85rem;color:var(--text-muted);margin-top:8px;font-weight:500;">{{ pct }}% complete — {{ solved_ids|length }}/{{ total }} challenges pwned</div>
 </div>
 
-<div class="sec-hdr mb-3 fi2">// available challenges</div>
+<h2 class="sec-hdr mb-3 fi2">Available Challenges</h2>
 <div class="row g-3">
   {% for ch in challenges %}
   <div class="col-md-6 col-lg-4 fi">
