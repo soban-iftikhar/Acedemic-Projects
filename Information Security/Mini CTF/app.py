@@ -1,20 +1,14 @@
 import os
-import subprocess
 import sqlite3
 from flask import (Flask, render_template, request, redirect,
                    url_for, session, flash, make_response)
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
 from db import get_db, init_db
 from auth import login_required, admin_required, get_current_user, log_activity
 from flags import FLAGS, CRYPTO_ENCODED
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
-app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'challenge_data', 'upload')
-app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
-
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -445,89 +439,6 @@ def challenge_xss():
     resp.set_cookie('ctf_flag', FLAGS['xss'], httponly=False, samesite='Lax')
     return resp
 
-# --- Challenge 4: Command Injection ---
-CMDI_DIR = os.path.join(os.path.dirname(__file__), 'challenge_data', 'cmdi')
-
-def init_cmdi():
-    os.makedirs(CMDI_DIR, exist_ok=True)
-    flag_file = os.path.join(CMDI_DIR, 'flag.txt')
-    if not os.path.exists(flag_file):
-        with open(flag_file, 'w') as f:
-            f.write(FLAGS['cmdi'])
-
-@app.route('/challenges/cmdi', methods=['GET','POST'])
-@login_required
-def challenge_cmdi():
-    init_cmdi()
-    output = None
-    if request.method == 'POST':
-        host = request.form.get('host','')
-        log_activity(session.get('user_id'), 'CMDI_ATTEMPT',
-                     payload=host[:200], ip=request.remote_addr)
-        try:
-            result = subprocess.run(
-                f'ping -c 2 {host}',
-                shell=True, capture_output=True, text=True, timeout=8, cwd=CMDI_DIR
-            )
-            output = result.stdout + result.stderr
-        except subprocess.TimeoutExpired:
-            output = 'Request timed out.'
-        except Exception as e:
-            output = str(e)
-    db = get_db()
-    ch = db.execute("SELECT * FROM challenges WHERE slug='cmdi'").fetchone()
-    db.close()
-    user = get_current_user()
-    return render_template('challenges/cmdi.html', user=user, challenge=ch, output=output)
-
-# --- Challenge 5: File Upload ---
-UPLOAD_VULN_DIR = os.path.join(os.path.dirname(__file__), 'challenge_data', 'upload')
-
-def init_upload():
-    os.makedirs(UPLOAD_VULN_DIR, exist_ok=True)
-    flag_file = os.path.join(UPLOAD_VULN_DIR, 'secret_flag.txt')
-    if not os.path.exists(flag_file):
-        with open(flag_file, 'w') as f:
-            f.write(FLAGS['upload'])
-
-@app.route('/challenges/upload', methods=['GET','POST'])
-@login_required
-def challenge_upload():
-    init_upload()
-    result = None
-    if request.method == 'POST':
-        f = request.files.get('avatar')
-        if not f or f.filename == '':
-            flash('No file selected.', 'error')
-            return redirect(url_for('challenge_upload'))
-        filename = f.filename
-        _, ext = os.path.splitext(filename)
-        log_activity(session.get('user_id'), 'UPLOAD_ATTEMPT',
-                     payload=f'filename={filename}', ip=request.remote_addr)
-        allowed = {'.png','.jpg','.jpeg','.gif'}
-        if ext.lower() not in allowed:
-            flash(f'Only image files allowed. Got: {ext}', 'error')
-        else:
-            save_path = os.path.join(UPLOAD_VULN_DIR, filename)
-            f.save(save_path)
-            # VULNERABLE: executes file if it contains .py anywhere in name
-            if '.py' in filename:
-                try:
-                    out = subprocess.run(
-                        ['python3', save_path],
-                        capture_output=True, text=True, timeout=5, cwd=UPLOAD_VULN_DIR
-                    )
-                    result = out.stdout + out.stderr
-                except Exception as e:
-                    result = str(e)
-            else:
-                result = f'File uploaded successfully: {filename}'
-    db = get_db()
-    ch = db.execute("SELECT * FROM challenges WHERE slug='upload'").fetchone()
-    db.close()
-    user = get_current_user()
-    return render_template('challenges/upload.html', user=user, challenge=ch, result=result)
-
 # --- Challenge 6: Broken Access Control ---
 @app.route('/challenges/bac')
 @login_required
@@ -549,7 +460,194 @@ def challenge_bac_secret():
     db.close()
     return render_template('challenges/bac.html', user=user, challenge=ch, flag=FLAGS['bac'])
 
-# --- Challenge 7: Cryptography ---
+# --- Challenge 6: Hash Cracking ---
+@app.route('/challenges/hash', methods=['GET', 'POST'])
+@login_required
+def challenge_hash():
+    success = error = None
+    db = None
+    try:
+        db = get_db()
+        ch = db.execute("SELECT * FROM challenges WHERE slug='hash'").fetchone()
+        if request.method == 'POST':
+            cracked = request.form.get('cracked', '').strip().lower()
+            db.execute(
+                "INSERT INTO activity_logs (user_id, action, payload, ip_address) VALUES (?,?,?,?)",
+                (session['user_id'], 'HASH_ATTEMPT', cracked, request.remote_addr)
+            )
+            if cracked == 'password':
+                success = FLAGS['hash']
+            else:
+                error = 'Incorrect plaintext. That is not what this hash decodes to.'
+            db.commit()
+    except Exception as e:
+        error = f'Error: {e}'
+    finally:
+        if db: db.close()
+    user = get_current_user()
+    return render_template('challenges/hash.html', user=user, challenge=ch,
+                           success=success, error=error)
+
+# --- Challenge 7: RSA Decryption ---
+@app.route('/challenges/rsa', methods=['GET', 'POST'])
+@login_required
+def challenge_rsa():
+    success = error = None
+    calc = None
+    db = None
+    try:
+        db = get_db()
+        ch = db.execute("SELECT * FROM challenges WHERE slug='rsa'").fetchone()
+        if request.method == 'POST':
+            action = request.form.get('action', '')
+            
+            if action == 'calculate':
+                try:
+                    p  = int(request.form.get('p', 0))
+                    q  = int(request.form.get('q', 0))
+                    e  = int(request.form.get('e', 0))
+                    ct = int(request.form.get('ct', 0))
+                    n     = p * q
+                    phi_n = (p - 1) * (q - 1)
+                    d     = pow(e, -1, phi_n)
+                    pt    = pow(ct, d, n)
+                    calc  = {'n': n, 'phi_n': phi_n, 'd': d, 'plaintext': pt}
+                    db.execute(
+                        "INSERT INTO activity_logs (user_id, action, payload, ip_address) VALUES (?,?,?,?)",
+                        (session['user_id'], 'RSA_CALC',
+                         f'p={p} q={q} e={e} ct={ct} result={pt}', request.remote_addr)
+                    )
+                except Exception as ex:
+                    error = f'Calculation error: {ex}'
+            
+            elif action == 'submit':
+                answer = request.form.get('plaintext', '').strip()
+                db.execute(
+                    "INSERT INTO activity_logs (user_id, action, payload, ip_address) VALUES (?,?,?,?)",
+                    (session['user_id'], 'RSA_ATTEMPT', answer, request.remote_addr)
+                )
+                if answer in ['65', 'A', 'a']:
+                    success = FLAGS['rsa']
+                else:
+                    error = 'Incorrect. Check your RSA calculation steps.'
+            
+            db.commit()
+    except Exception as e:
+        if not error: error = f'Error: {e}'
+    finally:
+        if db: db.close()
+    user = get_current_user()
+    return render_template('challenges/rsa.html', user=user, challenge=ch,
+                           success=success, error=error, calc=calc)
+
+# --- Challenge 8: Brute Force Login ---
+@app.route('/challenges/bruteforce', methods=['GET', 'POST'])
+@login_required
+def challenge_bruteforce():
+    WORDLIST = ['password','123456','admin','letmein','qwerty',
+                'monkey','dragon','master','abc123','password123']
+    success = error = None
+    db = None
+    try:
+        db = get_db()
+        ch = db.execute("SELECT * FROM challenges WHERE slug='bruteforce'").fetchone()
+        if request.method == 'POST':
+            pwd = request.form.get('password', '').strip()
+            db.execute(
+                "INSERT INTO activity_logs (user_id, action, payload, ip_address) VALUES (?,?,?,?)",
+                (session['user_id'], 'BRUTEFORCE_ATTEMPT', pwd, request.remote_addr)
+            )
+            if pwd == 'letmein':
+                success = FLAGS['bruteforce']
+            else:
+                error = 'Wrong password. No lockout policy — keep trying.'
+            db.commit()
+    except Exception as e:
+        error = f'Error: {e}'
+    finally:
+        if db: db.close()
+    user = get_current_user()
+    return render_template('challenges/bruteforce.html', user=user, challenge=ch,
+                           success=success, error=error, wordlist=WORDLIST)
+
+# --- Challenge 9: Diffie-Hellman Exchange ---
+@app.route('/challenges/diffie', methods=['GET', 'POST'])
+@login_required
+def challenge_diffie():
+    success = error = None
+    calc = None
+    db = None
+    try:
+        db = get_db()
+        ch = db.execute("SELECT * FROM challenges WHERE slug='diffie'").fetchone()
+        if request.method == 'POST':
+            action = request.form.get('action', '')
+            
+            if action == 'calculate':
+                try:
+                    p = int(request.form.get('p', 0))
+                    g = int(request.form.get('g', 0))
+                    A = int(request.form.get('A', 0))
+                    a = int(request.form.get('a', 0))
+                    shared = pow(A, a, p)
+                    calc = {'p': p, 'g': g, 'A': A, 'a': a, 'shared': shared}
+                    db.execute(
+                        "INSERT INTO activity_logs (user_id, action, payload, ip_address) VALUES (?,?,?,?)",
+                        (session['user_id'], 'DH_CALC',
+                         f'p={p} g={g} A={A} a={a} shared={shared}', request.remote_addr)
+                    )
+                except Exception as ex:
+                    error = f'Calculation error: {ex}'
+            
+            elif action == 'submit':
+                answer = request.form.get('shared_secret', '').strip()
+                db.execute(
+                    "INSERT INTO activity_logs (user_id, action, payload, ip_address) VALUES (?,?,?,?)",
+                    (session['user_id'], 'DH_ATTEMPT', answer, request.remote_addr)
+                )
+                if answer == '2':
+                    success = FLAGS['diffie']
+                else:
+                    error = 'Incorrect shared secret. Use: shared = B^a mod p.'
+            
+            db.commit()
+    except Exception as e:
+        if not error: error = f'Error: {e}'
+    finally:
+        if db: db.close()
+    user = get_current_user()
+    return render_template('challenges/diffie.html', user=user, challenge=ch,
+                           success=success, error=error, calc=calc)
+
+# --- Challenge 10: Vigenere Cipher ---
+@app.route('/challenges/vigenere', methods=['GET', 'POST'])
+@login_required
+def challenge_vigenere():
+    success = error = None
+    db = None
+    try:
+        db = get_db()
+        ch = db.execute("SELECT * FROM challenges WHERE slug='vigenere'").fetchone()
+        if request.method == 'POST':
+            answer = request.form.get('decoded', '').strip()
+            db.execute(
+                "INSERT INTO activity_logs (user_id, action, payload, ip_address) VALUES (?,?,?,?)",
+                (session['user_id'], 'VIGENERE_ATTEMPT', answer[:100], request.remote_addr)
+            )
+            if answer.lower() == FLAGS['vigenere'].lower():
+                success = FLAGS['vigenere']
+            else:
+                error = 'Incorrect decryption. Check your key alignment and shift direction.'
+            db.commit()
+    except Exception as e:
+        error = f'Error: {e}'
+    finally:
+        if db: db.close()
+    user = get_current_user()
+    return render_template('challenges/vigenere.html', user=user, challenge=ch,
+                           success=success, error=error)
+
+# --- Challenge 11: Cryptography ---
 def rot13(text):
     result = []
     for c in text:
@@ -563,21 +661,22 @@ def rot13(text):
 @app.route('/challenges/crypto', methods=['GET','POST'])
 @login_required
 def challenge_crypto():
-    decoded = correct = None
+    decoded = correct_flag = None
     user_input = ''
     if request.method == 'POST':
         user_input = request.form.get('decoded','').strip()
         decoded = rot13(CRYPTO_ENCODED)
         log_activity(session.get('user_id'), 'CRYPTO_ATTEMPT',
                      payload=user_input[:200], ip=request.remote_addr)
-        correct = (user_input == FLAGS['crypto'])
+        if user_input == FLAGS['crypto']:
+            correct_flag = FLAGS['crypto']
     db = get_db()
     ch = db.execute("SELECT * FROM challenges WHERE slug='crypto'").fetchone()
     db.close()
     user = get_current_user()
     return render_template('challenges/crypto.html', user=user, challenge=ch,
                            encoded=CRYPTO_ENCODED, decoded=decoded,
-                           correct=correct, user_input=user_input)
+                           correct_flag=correct_flag, user_input=user_input)
 
 # ── Run ────────────────────────────────────────────────────────────────────────
 if __name__ == '__main__':

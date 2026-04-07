@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Brute Force Login{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <h1 class="sec-hdr mb-1">Challenge 08 — Brute Force Login</h1>
+    <h2 class="pg-title">No Rate Limiting <span style="color:var(--red);">Vulnerability</span></h2>
+  </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+  <div class="col-md-7">
+    <div class="ctf-card p-4 fi">
+      {% if success %}
+      <div class="flag-box" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;animation:slideUp 0.6s ease;">
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:var(--green);margin-bottom:.5rem;">✓ Challenge Solved!</div>
+        <div style="font-family:'Inter',monospace;font-size:.95rem;color:var(--text);word-break:break-all;">{{ success }}</div>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+          <a href="/challenge/bruteforce" class="btn-ctf" style="flex:1;text-align:center;padding:.6rem 1rem;">Submit Flag</a>
+          <a href="/challenges" class="btn-outline" style="flex:1;text-align:center;padding:.6rem 1rem;">← Back to Challenges</a>
+        </div>
+      </div>
+      {% else %}
+        {% if error %}
+        <div class="alert alert-danger fi">{{ error }}</div>
+        {% endif %}
+
+        <h3 class="sec-hdr mb-3">Admin Login Portal</h3>
+        <div style="background:linear-gradient(135deg,#1E1E2E,#2a2a3e);border:1px solid #333;border-radius:12px;padding:2rem;margin-bottom:1.5rem;">
+          <form method="POST">
+            <div class="mb-3">
+              <label class="form-label" style="color:#fff;">Username</label>
+              <input type="text" class="ctf-input form-control" value="admin" readonly style="background:#1E1E2E;color:#CDD6F4;border:1px solid #444;">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" style="color:#fff;">Password</label>
+              <input type="text" name="password" class="ctf-input form-control" placeholder="Try a password..." required autofocus>
+            </div>
+            <button type="submit" class="btn-ctf w-100">Login</button>
+          </form>
+        </div>
+
+        <h3 class="sec-hdr mb-2">Wordlist (10 Most Common Passwords)</h3>
+        <div class="terminal-solo" style="background:#1E1E2E;border:1px solid #333;border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-family:'Courier New',monospace;color:#CDD6F4;font-size:.9rem;line-height:1.8;">
+1. password<br>
+2. 123456<br>
+3. admin<br>
+4. letmein<br>
+5. qwerty<br>
+6. monkey<br>
+7. dragon<br>
+8. master<br>
+9. abc123<br>
+10. password123
+        </div>
+
+        <div style="background:rgba(239,68,68,.04);border-left:3px solid var(--red);padding:1rem;border-radius:8px;">
+          <div style="font-weight:600;color:var(--text);margin-bottom:.5rem;">No Protections</div>
+          <p style="font-size:.9rem;color:var(--text-muted);margin:0;">
+            ✗ No rate limiting<br>
+            ✗ No account lockout after failed attempts<br>
+            ✗ No CAPTCHA<br>
+            <br>
+            Try each password until one works!
+          </p>
+        </div>
+        
+        <div id="attempts" style="margin-top:1rem;padding:1rem;background:rgba(124,58,237,.04);border-radius:8px;text-align:center;color:var(--text);">
+          Attempts: <span id="count" style="font-weight:700;color:var(--violet);">0</span>
+        </div>
+
+        <script>
+          let count = localStorage.getItem('bruteforce_attempts') || 0;
+          document.getElementById('count').textContent = count;
+          
+          document.querySelector('form').addEventListener('submit', function() {
+            count = parseInt(count) + 1;
+            localStorage.setItem('bruteforce_attempts', count);
+            document.getElementById('count').textContent = count;
+          });
+        </script>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="ctf-card p-3 fi2">
+      <h3 class="sec-hdr mb-3">Vulnerability Intel</h3>
+      <div style="font-size:.9rem;color:var(--text-muted);line-height:1.6;">
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Brute Force vs Dictionary Attack</strong><br>
+        Brute force tries every possible combination. Dictionary attack uses a wordlist of common passwords — much faster and more practical.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Why This Works</strong><br>
+        Despite warnings, humans choose weak passwords. The 10 most common passwords account for ~2% of all login attempts. Many admins use obvious choices like "admin" or "password".</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Essential Defenses</strong><br>
+        ✓ Rate limiting: Block IPs after N failed attempts<br>
+        ✓ Account lockout: Lock after 5-10 failures<br>
+        ✓ CAPTCHA: Slow down automated attempts<br>
+        ✓ Multi-factor auth: 2FA defeats password-only attacks</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Tools Used</strong><br>
+        Professional attackers use Burpsuite Intruder, Hydra, or custom scripts to automate brute force attacks at scale.</p>
+
+        <p><strong style="color:var(--text);">NIST Guidelines</strong><br>
+        NIST SP 800-63B recommends: minimum 8 characters, no composition rules (let users choose easy-to-remember passwords), check against known breached password lists.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

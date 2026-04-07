@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}RSA Decryption{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <h1 class="sec-hdr mb-1">Challenge 07 — RSA Decryption</h1>
+    <h2 class="pg-title">Decrypt the <span style="color:var(--sky);">Message</span></h2>
+  </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+  <div class="col-md-7">
+    <div class="ctf-card p-4 fi">
+      {% if success %}
+      <div class="flag-box" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;animation:slideUp 0.6s ease;">
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:var(--green);margin-bottom:.5rem;">✓ Challenge Solved!</div>
+        <div style="font-family:'Inter',monospace;font-size:.95rem;color:var(--text);word-break:break-all;">{{ success }}</div>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+          <a href="/challenge/rsa" class="btn-ctf" style="flex:1;text-align:center;padding:.6rem 1rem;">Submit Flag</a>
+          <a href="/challenges" class="btn-outline" style="flex:1;text-align:center;padding:.6rem 1rem;">← Back to Challenges</a>
+        </div>
+      </div>
+      {% else %}
+        {% if error %}
+        <div class="alert alert-danger fi">{{ error }}</div>
+        {% endif %}
+
+        <div class="terminal-solo" style="background:#1E1E2E;border:1px solid #333;border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-family:'Courier New',monospace;color:#CDD6F4;font-size:.9rem;">
+Given Values:<br>
+p = 61<br>
+q = 53<br>
+e = 17<br>
+Ciphertext = 2557
+        </div>
+
+        <h3 class="sec-hdr mb-2">Steps to Decrypt</h3>
+        <ol style="font-size:.95rem;color:var(--text);margin-bottom:1.5rem;line-height:1.8;">
+          <li><strong>Step 1:</strong> Calculate n = p × q</li>
+          <li><strong>Step 2:</strong> Calculate φ(n) = (p−1)(q−1)</li>
+          <li><strong>Step 3:</strong> Find private key d where e×d ≡ 1 mod φ(n)</li>
+          <li><strong>Step 4:</strong> Decrypt: plaintext = ciphertext<sup>d</sup> mod n</li>
+        </ol>
+
+        <h3 class="sec-hdr mb-2">RSA Calculator</h3>
+        <form method="POST" style="margin-bottom:1.5rem;">
+          <input type="hidden" name="action" value="calculate">
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label">p</label>
+              <input type="number" name="p" class="ctf-input form-control" value="61" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label">q</label>
+              <input type="number" name="q" class="ctf-input form-control" value="53" required>
+            </div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label">e</label>
+              <input type="number" name="e" class="ctf-input form-control" value="17" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label">ciphertext</label>
+              <input type="number" name="ct" class="ctf-input form-control" value="2557" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-ctf w-100">Calculate</button>
+        </form>
+
+        {% if calc %}
+        <div class="terminal-solo" style="background:#1E1E2E;border:1px solid #333;border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-family:'Courier New',monospace;color:#CDD6F4;font-size:.9rem;">
+n = {{ calc['n'] }}<br>
+φ(n) = {{ calc['phi_n'] }}<br>
+d = {{ calc['d'] }}<br>
+plaintext = {{ calc['plaintext'] }}
+        </div>
+        {% endif %}
+
+        <h3 class="sec-hdr mb-2">Submit Plaintext</h3>
+        <form method="POST">
+          <input type="hidden" name="action" value="submit">
+          <label class="form-label">Decrypted Plaintext</label>
+          <input type="text" name="plaintext" class="ctf-input form-control mb-3" placeholder="What is the decrypted message?" required>
+          <button type="submit" class="btn-ctf w-100">Submit Answer</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="ctf-card p-3 fi2">
+      <h3 class="sec-hdr mb-3">Vulnerability Intel</h3>
+      <div style="font-size:.9rem;color:var(--text);line-height:1.6;">
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">RSA Overview</strong><br>
+        RSA (Rivest-Shamir-Adleman) is the most widely-used public-key cryptosystem. It relies on the computational hardness of factoring large primes.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Key Pair</strong><br>
+        Public key (e, n) is shared. Private key d is kept secret. Anyone can encrypt with the public key, only the holder of d can decrypt.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Why Small Primes Fail</strong><br>
+        Using p=61 and q=53 is trivial to break. Real RSA uses 2048-bit or 4096-bit primes. Factoring the product would take millennia with current computers.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">The Math</strong><br>
+        The security depends on: it's easy to multiply large primes (n = p×q), but extremely hard to factor n back into p and q.</p>
+
+        <p><strong style="color:var(--text);">Connection to Labs</strong><br>
+        This mirrors the RSA lab where you computed keys and encrypted/decrypted messages. This challenge demonstrates the full RSA pipeline mathematically.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title %}Diffie-Hellman Exchange{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <h1 class="sec-hdr mb-1">Challenge 09 — Diffie-Hellman Exchange</h1>
+    <h2 class="pg-title">Compute the <span style="color:var(--sky);">Shared Secret</span></h2>
+  </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+  <div class="col-md-7">
+    <div class="ctf-card p-4 fi">
+      {% if success %}
+      <div class="flag-box" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;animation:slideUp 0.6s ease;">
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:var(--green);margin-bottom:.5rem;">✓ Challenge Solved!</div>
+        <div style="font-family:'Inter',monospace;font-size:.95rem;color:var(--text);word-break:break-all;">{{ success }}</div>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+          <a href="/challenge/diffie" class="btn-ctf" style="flex:1;text-align:center;padding:.6rem 1rem;">Submit Flag</a>
+          <a href="/challenges" class="btn-outline" style="flex:1;text-align:center;padding:.6rem 1rem;">← Back to Challenges</a>
+        </div>
+      </div>
+      {% else %}
+        {% if error %}
+        <div class="alert alert-danger fi">{{ error }}</div>
+        {% endif %}
+
+        <h3 class="sec-hdr mb-2">Intercepted Values</h3>
+        <div class="terminal-solo" style="background:#1E1E2E;border:1px solid #333;border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-family:'Courier New',monospace;color:#CDD6F4;font-size:.9rem;">
+Prime p = 23<br>
+Generator g = 5<br>
+Alice public key A = 8<br>
+Bob public key B = 19<br>
+Alice private key a = 6 (leaked!)
+        </div>
+
+        <h3 class="sec-hdr mb-2">DH Key Exchange Diagram</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+          <div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);padding:1rem;border-radius:8px;">
+            <div style="font-weight:600;color:var(--green);margin-bottom:.5rem;">Alice</div>
+            <div style="font-size:.85rem;color:var(--text);line-height:1.6;">
+              Private: a = 6<br>
+              Public: A = g<sup>a</sup> mod p = 5<sup>6</sup> mod 23 = 8<br>
+              <span style="margin-top:.5rem;display:block;border-top:1px solid rgba(16,185,129,.2);padding-top:.5rem;">
+                Shared: S = B<sup>a</sup> mod p = 19<sup>6</sup> mod 23 = ?
+              </span>
+            </div>
+          </div>
+          <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.3);padding:1rem;border-radius:8px;">
+            <div style="font-weight:600;color:#3B82F6;margin-bottom:.5rem;">Bob</div>
+            <div style="font-size:.85rem;color:var(--text);line-height:1.6;">
+              Private: b = ? (unknown)<br>
+              Public: B = g<sup>b</sup> mod p = 5<sup>b</sup> mod 23 = 19<br>
+              <span style="margin-top:.5rem;display:block;border-top:1px solid rgba(59,130,246,.2);padding-top:.5rem;">
+                Shared: S = A<sup>b</sup> mod p = 8<sup>b</sup> mod 23 = ?
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:.9rem;color:var(--text);margin-bottom:1.5rem;padding:1rem;background:rgba(124,58,237,.04);border-radius:8px;">
+          <strong style="color:var(--text);">The Magic:</strong> Despite using different private keys (a ≠ b), both arrive at the same shared secret S. This is the foundation of secure key exchange!
+        </p>
+
+        <h3 class="sec-hdr mb-2">DH Calculator</h3>
+        <form method="POST" style="margin-bottom:1.5rem;">
+          <input type="hidden" name="action" value="calculate">
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label">p</label>
+              <input type="number" name="p" class="ctf-input form-control" value="23" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label">g</label>
+              <input type="number" name="g" class="ctf-input form-control" value="5" required>
+            </div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label">A (Alice public)</label>
+              <input type="number" name="A" class="ctf-input form-control" value="8" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label">a (Alice private)</label>
+              <input type="number" name="a" class="ctf-input form-control" value="6" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-ctf w-100">Calculate Shared Secret</button>
+        </form>
+
+        {% if calc %}
+        <div class="terminal-solo" style="background:#1E1E2E;border:1px solid #333;border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-family:'Courier New',monospace;color:#CDD6F4;font-size:.9rem;">
+p = {{ calc['p'] }}<br>
+g = {{ calc['g'] }}<br>
+A = {{ calc['A'] }}<br>
+a = {{ calc['a'] }}<br>
+<br>
+<span style="color:#CDD6F4;">Shared Secret S = {{ calc['shared'] }}</span>
+        </div>
+        {% endif %}
+
+        <h3 class="sec-hdr mb-2">Submit Shared Secret</h3>
+        <form method="POST">
+          <input type="hidden" name="action" value="submit">
+          <label class="form-label">Shared Secret Value</label>
+          <input type="text" name="shared_secret" class="ctf-input form-control mb-3" placeholder="What is S?" required>
+          <button type="submit" class="btn-ctf w-100">Submit Answer</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="ctf-card p-3 fi2">
+      <h3 class="sec-hdr mb-3">Vulnerability Intel</h3>
+      <div style="font-size:.9rem;color:var(--text);line-height:1.6;">
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">The Problem DH Solves</strong><br>
+        How do two parties establish a shared secret over an insecure channel without ever meeting? Classical encryption requires both sides to know the key first.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">DH Concept</strong><br>
+        Each party has a private key (known only to them) and a public value (broadcast). The genius: S = B<sup>a</sup> mod p = A<sup>b</sup> mod p. Different paths, same answer.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Discrete Logarithm</strong><br>
+        Security relies on: it's easy to compute g<sup>x</sup> mod p, but extremely hard to find x given g<sup>x</sup> mod p. This is the discrete logarithm problem.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Real-World Use</strong><br>
+        TLS/HTTPS uses DH (or Elliptic Curve DH) to establish session keys. HTTPS connections use ECDH key exchange thousands of times per second globally.</p>
+
+        <p><strong style="color:var(--text);">Connection to Labs</strong><br>
+        This mirrors the DH exchange lab in class. Real DH uses 2048+ bit primes. With such large numbers, even quantum computers would struggle to break it.</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

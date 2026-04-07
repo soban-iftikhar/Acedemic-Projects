@@ -57,6 +57,10 @@
         <span>
           {% if profile['role'] == 'admin' %}
           <div class="flag-box mt-1">{{ profile['secret_data'] }}</div>
+          <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+            <a href=\"/challenge/idor\" class=\"btn-ctf\" style=\"flex:1;text-align:center;padding:.6rem 1rem;font-size:.9rem;\">Submit Flag</a>
+            <a href=\"/challenges\" class=\"btn-outline\" style=\"flex:1;text-align:center;padding:.6rem 1rem;font-size:.9rem;\">\u2190 Back</a>
+          </div>
           {% else %}
           <span style="color:#556;">{{ profile['secret_data'] }}</span>
           {% endif %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}Vigenere Cipher{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <h1 class="sec-hdr mb-1">Challenge 10 — Vigenere Cipher</h1>
+    <h2 class="pg-title">Polyalphabetic <span style="color:var(--pink);">Decryption</span></h2>
+  </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+  <div class="col-md-7">
+    <div class="ctf-card p-4 fi">
+      {% if success %}
+      <div class="flag-box" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;animation:slideUp 0.6s ease;">
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:var(--green);margin-bottom:.5rem;">✓ Challenge Solved!</div>
+        <div style="font-family:'Inter',monospace;font-size:.95rem;color:var(--text);word-break:break-all;">{{ success }}</div>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+          <a href="/challenge/vigenere" class="btn-ctf" style="flex:1;text-align:center;padding:.6rem 1rem;">Submit Flag</a>
+          <a href="/challenges" class="btn-outline" style="flex:1;text-align:center;padding:.6rem 1rem;">← Back to Challenges</a>
+        </div>
+      </div>
+      {% else %}
+        {% if error %}
+        <div class="alert alert-danger fi">{{ error }}</div>
+        {% endif %}
+
+        <h3 class="sec-hdr mb-2">Encrypted Message</h3>
+        <div class="terminal-solo" style="background:#1E1E2E;border:1px solid #333;border-radius:12px;padding:1rem;margin-bottom:.5rem;font-family:'Courier New',monospace;color:#CDD6F4;font-size:.9rem;">
+Ciphertext: RIJVS{j4g3u3t3_m4ynh3t_nh4mz3x}
+        </div>
+        <div class="terminal-solo" style="background:#1E1E2E;border:1px solid #333;border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-family:'Courier New',monospace;color:#CDD6F4;font-size:.9rem;">
+Key: CRYPTO
+        </div>
+
+        <h3 class="sec-hdr mb-2">Vigenere Decryption Formula</h3>
+        <div style="background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(99,102,241,.08));border:1px solid rgba(124,58,237,.2);padding:1rem;border-radius:8px;margin-bottom:1.5rem;font-family:'Courier New',monospace;font-size:.9rem;color:#CDD6F4;">
+For each letter:<br>
+plaintext[i] = (ciphertext[i] - key[i % keylen]) mod 26
+        </div>
+
+        <h3 class="sec-hdr mb-2">Vigenere Reference Table</h3>
+        <div style="background:rgba(124,58,237,.04);border:1px solid rgba(124,58,237,.2);padding:1rem;border-radius:8px;margin-bottom:1.5rem;font-size:.75rem;color:var(--text);overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;">
+            <tr>
+              <td style="padding:.25rem;border-right:1px solid rgba(124,58,237,.1);"><strong>A=0</strong></td>
+              <td style="padding:.25rem;border-right:1px solid rgba(124,58,237,.1);"><strong>B=1</strong></td>
+              <td style="padding:.25rem;border-right:1px solid rgba(124,58,237,.1);"><strong>C=2</strong></td>
+              <td style="padding:.25rem;border-right:1px solid rgba(124,58,237,.1);"><strong>...M=12</strong></td>
+              <td style="padding:.25rem;border-right:1px solid rgba(124,58,237,.1);"><strong>...Z=25</strong></td>
+            </tr>
+          </table>
+          <p style="margin-top:.5rem;margin-bottom:0;">
+            <strong style="color:var(--text);">Important Notes:</strong><br>
+            • Only alphabetic characters are encrypted<br>
+            • Numbers, symbols, and {} are NOT encrypted<br>
+            • The key repeats cyclically<br>
+            • Case: treat uppercase and lowercase normally (A-Z, a-z)
+          </p>
+        </div>
+
+        <h3 class="sec-hdr mb-2">Decryption Process</h3>
+        <div style="background:rgba(16,185,129,.04);border-left:3px solid var(--green);padding:1rem;border-radius:8px;margin-bottom:1.5rem;font-size:.9rem;color:var(--text);">
+          <strong style="color:var(--text);">Example with first few characters:</strong><br>
+          R - C = 17 - 2 = 15 = P<br>
+          I - R = 8 - 17 = -9 mod 26 = 17 = R<br>
+          J - Y = ... (continue pattern)<br>
+          <br>
+          The key CRYPTO repeats: CRYPTOCRYPTOCRYPTO...
+        </div>
+
+        <form method="POST" style="margin-bottom:1.5rem;">
+          <label class="form-label">Decrypted Flag</label>
+          <input type="text" name="decoded" class="ctf-input form-control mb-3" placeholder="flag{...}" required>
+          <button type="submit" class="btn-ctf w-100">Submit Answer</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="ctf-card p-3 fi2">
+      <h3 class="sec-hdr mb-3">Vulnerability Intel</h3>
+      <div style="font-size:.9rem;color:var(--text-muted);line-height:1.6;">
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Monoalphabetic vs Polyalphabetic</strong><br>
+        Caesar cipher (shift by fixed amount) is monoalphabetic: 'A' always becomes 'D'. Vigenere uses multiple shifts (polyalphabetic): 'A' becomes different letters depending on key position.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Why Vigenere is Stronger</strong><br>
+        Frequency analysis fails. In English, 'E' is most common, but in Vigenere ciphertext, each letter appears with similar frequency — the key destroys statistical patterns.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Breaking Vigenere: Kasiski Examination</strong><br>
+        If the same plaintext appears with the same key alignment, the ciphertext repeats at intervals equal to multiples of the key length. Cryptographers use this to find key length, then treat each shift separately.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Historical Significance</strong><br>
+        Vigenere was considered unbreakable for 300 years. It was finally broken in the 1860s. This cipher was used in WWI and even some WWII communications.</p>
+
+        <p><strong style="color:var(--text);">Connection to Labs</strong><br>
+        This mirrors the CrypTool classical ciphers lab. Modern encryption (AES, RSA) uses mathematical principles that can withstand all known attacks forever (with sufficient key sizes).</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
