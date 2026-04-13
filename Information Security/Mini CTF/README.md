@@ -1,28 +1,41 @@
 # MiniCTF Platform
-### InfoSec Lab Project — Educational CTF Platform
+### InfoSec Lab Project — Educational CTF Challenge Platform
+
+This project contains **two complete implementations** of the Mini CTF platform:
+
+1. **Flask Version** - Python backend with Jinja2 templates & SQLite
+2. **MERN Version** - Node.js/React full-stack with MongoDB
 
 ---
 
-## Setup & Run
+## 📁 Choose Your Version
 
-### Requirements
-- Python 3.8+
-- Flask (`pip install flask`)
-- Werkzeug (installed with Flask automatically)
-
-### Install
+### 🐍 Flask Version (Python)
 ```bash
-pip install flask
-```
-
-### Run
-```bash
+cd "Flask Version"
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 python app.py
 ```
+**Access:** http://localhost:5000
 
-Then open: **http://127.0.0.1:5000**
+### 🔧 MERN Version (JavaScript)
 
-The database (`ctf.db`) is created automatically on first run.
+**Backend:**
+```bash
+cd "MERN Version/backend"
+npm install
+npm run dev
+```
+
+**Frontend (new terminal):**
+```bash
+cd "MERN Version/frontend"
+npm install
+npm run dev
+```
+**Access:** http://localhost:5173
 
 ---
 
