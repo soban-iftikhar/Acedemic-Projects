@@ -4,6 +4,7 @@ import '../../services/post_service.dart';
 import '../../services/auth_service.dart';
 import '../../models/post.dart';
 import '../../widgets/comment_widget.dart';
+import '../profile/profile_screen.dart';
 
 class PostDetailScreen extends StatefulWidget {
   final String postId;
@@ -66,10 +67,11 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
     }
 
     final comments = postService.getPostComments(widget.postId);
-    final user = authService.getUserById(post.userId);
+    final user = authService.getUserById(post!.userId);
     final hasLiked = postService.hasUserLiked(widget.postId, authService.currentUser!.id);
 
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         title: const Text('Confession'),
         elevation: 0,
@@ -89,46 +91,59 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Author info
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.deepPurple[100],
-                          child: Text(
-                            post.userId.substring(0, 1).toUpperCase(),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                user?.isAnonymous == false
-                                    ? (user?.fullName ?? 'Anonymous')
-                                    : 'Anonymous',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: !post!.userWasAnonymous
+                          ? () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      ProfileScreen(userId: post!.userId),
                                 ),
-                              ),
-                              if (user?.isAnonymous == false)
+                              );
+                            }
+                          : null,
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.deepPurple[100],
+                            child: Text(
+                              post!.userId.substring(0, 1).toUpperCase(),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 Text(
-                                  user?.university ?? '',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey[600],
+                                  post!.userWasAnonymous
+                                      ? 'Anonymous'
+                                      : (user?.fullName ?? 'Anonymous'),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                            ],
+                                if (!post!.userWasAnonymous)
+                                  Text(
+                                    user?.university ?? '',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
-                        ),
-                        // Report feature coming soon
-                      ],
+                          // Report feature coming soon
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 12),
 
                     // Post content
                     Text(
-                      post.content,
+                      post!.content,
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 12),
@@ -138,13 +153,13 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          _formatTime(post.createdAt),
+                          _formatTime(post!.createdAt),
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.grey[600],
                           ),
                         ),
-                        if (post.status == PostStatus.flagged)
+                        if (post!.status == PostStatus.flagged)
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 8,
@@ -171,7 +186,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                       children: [
                         _InteractionButton(
                           icon: hasLiked ? Icons.favorite : Icons.favorite_border,
-                          label: '${post.likeCount}',
+                          label: '${post!.likeCount}',
                           color: hasLiked ? Colors.red : Colors.grey[600],
                           onTap: () async {
                             await postService.toggleLike(

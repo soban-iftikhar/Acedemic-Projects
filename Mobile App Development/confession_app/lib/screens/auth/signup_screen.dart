@@ -72,6 +72,9 @@ class _SignupScreenState extends State<SignupScreen> {
 
     if (success) {
       Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Account created! Please login.')),
+      );
     } else {
       setState(() {
         _isLoading = false;

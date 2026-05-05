@@ -10,8 +10,9 @@ class Post {
   int likeCount;
   int commentCount;
   PostStatus status;
-  List<String> reports; // User IDs who reported
+  List<String> reports;
   int reportCount;
+  bool userWasAnonymous; // Store anonymity state at time of post creation
 
   Post({
     required this.id,
@@ -25,6 +26,7 @@ class Post {
     this.status = PostStatus.active,
     this.reports = const [],
     this.reportCount = 0,
+    this.userWasAnonymous = true,
   });
 
   bool isFlaggedForRemoval() => reportCount >= 3 || status == PostStatus.flagged;
@@ -42,6 +44,7 @@ class Post {
       'status': status.toString(),
       'reports': reports,
       'reportCount': reportCount,
+      'userWasAnonymous': userWasAnonymous,
     };
   }
 
@@ -63,6 +66,7 @@ class Post {
       ),
       reports: List<String>.from(map['reports'] as List? ?? []),
       reportCount: map['reportCount'] as int? ?? 0,
+      userWasAnonymous: map['userWasAnonymous'] as bool? ?? true,
     );
   }
 }

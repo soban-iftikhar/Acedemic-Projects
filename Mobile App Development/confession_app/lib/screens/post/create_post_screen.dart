@@ -16,7 +16,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   late TextEditingController _contentController;
   bool _isLoading = false;
   String? _errorMessage;
-  bool _isAnonymous = true;
 
   @override
   void initState() {
@@ -48,6 +47,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       await postService.createPost(
         userId: authService.currentUser!.id,
         content: _contentController.text,
+        userIsAnonymous: authService.currentUser!.isAnonymous,
       );
 
       if (mounted) {
@@ -94,24 +94,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 color: Colors.grey[850],
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Post Anonymously',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Switch(
-                        value: _isAnonymous,
-                        onChanged: (value) {
-                          setState(() => _isAnonymous = value);
-                        },
-                        activeColor: Colors.deepPurple,
-                      ),
-                    ],
+                  child: Text(
+                    'Characters: ${_contentController.text.length}/280',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[500],
+                    ),
                   ),
                 ),
               ),
