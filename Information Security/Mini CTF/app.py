@@ -164,20 +164,24 @@ def submit_flag(slug):
         "INSERT INTO submissions (user_id, challenge_id, submitted_flag, correct, first_blood) VALUES (?,?,?,?,?)",
         (user['id'], ch['id'], submitted, 1 if correct else 0, 1 if first_blood else 0)
     )
-    log_activity(user['id'], 'FLAG_SUBMIT',
-                 payload=f'challenge={slug} flag={submitted} correct={correct}',
-                 ip=request.remote_addr)
     if correct:
         db.execute("UPDATE users SET score = score + ? WHERE id=?", (ch['points'], user['id']))
-        db.commit()
-        db.close()
+    db.commit()
+    db.close()
+    
+    try:
+        log_activity(user['id'], 'FLAG_SUBMIT',
+                     payload=f'challenge={slug} flag={submitted} correct={correct}',
+                     ip=request.remote_addr)
+    except:
+        pass  # Ignore logging errors to prevent lockups
+    
+    if correct:
         msg = f'Correct! +{ch["points"]} pts'
         if first_blood:
             msg += ' 🩸 First Blood!'
         flash(msg, 'success')
     else:
-        db.commit()
-        db.close()
         flash('Wrong flag. Keep trying.', 'error')
     return redirect(url_for('challenge_detail', slug=slug))
 
@@ -352,7 +356,7 @@ SQLI_DB = os.path.join(os.path.dirname(__file__), 'challenge_data', 'vuln_login.
 
 def init_sqli_db():
     os.makedirs(os.path.dirname(SQLI_DB), exist_ok=True)
-    conn = sqlite3.connect(SQLI_DB)
+    conn = sqlite3.connect(SQLI_DB, timeout=10.0)
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS vuln_users
                  (id INTEGER PRIMARY KEY, username TEXT, password TEXT, role TEXT)''')
@@ -372,16 +376,19 @@ def challenge_sqli():
         query_shown = f"SELECT * FROM vuln_users WHERE username='{username}' AND password='{password}'"
         log_activity(session.get('user_id'), 'SQLI_ATTEMPT',
                      payload=f'user={username} pass={password}', ip=request.remote_addr)
+        conn = None
         try:
-            conn = sqlite3.connect(SQLI_DB)
+            conn = sqlite3.connect(SQLI_DB, timeout=10.0)
             row = conn.execute(query_shown).fetchone()
-            conn.close()
             if row:
                 success = FLAGS['sqli']
             else:
                 error = 'Invalid credentials.'
         except Exception as e:
             error = f'DB Error: {e}'
+        finally:
+            if conn:
+                conn.close()
     user = get_current_user()
     db = get_db()
     ch = db.execute("SELECT * FROM challenges WHERE slug='sqli'").fetchone()

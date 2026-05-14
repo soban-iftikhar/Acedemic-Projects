@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row mb-3 fi">
   <div class="col">
-    <div class="sec-hdr mb-1">// challenge 05 // insecure file upload</div>
+    <h1 class="sec-hdr mb-1">Challenge 05 — Insecure File Upload</h1>
     <h2 class="pg-title">Profile <span style="color:var(--red);">Avatar Upload</span></h2>
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="row g-4 justify-content-center">
   <div class="col-md-6">
     <div class="ctf-card p-4 fi1">
-      <div class="sec-hdr mb-3">// upload your avatar</div>
+      <h2 class="sec-hdr mb-3">Upload Your Avatar</h2>
       <p style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#667;margin-bottom:1.2rem;">
         Allowed: <span style="color:var(--yellow);">.png &nbsp;.jpg &nbsp;.jpeg &nbsp;.gif</span>
       </p>
@@ -27,14 +27,14 @@
 
       {% if result %}
       <div class="mt-3">
-        <div class="sec-hdr mb-1">// server response</div>
+        <h3 class="sec-hdr mb-1">Server Response</h3>
         <div class="terminal-solo">{{ result }}</div>
       </div>
       {% endif %}
     </div>
 
     <div class="ctf-card p-3 mt-3 fi2">
-      <div class="sec-hdr mb-3">// vulnerability intel</div>
+      <h2 class="sec-hdr mb-3">Vulnerability Intel</h2>
       <p style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#667;line-height:1.9;">
         Server checks <span style="color:var(--red);">os.path.splitext(filename)</span><br>
         only the <span style="color:var(--yellow);">last extension</span> is checked.<br><br>
