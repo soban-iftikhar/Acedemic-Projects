@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Players{% endblock %}
+{% block content %}
+<div class="row mb-4 fi align-items-center">
+  <div class="col">
+    <div class="sec-hdr mb-1">// player management</div>
+    <h2 class="pg-title">Registered <span style="color:var(--cyan);">Players</span></h2>
+  </div>
+</div>
+<div class="ctf-card fi1">
+  <table class="ctf-table table mb-0">
+    <thead>
+      <tr><th>#</th><th>Username</th><th>Email</th><th>Score</th><th>Solved</th><th>Joined</th></tr>
+    </thead>
+    <tbody>
+      {% for p in players %}
+      <tr>
+        <td style="color:var(--muted);">{{ loop.index }}</td>
+        <td>{{ p['username'] }}</td>
+        <td style="color:var(--muted);">{{ p['email'] }}</td>
+        <td style="color:var(--green);">{{ p['score'] }}</td>
+        <td style="color:var(--cyan);">{{ solved_counts[p['id']] }}</td>
+        <td style="color:var(--muted);">{{ p['created_at'][:10] }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem;">No players registered yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

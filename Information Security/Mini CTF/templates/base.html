@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}MiniCTF{% endblock %} | MiniCTF Platform</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050508;--bg2:#0a0a12;--card:#0d0d18;--green:#00ff41;--cyan:#00d4ff;--red:#ff0040;--yellow:#ffe600;--purple:#bf00ff;--text:#e0e0e0;--muted:#445;--border:#1a1a2e;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.04) 2px,rgba(0,0,0,.04) 4px);pointer-events:none;z-index:9999;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,65,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,65,.025) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:1;}
+.navbar{background:rgba(5,5,8,.96)!important;border-bottom:1px solid var(--green);box-shadow:0 0 20px rgba(0,255,65,.12);backdrop-filter:blur(10px);padding:.6rem 0;}
+.navbar-brand{font-family:'Orbitron',monospace;font-weight:900;font-size:1.35rem;color:var(--green)!important;text-shadow:0 0 10px rgba(0,255,65,.8);letter-spacing:2px;}
+.navbar-brand span{color:var(--cyan);}
+.nav-link{color:#888!important;font-family:'Share Tech Mono',monospace;font-size:.82rem;letter-spacing:1px;transition:all .2s;padding:.45rem .9rem!important;}
+.nav-link:hover,.nav-link.active{color:var(--green)!important;text-shadow:0 0 8px rgba(0,255,65,.5);}
+.nav-link i{margin-right:5px;}
+.navbar-toggler{border-color:var(--green);}
+.navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%2300ff41' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");}
+.ctf-card{background:var(--card);border:1px solid var(--border);border-radius:4px;transition:all .3s;overflow:hidden;position:relative;}
+.ctf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity .3s;}
+.ctf-card:hover{border-color:rgba(0,255,65,.25);box-shadow:0 0 20px rgba(0,255,65,.06);transform:translateY(-1px);}
+.ctf-card:hover::before{opacity:1;}
+.btn-ctf{background:transparent;border:1px solid var(--green);color:var(--green);font-family:'Share Tech Mono',monospace;font-size:.82rem;letter-spacing:1px;padding:.45rem 1.4rem;transition:all .2s;border-radius:2px;text-transform:uppercase;text-decoration:none;display:inline-block;}
+.btn-ctf:hover,.btn-ctf:focus{background:var(--green);color:#000!important;box-shadow:0 0 15px rgba(0,255,65,.45);}
+.btn-red{border-color:var(--red)!important;color:var(--red)!important;}
+.btn-red:hover{background:var(--red)!important;color:#fff!important;box-shadow:0 0 15px rgba(255,0,64,.45)!important;}
+.btn-cyan{border-color:var(--cyan)!important;color:var(--cyan)!important;}
+.btn-cyan:hover{background:var(--cyan)!important;color:#000!important;box-shadow:0 0 15px rgba(0,212,255,.45)!important;}
+.ctf-input{background:rgba(0,0,0,.5)!important;border:1px solid #1a2a1a!important;color:var(--green)!important;font-family:'Share Tech Mono',monospace!important;border-radius:2px!important;transition:all .2s;}
+.ctf-input:focus{border-color:var(--green)!important;box-shadow:0 0 10px rgba(0,255,65,.15)!important;background:rgba(0,255,65,.02)!important;}
+.ctf-input::placeholder{color:#334!important;}
+.form-label{font-family:'Share Tech Mono',monospace;font-size:.76rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.alert{border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:.88rem;border:none;border-left:3px solid;}
+.alert-success{background:rgba(0,255,65,.07);border-left-color:var(--green);color:var(--green);}
+.alert-danger{background:rgba(255,0,64,.07);border-left-color:var(--red);color:var(--red);}
+.alert-info{background:rgba(0,212,255,.07);border-left-color:var(--cyan);color:var(--cyan);}
+.alert-warning{background:rgba(255,230,0,.07);border-left-color:var(--yellow);color:var(--yellow);}
+.diff-easy{color:var(--green);border:1px solid var(--green);}
+.diff-medium{color:var(--yellow);border:1px solid var(--yellow);}
+.diff-hard{color:var(--red);border:1px solid var(--red);}
+.bdg{font-family:'Share Tech Mono',monospace;font-size:.68rem;padding:2px 8px;border-radius:2px;letter-spacing:1px;}
+.terminal{background:#000;border:1px solid #1a2a1a;border-radius:0 0 4px 4px;padding:1rem;font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--green);white-space:pre-wrap;word-break:break-all;max-height:320px;overflow-y:auto;}
+.terminal-solo{background:#000;border:1px solid #1a2a1a;border-radius:4px;padding:1rem;font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--green);white-space:pre-wrap;word-break:break-all;max-height:320px;overflow-y:auto;}
+.terminal::-webkit-scrollbar,.terminal-solo::-webkit-scrollbar{width:4px;}
+.terminal::-webkit-scrollbar-thumb,.terminal-solo::-webkit-scrollbar-thumb{background:var(--green);}
+.t-header{background:#0a0a0a;border:1px solid #1a2a1a;border-bottom:none;border-radius:4px 4px 0 0;padding:5px 12px;display:flex;align-items:center;gap:6px;}
+.t-dot{width:10px;height:10px;border-radius:50%;}
+.sec-hdr{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:3px;color:var(--green);text-transform:uppercase;opacity:.65;}
+.pg-title{font-family:'Orbitron',monospace;font-weight:700;color:#fff;text-shadow:0 0 20px rgba(0,255,65,.25);}
+.flag-box{background:rgba(0,255,65,.04);border:1px solid var(--green);border-radius:4px;padding:.9rem 1.4rem;font-family:'Share Tech Mono',monospace;font-size:1rem;color:var(--green);text-shadow:0 0 8px rgba(0,255,65,.4);letter-spacing:2px;animation:fpulse 2s ease-in-out infinite;word-break:break-all;}
+@keyframes fpulse{0%,100%{box-shadow:0 0 8px rgba(0,255,65,.2);}50%{box-shadow:0 0 22px rgba(0,255,65,.5);}}
+.stat-box{text-align:center;padding:1.4rem;}
+.stat-num{font-family:'Orbitron',monospace;font-size:2.3rem;font-weight:700;color:var(--green);text-shadow:0 0 12px rgba(0,255,65,.45);line-height:1;}
+.stat-lbl{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:.4rem;}
+.solved-pin{position:absolute;top:10px;right:10px;color:var(--green);font-size:1.1rem;text-shadow:0 0 8px rgba(0,255,65,.7);}
+.cat-pill{font-family:'Share Tech Mono',monospace;font-size:.68rem;padding:2px 10px;border-radius:20px;background:rgba(0,212,255,.08);color:var(--cyan);border:1px solid rgba(0,212,255,.25);letter-spacing:1px;}
+.ctf-table{background:transparent;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.82rem;width:100%;}
+.ctf-table th{color:var(--green);border-color:#1a2a1a!important;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;background:rgba(0,255,65,.02);padding:.7rem .75rem;}
+.ctf-table td{border-color:#111!important;padding:.6rem .75rem;vertical-align:middle;}
+.ctf-table tr:hover td{background:rgba(0,255,65,.02);}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:#1a2a1a;border-radius:3px;}::-webkit-scrollbar-thumb:hover{background:var(--green);}
+footer{border-top:1px solid #0d0d1a;padding:1.2rem 0;font-family:'Share Tech Mono',monospace;font-size:.72rem;color:#334;text-align:center;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.fi{animation:fadeUp .35s ease both;}
+.fi1{animation:fadeUp .35s .08s ease both;}
+.fi2{animation:fadeUp .35s .16s ease both;}
+.fi3{animation:fadeUp .35s .24s ease both;}
+@keyframes glitch{0%,100%{text-shadow:0 0 10px rgba(0,255,65,.8);}25%{text-shadow:-2px 0 var(--red),2px 0 var(--cyan);}75%{text-shadow:2px 0 var(--red),-2px 0 var(--cyan);}}
+.glitch:hover{animation:glitch .3s ease;}
+select.ctf-input option{background:#0a0a12;color:var(--green);}
+</style>
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+<div class="wrap">
+{% if session.get('user_id') %}
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand glitch" href="/">MINI<span>CTF</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      {% if session.get('role') == 'admin' %}
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/admin/dashboard"><i class="fa fa-tachometer-alt"></i>Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/challenges"><i class="fa fa-flag"></i>Challenges</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/users"><i class="fa fa-users"></i>Players</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/submissions"><i class="fa fa-list"></i>Submissions</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin/logs"><i class="fa fa-terminal"></i>Logs</a></li>
+      </ul>
+      {% else %}
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/dashboard"><i class="fa fa-home"></i>Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/challenges"><i class="fa fa-flag"></i>Challenges</a></li>
+        <li class="nav-item"><a class="nav-link" href="/scoreboard"><i class="fa fa-trophy"></i>Scoreboard</a></li>
+      </ul>
+      {% endif %}
+      <ul class="navbar-nav ms-auto align-items-center gap-3">
+        <li class="nav-item">
+          <span style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:var(--muted);">
+            <i class="fa fa-user" style="color:var(--green);margin-right:5px;"></i>{{ session.get('username') }}
+            {% if session.get('role') != 'admin' and user %}
+            <span style="color:var(--green);margin-left:8px;">{{ user['score'] }} pts</span>
+            {% endif %}
+          </span>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="/auth/logout"><i class="fa fa-sign-out-alt"></i>Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endif %}
+
+<main class="container-fluid px-4 py-4">
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% if msgs %}
+    <div class="mb-3">
+      {% for cat, msg in msgs %}
+      <div class="alert alert-{{ 'danger' if cat == 'error' else cat }} alert-dismissible fade show">
+        {{ msg }}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+
+<footer>
+  <div class="container">
+    MINICTF &nbsp;|&nbsp; InfoSec Lab Project &nbsp;|&nbsp;
+    <span style="color:var(--green);">All vulnerabilities are intentional &amp; educational</span>
+  </div>
+</footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

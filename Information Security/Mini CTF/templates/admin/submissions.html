@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Submissions{% endblock %}
+{% block content %}
+<div class="row mb-4 fi align-items-center">
+  <div class="col">
+    <div class="sec-hdr mb-1">// submission log</div>
+    <h2 class="pg-title">All <span style="color:var(--yellow);">Submissions</span></h2>
+  </div>
+</div>
+<div class="ctf-card fi1">
+  <table class="ctf-table table mb-0">
+    <thead>
+      <tr><th>Time</th><th>Player</th><th>Challenge</th><th>Submitted Flag</th><th>Result</th><th>1st</th></tr>
+    </thead>
+    <tbody>
+      {% for s in submissions %}
+      <tr>
+        <td style="color:var(--muted);font-size:.78rem;white-space:nowrap;">{{ s['timestamp'][:19] }}</td>
+        <td>{{ s['username'] }}</td>
+        <td style="color:var(--cyan);">{{ s['challenge_title'] }}</td>
+        <td style="font-size:.78rem;color:#aaa;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ s['submitted_flag'] }}</td>
+        <td>
+          {% if s['correct'] %}
+          <span style="color:var(--green);">CORRECT</span>
+          {% else %}
+          <span style="color:var(--red);">WRONG</span>
+          {% endif %}
+        </td>
+        <td>{% if s['first_blood'] %}<span style="color:var(--red);">&#128247;</span>{% endif %}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem;">No submissions yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

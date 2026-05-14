@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="row mb-4 fi align-items-center">
+  <div class="col">
+    <div class="sec-hdr mb-1">// admin control center</div>
+    <h2 class="pg-title">System <span style="color:var(--red);">Overview</span></h2>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3 fi1">
+    <div class="ctf-card stat-box">
+      <div class="stat-num">{{ total_users }}</div>
+      <div class="stat-lbl">Players</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3 fi1">
+    <div class="ctf-card stat-box">
+      <div class="stat-num" style="color:var(--cyan);">{{ total_challenges }}</div>
+      <div class="stat-lbl">Challenges</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3 fi1">
+    <div class="ctf-card stat-box">
+      <div class="stat-num" style="color:var(--yellow);">{{ total_subs }}</div>
+      <div class="stat-lbl">Submissions</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3 fi1">
+    <div class="ctf-card stat-box">
+      <div class="stat-num" style="color:var(--green);">{{ correct_subs }}</div>
+      <div class="stat-lbl">Correct Flags</div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4 fi2">
+  <div class="col-md-3">
+    <a href="/admin/challenges" class="ctf-card p-3 d-block text-decoration-none" style="border-color:rgba(0,212,255,.2);">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--cyan);"><i class="fa fa-flag me-2"></i>MANAGE CHALLENGES</div>
+    </a>
+  </div>
+  <div class="col-md-3">
+    <a href="/admin/users" class="ctf-card p-3 d-block text-decoration-none" style="border-color:rgba(0,255,65,.2);">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--green);"><i class="fa fa-users me-2"></i>VIEW PLAYERS</div>
+    </a>
+  </div>
+  <div class="col-md-3">
+    <a href="/admin/submissions" class="ctf-card p-3 d-block text-decoration-none" style="border-color:rgba(255,230,0,.2);">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--yellow);"><i class="fa fa-list me-2"></i>SUBMISSIONS LOG</div>
+    </a>
+  </div>
+  <div class="col-md-3">
+    <a href="/admin/logs" class="ctf-card p-3 d-block text-decoration-none" style="border-color:rgba(255,0,64,.2);">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--red);"><i class="fa fa-terminal me-2"></i>ACTIVITY LOGS</div>
+    </a>
+  </div>
+</div>
+
+<div class="ctf-card p-3 fi3">
+  <div class="sec-hdr mb-2">// live activity feed</div>
+  <div class="t-header">
+    <div class="t-dot" style="background:#ff5f57;"></div>
+    <div class="t-dot" style="background:#febc2e;"></div>
+    <div class="t-dot" style="background:#28c840;"></div>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);margin-left:8px;">activity_log — last 20 events</span>
+  </div>
+  <div class="terminal">{% for log in recent_logs %}[{{ log['timestamp'] }}] {% if log['user_id'] %}UID:{{ log['user_id'] }}{% else %}ANON{% endif %} | {{ log['action'] }}{% if log['payload'] %} | {{ log['payload'] }}{% endif %}
+{% endfor %}{% if not recent_logs %}No activity yet.{% endif %}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Scoreboard{% endblock %}
+{% block content %}
+<div class="row mb-4 fi align-items-center">
+  <div class="col">
+    <div class="sec-hdr mb-1">// global rankings</div>
+    <h2 class="pg-title">Live <span style="color:var(--green);">Scoreboard</span></h2>
+  </div>
+</div>
+
+{% if players %}
+<div class="row g-3 mb-4 justify-content-center fi1">
+  {% for p in players[:3] %}
+  <div class="col-6 col-md-3 text-center">
+    <div class="ctf-card p-3">
+      <div style="font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:900;
+        {% if loop.index==1 %}color:#ffd700;text-shadow:0 0 15px rgba(255,215,0,.6);
+        {% elif loop.index==2 %}color:#c0c0c0;text-shadow:0 0 10px rgba(192,192,192,.4);
+        {% else %}color:#cd7f32;text-shadow:0 0 10px rgba(205,127,50,.4);{% endif %}">#{{ loop.index }}</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.85rem;color:#ddd;margin-top:3px;">{{ p['username'] }}</div>
+      <div style="font-family:'Orbitron',monospace;font-size:1.2rem;color:var(--green);margin-top:3px;">{{ p['score'] }}</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--muted);">{{ solved_counts[p['id']] }} solved</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="ctf-card fi2">
+  <table class="ctf-table table mb-0">
+    <thead>
+      <tr>
+        <th style="width:55px;">#</th>
+        <th>Player</th>
+        <th>Score</th>
+        <th>Solved</th>
+        <th>Joined</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in players %}
+      <tr {% if p['id'] == user['id'] %}style="background:rgba(0,255,65,.04);"{% endif %}>
+        <td>
+          {% if loop.index == 1 %}<span style="color:#ffd700;"><i class="fa fa-crown"></i></span>
+          {% elif loop.index == 2 %}<span style="color:#c0c0c0;">2</span>
+          {% elif loop.index == 3 %}<span style="color:#cd7f32;">3</span>
+          {% else %}<span style="color:var(--muted);">{{ loop.index }}</span>{% endif %}
+        </td>
+        <td>
+          {{ p['username'] }}
+          {% if p['id'] == user['id'] %}<span style="color:var(--cyan);font-size:.72rem;margin-left:6px;">(you)</span>{% endif %}
+        </td>
+        <td style="color:var(--green);">{{ p['score'] }}</td>
+        <td style="color:var(--cyan);">{{ solved_counts[p['id']] }}</td>
+        <td style="color:var(--muted);">{{ p['created_at'][:10] }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" style="text-align:center;color:var(--muted);padding:2rem;">No players yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

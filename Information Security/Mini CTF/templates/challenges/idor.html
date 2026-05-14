@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Profile Viewer{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <div class="sec-hdr mb-1">// challenge 02 // idor</div>
+    <h2 class="pg-title">User <span style="color:var(--cyan);">Profile System</span></h2>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-md-5">
+    <div class="ctf-card p-4 fi1">
+      <div class="sec-hdr mb-3">// profile lookup</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#667;margin-bottom:1rem;line-height:1.7;">
+        Profiles are loaded by the <span style="color:var(--yellow);">?id=</span> parameter.<br>
+        No ownership check is performed.
+      </p>
+      <form action="/challenges/idor/profile" method="GET">
+        <div class="mb-3">
+          <label class="form-label">User ID</label>
+          <div style="display:flex;align-items:stretch;gap:0;">
+            <span style="background:#0a0a0a;border:1px solid #1a2a1a;border-right:none;color:var(--muted);padding:.45rem .75rem;font-family:'Share Tech Mono',monospace;font-size:.8rem;border-radius:2px 0 0 2px;white-space:nowrap;">/profile?id=</span>
+            <input type="number" name="id" class="form-control ctf-input" placeholder="1"
+                   style="border-radius:0 2px 2px 0!important;border-left:none!important;"
+                   value="{{ request.args.get('id','') }}" min="1">
+          </div>
+        </div>
+        <button type="submit" class="btn-ctf w-100" style="display:block;text-align:center;padding:.45rem;">VIEW PROFILE</button>
+      </form>
+    </div>
+
+    <div class="ctf-card p-3 mt-3 fi2">
+      <div class="sec-hdr mb-2">// intel</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#667;line-height:1.8;">
+        IDs are sequential integers.<br>
+        Admin was registered <span style="color:var(--yellow);">first</span>.<br>
+        Their profile has <span style="color:var(--red);">sensitive data</span>.
+      </p>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    {% if profile %}
+    <div class="ctf-card p-4 fi" style="{% if profile['role'] == 'admin' %}border-color:rgba(0,255,65,.4);{% endif %}">
+      <div class="sec-hdr mb-3">// profile — id:{{ profile['id'] }}</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.85rem;display:grid;grid-template-columns:110px 1fr;gap:.5rem .75rem;align-items:start;">
+        <span style="color:var(--muted);">USERNAME</span>
+        <span style="color:#ddd;">{{ profile['username'] }}</span>
+        <span style="color:var(--muted);">EMAIL</span>
+        <span style="color:#ddd;">{{ profile['email'] }}</span>
+        <span style="color:var(--muted);">ROLE</span>
+        <span style="color:{% if profile['role'] == 'admin' %}var(--red){% else %}var(--green){% endif %};">{{ profile['role']|upper }}</span>
+        <span style="color:var(--muted);">JOINED</span>
+        <span style="color:#aaa;">{{ profile['created_at'][:10] }}</span>
+        <span style="color:var(--muted);">DATA</span>
+        <span>
+          {% if profile['role'] == 'admin' %}
+          <div class="flag-box mt-1">{{ profile['secret_data'] }}</div>
+          {% else %}
+          <span style="color:#556;">{{ profile['secret_data'] }}</span>
+          {% endif %}
+        </span>
+      </div>
+    </div>
+    {% else %}
+    <div class="ctf-card p-4 fi1 text-center" style="padding:3rem!important;">
+      <i class="fa fa-user-circle" style="font-size:3rem;color:#1a2a1a;"></i>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--muted);margin-top:1rem;">Enter a user ID to load their profile</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

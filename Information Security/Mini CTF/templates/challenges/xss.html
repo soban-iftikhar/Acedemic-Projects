@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Message Board{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <div class="sec-hdr mb-1">// challenge 03 // stored xss</div>
+    <h2 class="pg-title">Public <span style="color:var(--purple);">Message Board</span></h2>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-md-7">
+    <div class="ctf-card p-4 mb-3 fi1">
+      <div class="sec-hdr mb-3">// post a message</div>
+      <form method="POST">
+        <div class="mb-3">
+          <textarea name="message" class="form-control ctf-input" rows="3"
+                    placeholder="Leave a message... HTML is supported" required></textarea>
+        </div>
+        <button type="submit" class="btn-ctf" style="padding:.4rem 1.4rem;">POST MESSAGE</button>
+      </form>
+    </div>
+
+    <div class="sec-hdr mb-2 fi2">// board — {{ messages|length }} message(s)</div>
+    {% for msg in messages %}
+    <div class="ctf-card p-3 mb-2 fi" style="border-left:2px solid #1a2a2a;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:5px;">
+        <i class="fa fa-user me-1" style="color:var(--cyan);"></i>{{ msg['username'] }}
+        <span style="margin-left:8px;">{{ msg['timestamp'] }}</span>
+      </div>
+      <div style="color:#ccc;font-size:.92rem;line-height:1.5;">{{ msg['message']|safe }}</div>
+    </div>
+    {% else %}
+    <div class="ctf-card p-4 text-center fi2">
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--muted);">No messages yet. Be the first to post.</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="col-md-5">
+    <div class="ctf-card p-3 fi2">
+      <div class="sec-hdr mb-3">// vulnerability intel</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#667;line-height:1.9;">
+        Messages rendered with <span style="color:var(--red);">|safe</span> — no escaping.<br><br>
+        The flag is stored in your browser cookie:<br>
+        <span style="color:var(--yellow);">ctf_flag</span><br><br>
+        Inject a script to read <span style="color:var(--cyan);">document.cookie</span><br><br>
+        Example payload:<br>
+        <span style="color:var(--green);font-size:.75rem;">&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

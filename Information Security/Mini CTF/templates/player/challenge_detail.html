@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}{{ challenge['title'] }}{% endblock %}
+{% block content %}
+<div class="row mb-4 fi align-items-start">
+  <div class="col-md-8">
+    <div class="sec-hdr mb-1">// challenge // {{ challenge['category']|upper }}</div>
+    <h2 class="pg-title">{{ challenge['title'] }}</h2>
+    <div class="d-flex gap-3 mt-2 align-items-center flex-wrap">
+      <span class="bdg diff-{{ challenge['difficulty']|lower }}">{{ challenge['difficulty'] }}</span>
+      <span style="font-family:'Share Tech Mono',monospace;font-size:.88rem;color:var(--yellow);">{{ challenge['points'] }} pts</span>
+      {% if already_solved %}
+      <span style="font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--green);"><i class="fa fa-check me-1"></i>SOLVED</span>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-4 text-md-end mt-2 mt-md-0">
+    <a href="/challenges" class="btn-ctf btn-cyan" style="padding:.35rem 1rem;font-size:.78rem;"><i class="fa fa-arrow-left me-1"></i>Back</a>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <div class="ctf-card p-4 mb-3 fi1">
+      <div class="sec-hdr mb-3">// mission brief</div>
+      <p style="line-height:1.8;color:#ccc;font-size:.95rem;">{{ challenge['description'] }}</p>
+    </div>
+    <div class="ctf-card p-4 fi2">
+      <div class="sec-hdr mb-3">// launch challenge</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#556;margin-bottom:1rem;">
+        The vulnerable app opens in the same tab. Use browser back to return.
+      </p>
+      <a href="/challenges/{{ challenge['slug'] }}" class="btn-ctf">
+        <i class="fa fa-crosshairs me-2"></i>OPEN CHALLENGE
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    {% if not already_solved %}
+    <div class="ctf-card p-4 mb-3 fi1">
+      <div class="sec-hdr mb-3">// submit flag</div>
+      <form method="POST" action="/submit/{{ challenge['slug'] }}">
+        <div class="mb-3">
+          <input type="text" name="flag" class="form-control ctf-input"
+                 placeholder="flag{...}" autocomplete="off" required>
+        </div>
+        <button type="submit" class="btn btn-ctf w-100"><i class="fa fa-flag me-2"></i>SUBMIT FLAG</button>
+      </form>
+    </div>
+    {% else %}
+    <div class="ctf-card p-4 mb-3 fi1" style="border-color:rgba(0,255,65,.35);">
+      <div class="sec-hdr mb-3">// challenge complete</div>
+      <div class="text-center py-2">
+        <i class="fa fa-trophy" style="font-size:2rem;color:var(--yellow);text-shadow:0 0 15px rgba(255,230,0,.5);"></i>
+        <p style="font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--green);margin-top:.8rem;">Challenge pwned!</p>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="ctf-card p-4 fi2">
+      <div class="sec-hdr mb-2">// buy hint</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:#556;margin-bottom:.8rem;">
+        Costs <span style="color:var(--red);">-{{ challenge['hint_cost'] }} pts</span> from your score
+      </p>
+      <form method="POST" action="/hint/{{ challenge['slug'] }}">
+        <button type="submit" class="btn-ctf btn-red w-100"
+                onclick="return confirm('Use hint for -{{ challenge['hint_cost'] }} pts?')"
+                style="padding:.4rem;display:block;text-align:center;">
+          <i class="fa fa-lightbulb me-2"></i>BUY HINT (-{{ challenge['hint_cost'] }} pts)
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

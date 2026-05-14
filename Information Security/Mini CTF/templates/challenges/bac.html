@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Secret Admin Panel{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <div class="sec-hdr mb-1">// challenge 06 // broken access control</div>
+    <h2 class="pg-title">Account <span style="color:var(--yellow);">Settings</span></h2>
+  </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+  <div class="col-md-6">
+    {% if flag %}
+    <div class="ctf-card p-4 fi" style="border-color:rgba(0,255,65,.5);">
+      <div class="sec-hdr mb-3">// admin panel — unauthorized access!</div>
+      <div class="alert alert-danger mb-3" style="font-size:.82rem;">
+        <i class="fa fa-exclamation-triangle me-2"></i>
+        You accessed the admin panel without admin privileges!
+      </div>
+      <div class="flag-box">{{ flag }}</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--muted);margin-top:.8rem;">
+        Submit this flag on the <a href="/challenge/bac" style="color:var(--green);">challenge page</a>
+      </p>
+    </div>
+    {% else %}
+    <div class="ctf-card p-4 fi1">
+      <div class="sec-hdr mb-3">// my account</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.85rem;display:grid;grid-template-columns:100px 1fr;gap:.6rem .75rem;margin-bottom:1.2rem;">
+        <span style="color:var(--muted);">Username</span>
+        <span style="color:#ddd;">{{ session.username }}</span>
+        <span style="color:var(--muted);">Role</span>
+        <span style="color:var(--green);">player</span>
+        <span style="color:var(--muted);">Score</span>
+        <span style="color:var(--yellow);">{{ user['score'] }} pts</span>
+      </div>
+      <hr style="border-color:#1a2a1a;margin:1rem 0;">
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:#556;line-height:1.7;">
+        The admin panel link is hidden from the UI for regular users.<br>
+        But does the server actually check your role on the backend?
+      </p>
+    </div>
+
+    <div class="ctf-card p-3 mt-3 fi2">
+      <div class="sec-hdr mb-3">// vulnerability intel</div>
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#667;line-height:1.9;">
+        Route uses <span style="color:var(--yellow);">@login_required</span> only.<br>
+        <span style="color:var(--red);">@admin_required is missing.</span><br><br>
+        The backend never checks <span style="color:var(--cyan);">session['role']</span>.<br><br>
+        Navigate directly to:<br>
+        <span style="color:var(--green);">/challenges/bac/secret-panel</span>
+      </p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

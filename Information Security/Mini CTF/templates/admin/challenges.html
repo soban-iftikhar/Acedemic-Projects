@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Manage Challenges{% endblock %}
+{% block content %}
+<div class="row mb-4 fi align-items-center">
+  <div class="col">
+    <div class="sec-hdr mb-1">// challenge management</div>
+    <h2 class="pg-title">Challenges</h2>
+  </div>
+  <div class="col-auto">
+    <a href="/admin/challenges/add" class="btn-ctf" style="padding:.4rem 1.2rem;font-size:.8rem;"><i class="fa fa-plus me-1"></i>Add New</a>
+  </div>
+</div>
+<div class="ctf-card fi1">
+  <table class="ctf-table table mb-0">
+    <thead>
+      <tr><th>Slug</th><th>Title</th><th>Category</th><th>Diff</th><th>Pts</th><th>Active</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for ch in challenges %}
+      <tr>
+        <td style="color:var(--muted);font-size:.78rem;">{{ ch['slug'] }}</td>
+        <td>{{ ch['title'] }}</td>
+        <td><span class="cat-pill">{{ ch['category'] }}</span></td>
+        <td><span class="bdg diff-{{ ch['difficulty']|lower }}">{{ ch['difficulty'] }}</span></td>
+        <td style="color:var(--yellow);">{{ ch['points'] }}</td>
+        <td>{% if ch['active'] %}<span style="color:var(--green);">YES</span>{% else %}<span style="color:var(--red);">NO</span>{% endif %}</td>
+        <td>
+          <a href="/admin/challenges/edit/{{ ch['id'] }}" class="btn-ctf btn-cyan" style="padding:.25rem .7rem;font-size:.75rem;margin-right:4px;">Edit</a>
+          <form method="POST" action="/admin/challenges/delete/{{ ch['id'] }}" style="display:inline;" onsubmit="return confirm('Delete this challenge?')">
+            <button class="btn-ctf btn-red" style="padding:.25rem .7rem;font-size:.75rem;">Del</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

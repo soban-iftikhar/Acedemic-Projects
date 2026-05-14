@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height:80vh;">
+  <div class="col-md-5 col-lg-4">
+    <div class="text-center mb-4 fi">
+      <div style="font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:900;color:var(--green);">CREATE ACCOUNT</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:3px;margin-top:5px;">JOIN THE COMPETITION</div>
+    </div>
+    <div class="ctf-card p-4 fi1">
+      <div class="sec-hdr mb-4">// new operator</div>
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" name="username" class="form-control ctf-input" placeholder="choose username" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-control ctf-input" placeholder="your@email.com" required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control ctf-input" placeholder="choose password" required>
+        </div>
+        <button type="submit" class="btn btn-ctf w-100"><i class="fa fa-user-plus me-2"></i>REGISTER</button>
+      </form>
+    </div>
+    <div class="text-center mt-3 fi2">
+      <a href="/auth/login" style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:var(--muted);text-decoration:none;">
+        Already registered? <span style="color:var(--green);">Login</span>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
