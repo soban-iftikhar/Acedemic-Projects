@@ -1,1 +1,0 @@
-flag{cmdi_syst3m_c0mm4nd_pwn3d}

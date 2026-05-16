@@ -111,16 +111,6 @@ def init_db():
          "Try a basic script tag. The flag is stored in the page cookie named ctf_flag. Use document.cookie to access it.",
          40, FLAGS['xss']),
 
-        ('cmdi',    'Ping Utility',        'Command Injection',    'Medium', 200,
-         'An internal network tool lets admins ping any host. The input is passed directly to the OS shell. Break out of the ping command and read the flag file.',
-         'Shell separators like ; && || let you chain commands. The flag is in flag.txt in the challenge directory.',
-         40, FLAGS['cmdi']),
-
-        ('upload',  'Avatar Upload',       'File Upload',          'Hard',   300,
-         'A profile picture upload feature only checks the file extension string — not actual file content. Upload a Python script disguised as an image to read the server-side flag.',
-         'The server checks os.path.splitext(filename). Try a double extension like shell.py.png and upload a Python script that reads secret_flag.txt.',
-         50, FLAGS['upload']),
-
         ('bac',     'Secret Admin Panel',  'Broken Access Control','Easy',   100,
          'A hidden admin endpoint exists but access control is only enforced on the frontend. The backend route only checks login, not role. Navigate directly to it as a regular player.',
          'Try navigating directly to /challenges/bac/secret-panel — the server never checks if you are actually an admin.',
@@ -130,6 +120,31 @@ def init_db():
          'An intercepted transmission contains an encoded message. Intelligence suggests it uses a classical substitution cipher with a shift of 13. Decode it to recover the flag.',
          'ROT13 is Caesar cipher with shift=13. Each letter shifts 13 positions forward in the alphabet. Numbers and symbols are unchanged.',
          50, FLAGS['crypto']),
+
+        ('hash',    'Hash Cracking',       'Cryptography',         'Medium', 200,
+         'A database breach has leaked password hashes. The admin password hash is: 5f4dcc3b5aa765d61d8327deb882cf99. Identify the hash algorithm, crack it using your knowledge of common passwords, and enter the plaintext to retrieve the flag.',
+         'MD5 produces exactly 32 hexadecimal characters. This hash corresponds to one of the most common passwords ever used. Think: what would a lazy admin set as their password?',
+         40, FLAGS['hash']),
+
+        ('rsa',     'RSA Decryption',      'Cryptography',         'Hard',   300,
+         'An RSA encrypted message has been intercepted. You are given: p = 61, q = 53, e = 17, Ciphertext = 2557. Use RSA mathematics to compute the private key d and decrypt the message. Steps: (1) n = p × q, (2) φ(n) = (p−1)(q−1), (3) find d where e×d ≡ 1 mod φ(n), (4) plaintext = ciphertext^d mod n.',
+         'n = 3233, φ(n) = 3120, use extended Euclidean algorithm to find d. In Python: pow(ciphertext, d, n). The answer is a 2-digit number.',
+         50, FLAGS['rsa']),
+
+        ('bruteforce', 'Brute Force Login', 'Authentication',       'Medium', 200,
+         'A login portal has no rate limiting, no account lockout, and no CAPTCHA. The admin used a password from the 10 most common passwords list. Try each one until you get in. Wordlist: password, 123456, admin, letmein, qwerty, monkey, dragon, master, abc123, password123',
+         'Think about which password an overconfident sysadmin who thinks they are clever would choose. It means allow me to enter.',
+         40, FLAGS['bruteforce']),
+
+        ('diffie',  'Diffie-Hellman Exchange', 'Cryptography',      'Hard',   300,
+         'Two parties are establishing a shared secret over an insecure channel using Diffie-Hellman key exchange. You have intercepted the public values. Given: Prime p = 23, Generator g = 5, Alice public key A = 8, Bob public key B = 19, Alice private key a = 6. Compute the shared secret that both Alice and Bob independently arrive at.',
+         'Shared secret = B^a mod p. Bob computes it as A^b mod p — both give the same result. This is the magic of Diffie-Hellman.',
+         50, FLAGS['diffie']),
+
+        ('vigenere', 'Vigenere Cipher',    'Cryptography',         'Medium', 200,
+         'A secret message has been encrypted using the Vigenere cipher — a polyalphabetic substitution cipher that uses a keyword to shift each letter by a different amount. Ciphertext: RIJVS{j4g3u3t3_m4ynh3t_nh4mz3x} Key: CRYPTO. Decrypt it to recover the flag.',
+         'For each letter: plaintext = (ciphertext_letter - key_letter) mod 26. Numbers and symbols and the flag{} wrapper are NOT encrypted — only alphabetic characters inside are shifted. Apply the key cyclically.',
+         40, FLAGS['vigenere']),
     ]
 
     for ch in challenges:

@@ -18,9 +18,10 @@
         You accessed the admin panel without admin privileges!
       </div>
       <div class="flag-box">{{ flag }}</div>
-      <p style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--muted);margin-top:.8rem;">
-        Submit this flag on the <a href="/challenge/bac" style="color:var(--green);">challenge page</a>
-      </p>
+      <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+        <a href="/challenge/bac" class="btn-ctf" style="flex:1;text-align:center;padding:.6rem 1rem;font-size:.9rem;">Submit Flag</a>
+        <a href="/challenges" class="btn-outline" style="flex:1;text-align:center;padding:.6rem 1rem;font-size:.9rem;">\u2190 Back to Challenges</a>
+      </div>
     </div>
     {% else %}
     <div class="ctf-card p-4 fi1">

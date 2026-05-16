@@ -35,18 +35,22 @@
       </div>
       {% endif %}
 
-      {% if correct is not none %}
+      {% if correct_flag %}
       <div class="mt-3">
-        {% if correct %}
-        <div class="alert alert-success">
-          <i class="fa fa-check me-2"></i>Correct decode! Submit this flag on the
-          <a href="/challenge/crypto" style="color:var(--green);font-weight:bold;">challenge page</a>.
+        <div class="flag-box" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;animation:slideUp 0.6s ease;">
+          <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:var(--green);margin-bottom:.5rem;">✓ Challenge Solved!</div>
+          <div style="font-family:'Inter',monospace;font-size:.95rem;color:var(--text);word-break:break-all;">{{ correct_flag }}</div>
+          <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+            <a href="/challenge/crypto" class="btn-ctf" style="flex:1;text-align:center;padding:.6rem 1rem;">Submit Flag</a>
+            <a href="/challenges" class="btn-outline" style="flex:1;text-align:center;padding:.6rem 1rem;">← Back to Challenges</a>
+          </div>
         </div>
-        {% else %}
+      </div>
+      {% elif decoded is not none and user_input %}
+      <div class="mt-3">
         <div class="alert alert-danger">
           <i class="fa fa-times me-2"></i>Incorrect. Keep decoding.
         </div>
-        {% endif %}
       </div>
       {% endif %}
     </div>

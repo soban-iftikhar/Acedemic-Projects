@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Hash Cracking{% endblock %}
+{% block content %}
+<div class="row mb-3 fi">
+  <div class="col">
+    <h1 class="sec-hdr mb-1">Challenge 06 — Hash Cracking</h1>
+    <h2 class="pg-title">Break the <span style="color:var(--green);">MD5</span></h2>
+  </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+  <div class="col-md-7">
+    <div class="ctf-card p-4 fi">
+      {% if success %}
+      <div class="flag-box" style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;animation:slideUp 0.6s ease;">
+        <div style="font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:var(--green);margin-bottom:.5rem;">✓ Challenge Solved!</div>
+        <div style="font-family:'Inter',monospace;font-size:.95rem;color:var(--text);word-break:break-all;">{{ success }}</div>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+          <a href="/challenge/hash" class="btn-ctf" style="flex:1;text-align:center;padding:.6rem 1rem;">Submit Flag</a>
+          <a href="/challenges" class="btn-outline" style="flex:1;text-align:center;padding:.6rem 1rem;">← Back to Challenges</a>
+        </div>
+      </div>
+      {% else %}
+        {% if error %}
+        <div class="alert alert-danger fi">{{ error }}</div>
+        {% endif %}
+        
+        <h3 class="sec-hdr mb-3">Hash to Crack</h3>
+        <div class="terminal-solo" style="background:#1E1E2E;border:1px solid #333;border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-family:'Courier New',monospace;color:#CDD6F4;font-size:.9rem;word-break:break-all;line-height:1.6;">
+5f4dcc3b5aa765d61d8327deb882cf99
+        </div>
+
+        <div style="background:rgba(124,58,237,.04);border-left:3px solid var(--violet);padding:1rem;margin-bottom:1.5rem;border-radius:8px;">
+          <div style="font-weight:600;color:var(--text);margin-bottom:.5rem;">Hash Algorithm Reference</div>
+          <table style="width:100%;font-size:.85rem;color:var(--text);">
+            <tr>
+              <td style="padding:.25rem;"><strong>MD5</strong></td>
+              <td style="padding:.25rem;">32 hex characters</td>
+            </tr>
+            <tr>
+              <td style="padding:.25rem;"><strong>SHA1</strong></td>
+              <td style="padding:.25rem;">40 hex characters</td>
+            </tr>
+            <tr>
+              <td style="padding:.25rem;"><strong>SHA256</strong></td>
+              <td style="padding:.25rem;">64 hex characters</td>
+            </tr>
+          </table>
+        </div>
+
+        <form method="POST" style="margin-bottom:1.5rem;">
+          <label class="form-label">Plaintext Password</label>
+          <input type="text" name="cracked" class="ctf-input form-control mb-3" placeholder="What plaintext hashes to this?" required>
+          <button type="submit" class="btn-ctf w-100">Submit Answer</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="ctf-card p-3 fi2">
+      <h3 class="sec-hdr mb-3">Vulnerability Intel</h3>
+      <div style="font-size:.9rem;color:var(--text-muted);line-height:1.6;">
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">What is Hashing?</strong><br>
+        A hash function takes input and produces a fixed-length output. It's a one-way function — you cannot reverse it mathematically.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Why MD5 is Broken</strong><br>
+        MD5 has known collision vulnerabilities. But more importantly: passwords are often common words. Rainbow tables contain precomputed hashes of millions of common passwords.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">The Attack</strong><br>
+        Instead of trying to mathematically reverse the hash, attackers try common passwords: password123, admin, monkey, etc. If the plaintext is in their dictionary — instant match.</p>
+
+        <p style="margin-bottom:1rem;"><strong style="color:var(--text);">Defense: Salting</strong><br>
+        Modern systems add a random "salt" to the password before hashing. Now the same password produces different hashes, making rainbow tables useless.</p>
+
+        <p><strong style="color:var(--text);">Connection to Labs</strong><br>
+        This mirrors the hashing lab in CrypTool where you computed MD5 and SHA hashes. The attack demonstrates why secure password hashing requires salt + strong algorithms (bcrypt, scrypt, argon2).</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
