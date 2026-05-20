@@ -7,7 +7,7 @@ function VigenereChallenge({ challenge }) {
   const [revealed, setRevealed] = useState(false);
   const [result, setResult] = useState('');
   const [showHint, setShowHint] = useState(false);
-  const expectedPlaintext = ['C', 'R', 'Y', 'P', 'T', 'O', 'G', 'R', 'A', 'P', 'H', 'Y'].join('');
+  const expectedPlaintext = 'ATTACKATDAWN';
 
   const handleRevealCiphertext = (e) => {
     e.preventDefault();
@@ -17,8 +17,11 @@ function VigenereChallenge({ challenge }) {
 
   const handleCheckGuess = (e) => {
     e.preventDefault();
-    
-    if (plaintext.toUpperCase() === expectedPlaintext || plaintext.toLowerCase() === 'vigenere cipher decrypted') {
+    const normalize = (s) => s.replace(/[^A-Za-z]/g, '').trim().toUpperCase();
+    const normalizedGuess = normalize(plaintext);
+    const normalizedExpected = normalize(expectedPlaintext);
+
+    if (normalizedGuess === normalizedExpected) {
       setResult(`✓ Correct! You successfully decrypted the Vigenere cipher!\n\nFlag: ${CHALLENGE_FLAGS.vigenere}`);
     } else {
       setResult('✗ Incorrect. Try using frequency analysis or a Vigenere cracker tool.');
