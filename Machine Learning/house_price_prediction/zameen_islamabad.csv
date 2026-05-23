@@ -1,0 +1,409 @@
+price_pkr,area,area_unit,city,bedrooms,bathrooms,location,property_type,built_year,parking_spaces,servant_quarters,store_rooms,kitchens,drawing_rooms,purpose
+3900000,3.0,Marla,Islamabad,2,1,Sector B-17,House,,1.0,0.0,0.0,1,1,For Sale
+17000000,14.0,Marla,Islamabad,4,3,Capital Smart City,House,2022.0,1.0,0.0,,1,1,For Sale
+44300000,10.1,Marla,Islamabad,4,4,F-11,Flat,,0.0,1.0,,1,2,For Sale
+11200000,5.0,Marla,Islamabad,3,2,G-13,House,2023.0,2.0,0.0,0.0,1,1,For Sale
+7600000,3.9,Marla,Islamabad,3,2,Bahria Town Phase 7,Flat,2022.0,0.0,0.0,0.0,1,1,For Sale
+24600000,20.0,Marla,Islamabad,4,4,Naval Anchorage,House,,1.0,1.0,1.0,1,1,For Sale
+411800000,20.0,Kanal,Islamabad,4,4,Naval Anchorage,Upper Portion,2020.0,1.0,1.0,1.0,1,1,For Sale
+1252200000,20.0,Kanal,Islamabad,5,3,F-11,Lower Portion,,,0.0,1.0,2,2,For Sale
+5000000,4.7,Marla,Islamabad,2,1,Sector C-14,Flat,2017.0,0.0,0.0,0.0,1,1,For Sale
+13000000,13.8,Marla,Islamabad,6,4,CBR Town,Flat,2003.0,0.0,1.0,0.0,1,1,For Sale
+56100000,10.2,Marla,Islamabad,6,5,F-6,Flat,,0.0,0.0,0.0,2,2,For Sale
+5700000,5.0,Marla,Islamabad,2,2,Sector C-14,Lower Portion,2023.0,1.0,0.0,0.0,1,1,For Sale
+703000000,12.0,Kanal,Islamabad,5,4,Gulberg Greens,House,2003.0,2.0,0.0,1.0,1,2,For Sale
+6900000,3.0,Marla,Islamabad,2,1,G-10,House,2017.0,2.0,0.0,0.0,1,1,For Sale
+32400000,14.4,Marla,Islamabad,5,4,Bahria Town Phase 8,Flat,2021.0,0.0,0.0,1.0,2,1,For Sale
+226200000,11.0,Kanal,Islamabad,5,4,I-14,Farm House,,1.0,0.0,0.0,1,2,For Sale
+443600000,5.0,Kanal,Islamabad,5,3,DHA Phase 5,House,2018.0,2.0,0.0,0.0,1,2,For Sale
+44500000,12.7,Marla,Islamabad,5,3,G-6,Flat,2023.0,0.0,1.0,1.0,1,2,For Sale
+3600000,3.0,Marla,Islamabad,3,1,Sector C-14,House,,1.0,0.0,0.0,1,1,For Sale
+20500000,8.0,Marla,Islamabad,3,3,I-10,House,,2.0,0.0,0.0,1,1,For Sale
+1627200000,20.0,Kanal,Islamabad,5,5,DHA Phase 1,House,,1.0,1.0,0.0,2,2,For Sale
+1516100000,20.0,Kanal,Islamabad,5,5,E-7,Upper Portion,2017.0,1.0,,0.0,2,1,For Sale
+6500000,3.0,Marla,Islamabad,2,1,G-11,House,,3.0,0.0,0.0,1,1,For Sale
+277100000,15.0,Kanal,Islamabad,6,3,Airport Housing Society,House,2006.0,2.0,1.0,1.0,1,1,For Sale
+19200000,8.0,Marla,Islamabad,4,3,G-11,House,,3.0,0.0,0.0,1,2,For Sale
+5300000,5.0,Marla,Islamabad,3,1,Blue World City,House,2007.0,3.0,0.0,0.0,1,1,For Sale
+65400000,13.0,Marla,Islamabad,5,3,F-6,Flat,,0.0,0.0,1.0,2,1,For Sale
+9500000,8.0,Marla,Islamabad,4,3,Park View City,House,2008.0,1.0,0.0,1.0,1,2,For Sale
+87400000,15.0,Marla,Islamabad,5,3,DHA Phase 5,House,2017.0,2.0,1.0,0.0,1,2,For Sale
+5200000,5.0,Marla,Islamabad,2,1,Park View City,House,,2.0,0.0,0.0,1,1,For Sale
+938500000,10.0,Kanal,Islamabad,4,4,DHA Phase 4,Upper Portion,2013.0,2.0,0.0,1.0,1,1,For Sale
+350000000,5.0,Kanal,Islamabad,5,5,Bahria Enclave,House,2023.0,2.0,1.0,1.0,1,1,For Sale
+37600000,20.0,Marla,Islamabad,6,3,G-8,House,2007.0,1.0,1.0,1.0,2,1,For Sale
+11500000,10.0,Marla,Islamabad,3,3,Naval Anchorage,House,2003.0,1.0,1.0,,1,1,For Sale
+766600000,14.0,Kanal,Islamabad,5,3,G-7,House,2016.0,1.0,1.0,1.0,1,2,For Sale
+10700000,8.0,Marla,Islamabad,5,2,Blue World City,House,2021.0,2.0,0.0,1.0,1,2,For Sale
+313500000,9.0,Kanal,Islamabad,6,4,G-10,Farm House,2012.0,2.0,0.0,1.0,2,2,For Sale
+55300000,9.8,Marla,Islamabad,5,3,F-7,Penthouse,2019.0,1.0,0.0,1.0,1,2,For Sale
+8800000,8.3,Marla,Islamabad,4,3,I-16,Flat,2009.0,0.0,0.0,0.0,1,2,For Sale
+7600000,7.0,Marla,Islamabad,4,3,Sector B-17,Penthouse,,1.0,0.0,0.0,1,2,For Sale
+24600000,13.2,Marla,Islamabad,4,5,PWD Housing Society,Penthouse,2007.0,3.0,,1.0,1,2,For Sale
+332000000,20.0,Kanal,Islamabad,4,5,Mumtaz City,House,2003.0,1.0,1.0,0.0,1,1,For Sale
+376700000,20.0,Kanal,Islamabad,7,4,I-16,Farm House,,2.0,1.0,0.0,2,2,For Sale
+1221600000,20.0,Kanal,Islamabad,6,4,G-6,Upper Portion,,1.0,1.0,0.0,2,2,For Sale
+6100000,5.0,Marla,Islamabad,3,1,Capital Smart City,House,,2.0,0.0,0.0,1,1,For Sale
+8900000,8.0,Marla,Islamabad,4,3,Capital Smart City,Flat,2018.0,0.0,0.0,0.0,1,2,For Sale
+752500000,8.0,Kanal,Islamabad,6,4,DHA Phase 1,Lower Portion,2021.0,1.0,1.0,0.0,2,1,For Sale
+482900000,10.0,Kanal,Islamabad,7,3,E-11,House,2005.0,1.0,1.0,,2,1,For Sale
+36400000,7.0,Marla,Islamabad,4,3,E-7,Lower Portion,,2.0,0.0,1.0,1,2,For Sale
+402600000,5.0,Kanal,Islamabad,5,4,DHA Phase 2,Farm House,2019.0,2.0,0.0,0.0,1,1,For Sale
+26000000,11.0,Marla,Islamabad,7,4,Bahria Town Phase 8,Flat,2023.0,0.0,1.0,0.0,2,2,For Sale
+23600000,5.0,Marla,Islamabad,3,2,F-6,Upper Portion,2002.0,1.0,0.0,0.0,1,1,For Sale
+4900000,5.0,Marla,Islamabad,3,1,Sector B-17,House,2001.0,2.0,0.0,0.0,1,1,For Sale
+9400000,5.0,Marla,Islamabad,3,1,I-10,Lower Portion,2003.0,2.0,0.0,0.0,1,1,For Sale
+23700000,11.5,Marla,Islamabad,6,4,G-15,Flat,2018.0,0.0,1.0,1.0,2,2,For Sale
+490300000,8.0,Kanal,Islamabad,5,5,G-6,House,2011.0,1.0,1.0,0.0,2,2,For Sale
+29500000,14.0,Marla,Islamabad,5,3,G-13,Upper Portion,2007.0,,,1.0,1,1,For Sale
+10600000,8.4,Marla,Islamabad,3,2,Sector C-14,Flat,,0.0,0.0,1.0,1,1,For Sale
+15800000,7.4,Marla,Islamabad,4,3,G-10,Penthouse,,1.0,0.0,1.0,1,2,For Sale
+19300000,10.0,Marla,Islamabad,4,2,Bahria Town Phase 7,House,2006.0,2.0,1.0,1.0,1,1,For Sale
+16300000,8.0,Marla,Islamabad,4,3,G-15,House,2004.0,3.0,0.0,1.0,1,1,For Sale
+6100000,3.0,Marla,Islamabad,3,2,PECHS,House,,2.0,0.0,0.0,1,1,For Sale
+8900000,5.0,Marla,Islamabad,2,1,PWD Housing Society,House,2009.0,1.0,0.0,0.0,1,1,For Sale
+689100000,12.0,Kanal,Islamabad,7,4,G-6,House,2019.0,3.0,1.0,1.0,2,2,For Sale
+33300000,15.0,Marla,Islamabad,4,4,Bahria Town Phase 4,House,,1.0,0.0,,1,1,For Sale
+6400000,6.5,Marla,Islamabad,4,3,Airport Housing Society,Flat,2014.0,0.0,0.0,0.0,1,2,For Sale
+940900000,20.0,Kanal,Islamabad,7,4,F-11,Upper Portion,2002.0,2.0,0.0,1.0,2,1,For Sale
+26900000,12.0,Marla,Islamabad,7,4,G-10,Penthouse,2016.0,2.0,1.0,1.0,2,1,For Sale
+14600000,14.0,Marla,Islamabad,6,4,I-14,House,2005.0,1.0,0.0,1.0,2,1,For Sale
+16100000,14.0,Marla,Islamabad,5,5,Sector C-14,Flat,2010.0,0.0,1.0,1.0,2,1,For Sale
+54300000,10.0,Marla,Islamabad,4,3,F-6,Lower Portion,,,0.0,1.0,1,2,For Sale
+30000000,13.4,Marla,Islamabad,4,5,Bahria Town Phase 7,Flat,2019.0,0.0,0.0,0.0,1,2,For Sale
+16800000,12.1,Marla,Islamabad,5,4,Sector B-17,Flat,,,1.0,1.0,1,2,For Sale
+25800000,20.0,Marla,Islamabad,7,3,Airport Housing Society,House,2020.0,1.0,0.0,,2,1,For Sale
+28400000,12.0,Marla,Islamabad,6,5,PECHS,Upper Portion,,2.0,,1.0,2,1,For Sale
+277200000,8.0,Kanal,Islamabad,6,4,Bahria Town Phase 8,House,2014.0,1.0,1.0,1.0,2,1,For Sale
+481900000,12.0,Kanal,Islamabad,6,5,G-14,Lower Portion,,3.0,0.0,1.0,2,1,For Sale
+97900000,20.0,Marla,Islamabad,6,5,DHA Phase 4,Lower Portion,2014.0,3.0,0.0,1.0,1,2,For Sale
+26700000,20.0,Marla,Islamabad,5,3,I-16,House,2021.0,1.0,,0.0,2,2,For Sale
+89700000,15.0,Marla,Islamabad,6,3,E-7,Lower Portion,2013.0,2.0,1.0,0.0,1,1,For Sale
+10300000,10.0,Marla,Islamabad,4,2,Sector B-17,House,2013.0,1.0,0.0,1.0,1,1,For Sale
+34600000,9.8,Marla,Islamabad,4,2,Gulberg Residencia,Flat,2012.0,0.0,0.0,0.0,1,1,For Sale
+55800000,14.0,Marla,Islamabad,5,4,G-6,Flat,2014.0,0.0,,1.0,2,2,For Sale
+141100000,7.0,Kanal,Islamabad,6,4,Top City-1,Farm House,,2.0,1.0,,2,2,For Sale
+17800000,7.0,Marla,Islamabad,4,3,PWD Housing Society,House,,3.0,0.0,1.0,1,2,For Sale
+10500000,3.0,Marla,Islamabad,2,2,E-11,Upper Portion,2007.0,2.0,0.0,0.0,1,1,For Sale
+31300000,15.0,Marla,Islamabad,5,4,G-14,House,2023.0,,1.0,0.0,1,1,For Sale
+44300000,20.0,Marla,Islamabad,5,4,G-9,Lower Portion,2009.0,2.0,1.0,1.0,2,2,For Sale
+336200000,10.0,Kanal,Islamabad,5,4,G-13,House,,1.0,1.0,,2,2,For Sale
+33700000,14.0,Marla,Islamabad,5,3,G-15,Upper Portion,2020.0,1.0,1.0,0.0,1,2,For Sale
+19300000,15.0,Marla,Islamabad,5,3,Mumtaz City,Upper Portion,,3.0,0.0,0.0,1,2,For Sale
+38700000,7.5,Marla,Islamabad,5,3,E-7,Flat,2019.0,0.0,0.0,0.0,1,2,For Sale
+44100000,20.0,Marla,Islamabad,6,5,G-8,House,,1.0,1.0,1.0,1,2,For Sale
+8700000,4.1,Marla,Islamabad,2,1,Bahria Town Phase 7,Flat,,0.0,0.0,0.0,1,1,For Sale
+13400000,5.5,Marla,Islamabad,4,3,Bahria Town Phase 8,Penthouse,,2.0,0.0,0.0,1,1,For Sale
+167600000,8.0,Kanal,Islamabad,5,4,Airport Housing Society,House,,1.0,0.0,0.0,2,1,For Sale
+23600000,6.9,Marla,Islamabad,4,3,G-6,Penthouse,2003.0,1.0,0.0,0.0,1,1,For Sale
+19800000,12.3,Marla,Islamabad,7,3,PWD Housing Society,Flat,2000.0,0.0,0.0,1.0,2,1,For Sale
+16200000,8.1,Marla,Islamabad,3,3,PWD Housing Society,Flat,,0.0,,1.0,1,1,For Sale
+5900000,5.0,Marla,Islamabad,3,2,Airport Housing Society,House,2014.0,3.0,0.0,0.0,1,1,For Sale
+42900000,20.0,Marla,Islamabad,7,4,I-10,House,,3.0,1.0,,2,2,For Sale
+21200000,10.0,Marla,Islamabad,4,3,Bahria Town Phase 4,Lower Portion,,2.0,,0.0,1,1,For Sale
+43200000,20.0,Marla,Islamabad,5,3,I-10,House,2019.0,2.0,1.0,0.0,2,1,For Sale
+18700000,9.1,Marla,Islamabad,4,3,Bahria Town Phase 4,Penthouse,2017.0,1.0,0.0,0.0,1,2,For Sale
+13600000,5.7,Marla,Islamabad,5,3,G-8,Penthouse,,1.0,0.0,0.0,1,2,For Sale
+4900000,3.0,Marla,Islamabad,2,2,G-13,Lower Portion,2000.0,1.0,0.0,0.0,1,1,For Sale
+30800000,10.0,Marla,Islamabad,4,2,Gulberg Residencia,House,2004.0,1.0,1.0,0.0,1,2,For Sale
+14800000,15.0,Marla,Islamabad,6,5,Margalla Hills,House,2003.0,2.0,0.0,0.0,2,2,For Sale
+10300000,8.8,Marla,Islamabad,4,2,Top City-1,Penthouse,,1.0,0.0,0.0,1,1,For Sale
+72700000,20.0,Marla,Islamabad,5,3,F-10,House,2022.0,2.0,0.0,0.0,1,2,For Sale
+5500000,5.0,Marla,Islamabad,2,2,Park View City,Lower Portion,2010.0,1.0,0.0,0.0,1,1,For Sale
+15400000,11.5,Marla,Islamabad,6,4,Blue World City,Flat,,0.0,0.0,1.0,1,2,For Sale
+5000000,5.0,Marla,Islamabad,2,1,I-16,Lower Portion,2002.0,2.0,0.0,0.0,1,1,For Sale
+13800000,7.0,Marla,Islamabad,4,2,G-10,Lower Portion,2011.0,2.0,0.0,0.0,1,1,For Sale
+9300000,7.0,Marla,Islamabad,4,2,Sector C-14,House,,,0.0,0.0,1,1,For Sale
+26500000,12.1,Marla,Islamabad,7,5,PECHS,Flat,,,0.0,1.0,2,2,For Sale
+27600000,14.0,Marla,Islamabad,7,3,G-10,Upper Portion,2002.0,2.0,0.0,1.0,2,2,For Sale
+35200000,10.1,Marla,Islamabad,6,5,Bahria Town Phase 2,Penthouse,2016.0,3.0,0.0,1.0,1,2,For Sale
+17400000,4.2,Marla,Islamabad,3,1,DHA Phase 5,Flat,2005.0,0.0,0.0,0.0,1,1,For Sale
+17200000,14.9,Marla,Islamabad,7,4,Faisal Town,Flat,2010.0,0.0,1.0,1.0,2,2,For Sale
+29300000,5.0,Marla,Islamabad,3,2,DHA Phase 5,Lower Portion,2019.0,1.0,0.0,0.0,1,1,For Sale
+33500000,14.0,Marla,Islamabad,5,4,G-13,House,2020.0,2.0,0.0,1.0,2,1,For Sale
+155800000,5.0,Kanal,Islamabad,6,4,Bahria Town Phase 8,Farm House,2015.0,1.0,0.0,1.0,1,2,For Sale
+10000000,5.0,Marla,Islamabad,2,1,Bahria Town Phase 8,House,2019.0,2.0,0.0,0.0,1,1,For Sale
+26100000,5.0,Marla,Islamabad,2,2,E-7,House,2023.0,1.0,0.0,0.0,1,1,For Sale
+6700000,6.4,Marla,Islamabad,5,2,I-14,Penthouse,2006.0,3.0,,0.0,1,2,For Sale
+8900000,8.5,Marla,Islamabad,4,3,Blue World City,Flat,2019.0,0.0,0.0,0.0,1,2,For Sale
+50300000,15.0,Marla,Islamabad,5,3,G-7,House,2016.0,1.0,0.0,1.0,1,2,For Sale
+206800000,7.0,Kanal,Islamabad,5,3,I-10,House,,1.0,1.0,0.0,2,1,For Sale
+423400000,5.0,Kanal,Islamabad,5,4,DHA Phase 2,Lower Portion,2015.0,1.0,1.0,0.0,1,1,For Sale
+16000000,3.0,Marla,Islamabad,2,2,DHA Phase 1,House,,1.0,0.0,0.0,1,1,For Sale
+49500000,10.0,Marla,Islamabad,5,2,DHA Phase 5,House,2009.0,2.0,0.0,0.0,1,2,For Sale
+8900000,7.0,Marla,Islamabad,4,3,Margalla Hills,Lower Portion,,2.0,0.0,1.0,1,1,For Sale
+683500000,13.0,Kanal,Islamabad,6,5,Gulberg Greens,Farm House,2002.0,3.0,1.0,0.0,1,2,For Sale
+24100000,20.0,Marla,Islamabad,5,4,Naval Anchorage,House,2015.0,2.0,0.0,1.0,1,2,For Sale
+634200000,20.0,Kanal,Islamabad,6,3,Bahria Town Phase 8,House,2009.0,1.0,0.0,0.0,2,1,For Sale
+6400000,6.0,Marla,Islamabad,4,3,Capital Smart City,Flat,2001.0,0.0,,0.0,1,2,For Sale
+179000000,5.0,Kanal,Islamabad,6,5,G-13,Upper Portion,2011.0,1.0,0.0,1.0,2,2,For Sale
+84500000,20.0,Marla,Islamabad,6,3,Gulberg Residencia,Upper Portion,,2.0,1.0,0.0,2,1,For Sale
+21300000,10.2,Marla,Islamabad,6,4,G-10,Flat,2011.0,0.0,1.0,,2,2,For Sale
+552500000,15.0,Kanal,Islamabad,4,3,I-10,Upper Portion,,1.0,0.0,0.0,1,2,For Sale
+5400000,5.0,Marla,Islamabad,3,2,I-14,House,2019.0,1.0,0.0,0.0,1,1,For Sale
+10400000,10.0,Marla,Islamabad,3,3,I-14,Lower Portion,2008.0,1.0,1.0,1.0,1,1,For Sale
+43400000,20.0,Marla,Islamabad,7,5,Bahria Town Phase 7,House,2009.0,2.0,1.0,0.0,1,2,For Sale
+9900000,5.0,Marla,Islamabad,2,2,PECHS,House,2002.0,1.0,0.0,0.0,1,1,For Sale
+42900000,20.0,Marla,Islamabad,7,4,G-11,Lower Portion,,2.0,,1.0,2,1,For Sale
+47400000,20.0,Marla,Islamabad,5,4,Bahria Town Phase 8,House,2022.0,2.0,0.0,0.0,2,1,For Sale
+42200000,12.2,Marla,Islamabad,7,3,Gulberg Residencia,Flat,2016.0,0.0,0.0,1.0,1,2,For Sale
+5300000,5.2,Marla,Islamabad,4,3,Park View City,Penthouse,2009.0,2.0,0.0,0.0,1,1,For Sale
+357700000,10.0,Kanal,Islamabad,7,4,G-11,House,2019.0,1.0,1.0,,1,2,For Sale
+915300000,14.0,Kanal,Islamabad,5,4,Gulberg Greens,House,,2.0,0.0,0.0,2,1,For Sale
+18900000,15.0,Marla,Islamabad,7,5,Blue World City,Upper Portion,2021.0,3.0,1.0,1.0,1,2,For Sale
+23200000,20.0,Marla,Islamabad,6,5,I-16,House,2010.0,1.0,0.0,1.0,2,2,For Sale
+8500000,4.6,Marla,Islamabad,3,1,G-14,Flat,2014.0,0.0,0.0,0.0,1,1,For Sale
+5800000,5.0,Marla,Islamabad,3,2,I-14,House,2005.0,3.0,0.0,0.0,1,1,For Sale
+113600000,7.0,Kanal,Islamabad,6,5,Blue World City,Lower Portion,2007.0,2.0,0.0,1.0,2,2,For Sale
+5700000,3.0,Marla,Islamabad,3,2,G-14,House,2013.0,2.0,0.0,0.0,1,1,For Sale
+64000000,20.0,Marla,Islamabad,4,5,G-7,Lower Portion,2002.0,,,1.0,1,1,For Sale
+142800000,8.0,Kanal,Islamabad,7,3,I-14,Farm House,2006.0,1.0,1.0,1.0,1,1,For Sale
+278100000,5.0,Kanal,Islamabad,4,4,E-11,Farm House,2016.0,2.0,1.0,0.0,1,2,For Sale
+6100000,5.0,Marla,Islamabad,3,2,Margalla Hills,Lower Portion,2015.0,2.0,0.0,0.0,1,1,For Sale
+28100000,12.8,Marla,Islamabad,5,4,G-10,Flat,2008.0,0.0,1.0,0.0,1,2,For Sale
+7300000,5.7,Marla,Islamabad,3,3,CBR Town,Penthouse,2023.0,2.0,0.0,0.0,1,1,For Sale
+73900000,15.0,Marla,Islamabad,7,3,E-7,House,2006.0,,1.0,0.0,1,1,For Sale
+16600000,13.5,Marla,Islamabad,4,4,Margalla Hills,Flat,2010.0,0.0,1.0,1.0,1,1,For Sale
+211700000,9.0,Kanal,Islamabad,5,4,I-16,Farm House,,3.0,1.0,1.0,2,1,For Sale
+49500000,20.0,Marla,Islamabad,6,4,G-10,Upper Portion,,2.0,1.0,1.0,2,2,For Sale
+64800000,12.8,Marla,Islamabad,5,4,E-7,Flat,2020.0,0.0,0.0,1.0,1,2,For Sale
+281200000,7.0,Kanal,Islamabad,5,4,PWD Housing Society,House,,2.0,0.0,0.0,1,1,For Sale
+10400000,3.0,Marla,Islamabad,3,2,F-11,House,2000.0,1.0,0.0,0.0,1,1,For Sale
+52800000,10.8,Marla,Islamabad,6,5,F-6,Flat,2002.0,0.0,1.0,1.0,1,2,For Sale
+996600000,16.0,Kanal,Islamabad,4,4,F-11,Farm House,,3.0,0.0,0.0,1,2,For Sale
+16000000,3.0,Marla,Islamabad,2,2,F-7,Upper Portion,2017.0,1.0,0.0,0.0,1,1,For Sale
+398100000,11.0,Kanal,Islamabad,5,3,Bahria Town Phase 8,Farm House,,2.0,1.0,0.0,2,1,For Sale
+24300000,11.1,Marla,Islamabad,5,4,G-9,Penthouse,2005.0,2.0,,1.0,2,2,For Sale
+13800000,7.0,Marla,Islamabad,5,2,PWD Housing Society,Lower Portion,2018.0,3.0,0.0,1.0,2,2,For Sale
+21500000,20.0,Marla,Islamabad,4,5,Sector C-14,Lower Portion,2009.0,1.0,1.0,0.0,1,2,For Sale
+19500000,5.0,Marla,Islamabad,3,2,F-11,House,2015.0,2.0,0.0,0.0,1,1,For Sale
+21300000,20.0,Marla,Islamabad,7,3,Naval Anchorage,House,2016.0,1.0,0.0,0.0,2,2,For Sale
+5200000,5.0,Marla,Islamabad,3,1,Capital Smart City,House,2015.0,2.0,0.0,0.0,1,1,For Sale
+45200000,12.7,Marla,Islamabad,6,4,Gulberg Greens,Flat,2009.0,0.0,0.0,1.0,2,2,For Sale
+12500000,3.0,Marla,Islamabad,2,1,E-11,Upper Portion,2017.0,2.0,0.0,0.0,1,1,For Sale
+13900000,3.4,Marla,Islamabad,3,1,Bahria Town Phase 1,Flat,2020.0,0.0,0.0,0.0,1,1,For Sale
+9600000,7.5,Marla,Islamabad,5,3,Sector C-14,Flat,2021.0,0.0,0.0,0.0,2,2,For Sale
+10100000,5.0,Marla,Islamabad,3,1,Bahria Town Phase 8,Lower Portion,,2.0,0.0,0.0,1,1,For Sale
+63800000,10.0,Marla,Islamabad,5,3,DHA Phase 2,Upper Portion,,1.0,1.0,0.0,2,1,For Sale
+48600000,20.0,Marla,Islamabad,7,3,Bahria Town Phase 7,House,2022.0,1.0,0.0,1.0,1,1,For Sale
+41100000,10.0,Marla,Islamabad,4,2,G-6,House,2023.0,2.0,1.0,0.0,1,1,For Sale
+13100000,12.3,Marla,Islamabad,5,4,Blue World City,Penthouse,2001.0,3.0,0.0,1.0,2,1,For Sale
+16500000,15.0,Marla,Islamabad,7,5,CBR Town,House,2013.0,3.0,1.0,1.0,1,2,For Sale
+109800000,20.0,Marla,Islamabad,5,4,E-7,House,2017.0,2.0,0.0,1.0,2,1,For Sale
+35000000,8.0,Marla,Islamabad,3,3,E-7,House,2006.0,2.0,0.0,0.0,1,1,For Sale
+45600000,10.2,Marla,Islamabad,4,4,E-7,Penthouse,2000.0,2.0,1.0,1.0,1,1,For Sale
+1892800000,20.0,Kanal,Islamabad,6,4,F-8,House,2017.0,3.0,1.0,1.0,1,2,For Sale
+19100000,10.0,Marla,Islamabad,5,3,G-10,Upper Portion,2013.0,2.0,1.0,0.0,1,2,For Sale
+10700000,3.0,Marla,Islamabad,3,2,F-11,House,2012.0,1.0,0.0,0.0,1,1,For Sale
+39100000,9.6,Marla,Islamabad,4,3,G-6,Flat,2023.0,0.0,0.0,1.0,1,2,For Sale
+105600000,20.0,Marla,Islamabad,5,3,F-6,House,2020.0,3.0,0.0,0.0,1,1,For Sale
+3900000,3.0,Marla,Islamabad,3,2,Faisal Town,House,2019.0,1.0,0.0,0.0,1,1,For Sale
+4000000,3.2,Marla,Islamabad,3,1,Naval Anchorage,Flat,,,0.0,0.0,1,1,For Sale
+3400000,3.0,Marla,Islamabad,3,1,Capital Smart City,Upper Portion,,1.0,0.0,0.0,1,1,For Sale
+50900000,9.3,Marla,Islamabad,4,3,F-8,Penthouse,2007.0,1.0,0.0,1.0,1,2,For Sale
+869000000,15.0,Kanal,Islamabad,4,3,F-11,Upper Portion,,2.0,1.0,,1,1,For Sale
+837500000,10.0,Kanal,Islamabad,5,3,F-6,House,,1.0,1.0,1.0,1,1,For Sale
+494700000,13.0,Kanal,Islamabad,4,4,G-8,Farm House,2022.0,1.0,0.0,0.0,1,2,For Sale
+20100000,5.0,Marla,Islamabad,3,2,Bahria Town Phase 1,Upper Portion,,1.0,0.0,0.0,1,1,For Sale
+10900000,3.0,Marla,Islamabad,2,1,Gulberg Greens,Lower Portion,2019.0,1.0,0.0,0.0,1,1,For Sale
+36400000,15.0,Marla,Islamabad,6,5,G-11,House,,2.0,1.0,1.0,1,2,For Sale
+85000000,20.0,Marla,Islamabad,5,3,E-7,House,,1.0,0.0,1.0,1,2,For Sale
+15900000,7.3,Marla,Islamabad,4,2,G-10,Flat,,0.0,0.0,0.0,1,1,For Sale
+223400000,11.0,Kanal,Islamabad,4,3,Park View City,Farm House,,,1.0,1.0,1,2,For Sale
+879500000,18.0,Kanal,Islamabad,5,4,Bahria Town Phase 2,Farm House,2002.0,1.0,1.0,1.0,2,1,For Sale
+13600000,6.6,Marla,Islamabad,3,3,G-8,Flat,,0.0,0.0,0.0,1,1,For Sale
+12000000,10.1,Marla,Islamabad,5,5,Sector B-17,Flat,2010.0,0.0,,0.0,1,1,For Sale
+58100000,10.0,Marla,Islamabad,4,3,E-7,Lower Portion,2012.0,2.0,0.0,1.0,1,2,For Sale
+33900000,14.6,Marla,Islamabad,5,4,G-9,Flat,,0.0,1.0,1.0,2,2,For Sale
+136600000,7.0,Kanal,Islamabad,7,3,CBR Town,Farm House,2013.0,2.0,1.0,,2,1,For Sale
+15300000,7.0,Marla,Islamabad,4,3,Bahria Town Phase 8,Upper Portion,2019.0,2.0,0.0,0.0,1,2,For Sale
+771800000,12.0,Kanal,Islamabad,6,3,E-11,Farm House,,1.0,0.0,1.0,2,1,For Sale
+18700000,14.6,Marla,Islamabad,5,5,Blue World City,Flat,,0.0,,1.0,1,1,For Sale
+12000000,11.3,Marla,Islamabad,5,5,Park View City,Penthouse,2015.0,2.0,0.0,1.0,2,2,For Sale
+151500000,5.0,Kanal,Islamabad,5,4,I-8,House,2003.0,2.0,0.0,1.0,2,2,For Sale
+7900000,6.8,Marla,Islamabad,4,2,Mumtaz City,Flat,,0.0,0.0,,1,1,For Sale
+41300000,20.0,Marla,Islamabad,5,4,Bahria Town Phase 4,House,2005.0,3.0,0.0,1.0,2,2,For Sale
+6000000,3.4,Marla,Islamabad,2,2,I-10,Flat,2012.0,0.0,0.0,0.0,1,1,For Sale
+521500000,8.0,Kanal,Islamabad,4,3,F-10,House,,1.0,0.0,1.0,1,1,For Sale
+740900000,19.0,Kanal,Islamabad,5,5,PECHS,Farm House,2022.0,1.0,1.0,,2,1,For Sale
+4000000,4.0,Marla,Islamabad,2,2,Margalla Hills,Penthouse,2005.0,1.0,0.0,0.0,1,1,For Sale
+481800000,10.0,Kanal,Islamabad,7,4,Bahria Enclave,Farm House,2004.0,,0.0,0.0,2,2,For Sale
+4400000,3.6,Marla,Islamabad,3,1,I-14,Penthouse,,2.0,0.0,0.0,1,1,For Sale
+229500000,14.0,Kanal,Islamabad,6,5,Park View City,Farm House,2007.0,2.0,,0.0,2,2,For Sale
+25800000,12.0,Marla,Islamabad,6,5,G-8,House,2014.0,1.0,1.0,0.0,1,1,For Sale
+643200000,20.0,Kanal,Islamabad,5,4,I-10,House,2003.0,1.0,0.0,1.0,1,2,For Sale
+70700000,20.0,Marla,Islamabad,5,5,G-6,House,2017.0,2.0,0.0,0.0,1,1,For Sale
+177700000,10.0,Kanal,Islamabad,5,4,Capital Smart City,House,2020.0,1.0,1.0,0.0,2,1,For Sale
+10300000,5.0,Marla,Islamabad,2,2,Bahria Town Phase 8,House,2008.0,2.0,0.0,,1,1,For Sale
+19600000,3.9,Marla,Islamabad,2,2,E-7,Flat,2008.0,0.0,0.0,0.0,1,1,For Sale
+27500000,14.4,Marla,Islamabad,5,3,G-15,Flat,,0.0,1.0,0.0,1,2,For Sale
+17300000,10.0,Marla,Islamabad,4,3,I-10,House,2001.0,2.0,1.0,1.0,1,1,For Sale
+3300000,3.2,Marla,Islamabad,2,2,Sector B-17,Flat,2013.0,0.0,0.0,0.0,1,1,For Sale
+17000000,15.0,Marla,Islamabad,5,3,Mumtaz City,House,2009.0,,0.0,0.0,2,2,For Sale
+39900000,10.9,Marla,Islamabad,4,3,F-11,Flat,,0.0,1.0,0.0,1,1,For Sale
+3600000,3.1,Marla,Islamabad,3,1,Top City-1,Flat,2013.0,0.0,0.0,0.0,1,1,For Sale
+16900000,7.0,Marla,Islamabad,3,2,PWD Housing Society,House,,1.0,0.0,1.0,1,1,For Sale
+11700000,5.0,Marla,Islamabad,2,1,Bahria Town Phase 8,House,,2.0,0.0,0.0,1,1,For Sale
+25300000,11.2,Marla,Islamabad,5,3,I-8,Penthouse,2010.0,2.0,1.0,1.0,1,1,For Sale
+52400000,15.0,Marla,Islamabad,7,4,G-6,Upper Portion,,1.0,0.0,1.0,1,2,For Sale
+23400000,7.6,Marla,Islamabad,4,3,G-6,Flat,2010.0,0.0,,0.0,1,1,For Sale
+6800000,7.4,Marla,Islamabad,4,3,Blue World City,Flat,2000.0,0.0,0.0,0.0,1,1,For Sale
+101900000,20.0,Marla,Islamabad,5,5,DHA Phase 4,House,,1.0,,1.0,2,2,For Sale
+52300000,12.0,Marla,Islamabad,7,3,F-10,House,,2.0,0.0,0.0,2,2,For Sale
+19700000,10.3,Marla,Islamabad,4,4,Bahria Town Phase 7,Flat,2022.0,0.0,0.0,0.0,1,1,For Sale
+21900000,12.0,Marla,Islamabad,5,4,PECHS,Lower Portion,2000.0,2.0,1.0,0.0,2,1,For Sale
+22800000,12.0,Marla,Islamabad,7,3,I-10,Upper Portion,2005.0,2.0,0.0,1.0,2,2,For Sale
+52500000,14.0,Marla,Islamabad,4,4,G-7,House,,1.0,0.0,,1,1,For Sale
+11000000,3.0,Marla,Islamabad,3,1,Bahria Enclave,House,2023.0,1.0,0.0,0.0,1,1,For Sale
+26100000,7.5,Marla,Islamabad,3,2,Bahria Town Phase 1,Penthouse,2002.0,1.0,0.0,0.0,1,1,For Sale
+24500000,10.0,Marla,Islamabad,5,2,G-9,Upper Portion,2018.0,1.0,1.0,0.0,2,1,For Sale
+1268800000,16.0,Kanal,Islamabad,5,4,F-8,Farm House,2000.0,1.0,1.0,0.0,1,2,For Sale
+32000000,5.0,Marla,Islamabad,2,2,E-7,Upper Portion,,2.0,0.0,0.0,1,1,For Sale
+5600000,5.0,Marla,Islamabad,2,2,Faisal Town,Upper Portion,2023.0,2.0,0.0,0.0,1,1,For Sale
+238100000,6.0,Kanal,Islamabad,6,3,Bahria Town Phase 4,Farm House,,2.0,0.0,0.0,1,2,For Sale
+38300000,10.0,Marla,Islamabad,4,2,E-11,Lower Portion,,1.0,0.0,0.0,1,1,For Sale
+8400000,4.4,Marla,Islamabad,3,1,G-11,Flat,2014.0,0.0,0.0,0.0,1,1,For Sale
+154200000,5.0,Kanal,Islamabad,5,3,Bahria Town Phase 7,House,2001.0,1.0,0.0,1.0,1,2,For Sale
+200800000,3.0,Kanal,Islamabad,6,4,G-7,House,,1.0,0.0,,1,2,For Sale
+429000000,7.0,Kanal,Islamabad,5,3,F-11,House,2014.0,1.0,0.0,0.0,2,1,For Sale
+18700000,5.0,Marla,Islamabad,3,1,Bahria Town Phase 2,Lower Portion,2023.0,1.0,0.0,0.0,1,1,For Sale
+47800000,11.2,Marla,Islamabad,5,4,DHA Phase 2,Flat,2004.0,0.0,1.0,1.0,1,1,For Sale
+5900000,5.9,Marla,Islamabad,4,3,Margalla Hills,Penthouse,2002.0,3.0,0.0,0.0,1,2,For Sale
+11300000,5.4,Marla,Islamabad,4,3,Bahria Town Phase 8,Flat,2022.0,0.0,0.0,0.0,1,1,For Sale
+8700000,7.1,Marla,Islamabad,4,3,Capital Smart City,Flat,,0.0,0.0,0.0,1,2,For Sale
+241000000,3.0,Kanal,Islamabad,6,4,DHA Phase 2,Upper Portion,2023.0,1.0,,1.0,1,1,For Sale
+45100000,13.2,Marla,Islamabad,6,4,F-11,Penthouse,2000.0,1.0,,1.0,1,1,For Sale
+20600000,9.8,Marla,Islamabad,4,3,G-14,Penthouse,,1.0,0.0,0.0,1,2,For Sale
+49800000,12.0,Marla,Islamabad,5,4,F-11,House,,2.0,1.0,0.0,1,2,For Sale
+705500000,12.0,Kanal,Islamabad,4,4,Bahria Enclave,House,2005.0,2.0,1.0,1.0,1,2,For Sale
+19800000,10.8,Marla,Islamabad,5,4,I-10,Flat,2009.0,0.0,1.0,1.0,1,1,For Sale
+40500000,7.7,Marla,Islamabad,3,2,DHA Phase 1,Penthouse,2003.0,2.0,0.0,0.0,1,1,For Sale
+76400000,20.0,Marla,Islamabad,5,4,Bahria Enclave,Lower Portion,,2.0,1.0,1.0,1,1,For Sale
+11800000,10.0,Marla,Islamabad,3,3,Mumtaz City,House,2005.0,1.0,1.0,1.0,1,1,For Sale
+12300000,7.2,Marla,Islamabad,5,2,PECHS,Flat,2001.0,0.0,0.0,0.0,2,1,For Sale
+12400000,5.0,Marla,Islamabad,2,2,G-11,Upper Portion,,1.0,0.0,0.0,1,1,For Sale
+873900000,14.0,Kanal,Islamabad,6,3,Bahria Town Phase 2,Lower Portion,,2.0,1.0,,2,1,For Sale
+63800000,11.4,Marla,Islamabad,7,4,F-8,Flat,,0.0,0.0,0.0,2,2,For Sale
+6400000,3.0,Marla,Islamabad,3,1,PECHS,House,,1.0,0.0,0.0,1,1,For Sale
+15000000,7.0,Marla,Islamabad,4,2,Bahria Town Phase 4,House,2015.0,2.0,0.0,1.0,1,2,For Sale
+5100000,5.0,Marla,Islamabad,3,1,Naval Anchorage,Upper Portion,2005.0,1.0,0.0,0.0,1,1,For Sale
+28800000,8.6,Marla,Islamabad,4,3,G-7,Flat,2021.0,0.0,0.0,0.0,1,1,For Sale
+22300000,20.0,Marla,Islamabad,7,4,Naval Anchorage,Lower Portion,2007.0,2.0,1.0,1.0,1,2,For Sale
+51000000,13.8,Marla,Islamabad,4,4,Bahria Town Phase 2,Flat,,0.0,1.0,0.0,1,1,For Sale
+15800000,3.0,Marla,Islamabad,3,1,F-8,House,,3.0,0.0,0.0,1,1,For Sale
+37200000,10.0,Marla,Islamabad,4,3,Bahria Town Phase 1,House,,3.0,0.0,1.0,1,2,For Sale
+12300000,10.0,Marla,Islamabad,3,2,Blue World City,Penthouse,2011.0,2.0,0.0,1.0,1,1,For Sale
+44200000,10.9,Marla,Islamabad,7,5,G-7,Flat,,0.0,1.0,1.0,1,1,For Sale
+4200000,3.5,Marla,Islamabad,3,1,Mumtaz City,Flat,,0.0,0.0,0.0,1,1,For Sale
+6900000,3.0,Marla,Islamabad,3,2,G-8,Lower Portion,2022.0,1.0,0.0,0.0,1,1,For Sale
+488000000,8.0,Kanal,Islamabad,6,4,F-11,House,2013.0,2.0,0.0,0.0,2,2,For Sale
+10400000,3.0,Marla,Islamabad,2,1,Gulberg Residencia,Lower Portion,2004.0,1.0,0.0,0.0,1,1,For Sale
+12900000,3.3,Marla,Islamabad,2,1,Gulberg Residencia,Penthouse,,2.0,0.0,0.0,1,1,For Sale
+17300000,8.0,Marla,Islamabad,5,3,G-15,House,2019.0,2.0,0.0,0.0,2,1,For Sale
+21400000,9.6,Marla,Islamabad,4,2,PWD Housing Society,Penthouse,,2.0,0.0,0.0,1,2,For Sale
+61700000,12.4,Marla,Islamabad,5,4,F-6,Penthouse,2021.0,1.0,1.0,,1,1,For Sale
+451900000,14.0,Kanal,Islamabad,5,4,Bahria Town Phase 8,House,2006.0,2.0,1.0,1.0,2,2,For Sale
+292900000,17.0,Kanal,Islamabad,6,3,Top City-1,Farm House,2015.0,2.0,1.0,1.0,1,2,For Sale
+17200000,8.0,Marla,Islamabad,4,2,G-8,Lower Portion,2019.0,2.0,0.0,0.0,1,1,For Sale
+42000000,20.0,Marla,Islamabad,6,4,G-11,House,2022.0,2.0,0.0,0.0,2,2,For Sale
+16100000,13.9,Marla,Islamabad,5,4,Capital Smart City,Flat,2023.0,0.0,1.0,0.0,1,1,For Sale
+262700000,15.0,Kanal,Islamabad,4,4,Park View City,House,2010.0,1.0,1.0,1.0,1,2,For Sale
+167300000,10.0,Kanal,Islamabad,6,3,CBR Town,Upper Portion,2013.0,3.0,0.0,1.0,1,2,For Sale
+22600000,7.0,Marla,Islamabad,5,2,Bahria Enclave,House,2005.0,2.0,0.0,1.0,2,1,For Sale
+54400000,10.0,Marla,Islamabad,4,3,DHA Phase 5,House,2020.0,2.0,0.0,0.0,1,1,For Sale
+14800000,7.6,Marla,Islamabad,3,3,I-10,Flat,,0.0,0.0,0.0,1,1,For Sale
+9000000,3.0,Marla,Islamabad,2,1,Gulberg Residencia,House,2004.0,2.0,0.0,,1,1,For Sale
+27400000,6.7,Marla,Islamabad,3,2,Gulberg Greens,Penthouse,,1.0,0.0,0.0,1,1,For Sale
+169400000,9.0,Kanal,Islamabad,5,4,Airport Housing Society,Farm House,,2.0,0.0,,2,2,For Sale
+42900000,20.0,Marla,Islamabad,7,4,Bahria Town Phase 8,House,2008.0,2.0,0.0,1.0,1,2,For Sale
+257800000,14.0,Kanal,Islamabad,4,3,Margalla Hills,House,2017.0,2.0,1.0,1.0,1,1,For Sale
+7800000,7.0,Marla,Islamabad,3,3,Mumtaz City,House,2008.0,2.0,0.0,0.0,1,1,For Sale
+183500000,10.0,Kanal,Islamabad,4,3,Mumtaz City,House,,1.0,0.0,1.0,1,2,For Sale
+1136700000,20.0,Kanal,Islamabad,5,5,G-7,Farm House,2015.0,1.0,1.0,0.0,2,1,For Sale
+79200000,15.0,Marla,Islamabad,4,5,DHA Phase 1,House,2020.0,3.0,0.0,0.0,1,1,For Sale
+21000000,10.0,Marla,Islamabad,4,2,G-9,Upper Portion,2003.0,1.0,1.0,1.0,1,2,For Sale
+25400000,5.0,Marla,Islamabad,2,2,DHA Phase 4,House,2019.0,1.0,0.0,0.0,1,1,For Sale
+31600000,10.0,Marla,Islamabad,5,3,Bahria Town Phase 2,Lower Portion,2005.0,2.0,1.0,1.0,2,2,For Sale
+5600000,5.0,Marla,Islamabad,3,2,Mumtaz City,House,2011.0,1.0,0.0,0.0,1,1,For Sale
+221500000,10.0,Kanal,Islamabad,4,5,Top City-1,House,,1.0,1.0,1.0,1,2,For Sale
+47100000,11.7,Marla,Islamabad,5,4,Gulberg Residencia,Penthouse,2021.0,2.0,0.0,1.0,1,2,For Sale
+1032700000,18.0,Kanal,Islamabad,7,3,Bahria Enclave,Farm House,2002.0,2.0,1.0,1.0,1,1,For Sale
+344200000,10.0,Kanal,Islamabad,4,4,G-11,House,2018.0,2.0,0.0,0.0,1,2,For Sale
+12400000,6.8,Marla,Islamabad,5,3,PECHS,Flat,2001.0,0.0,0.0,0.0,1,1,For Sale
+105900000,20.0,Marla,Islamabad,7,4,DHA Phase 1,House,2014.0,3.0,1.0,0.0,1,2,For Sale
+10300000,8.7,Marla,Islamabad,4,3,Margalla Hills,Penthouse,,1.0,0.0,0.0,1,2,For Sale
+14300000,12.0,Marla,Islamabad,4,3,Sector B-17,Upper Portion,,2.0,1.0,0.0,1,1,For Sale
+12100000,5.6,Marla,Islamabad,4,3,Bahria Town Phase 7,Flat,,0.0,0.0,0.0,1,2,For Sale
+5200000,4.5,Marla,Islamabad,3,2,Sector B-17,Penthouse,,2.0,0.0,0.0,1,1,For Sale
+1519700000,16.0,Kanal,Islamabad,7,5,DHA Phase 1,Farm House,,2.0,0.0,0.0,2,1,For Sale
+208400000,12.0,Kanal,Islamabad,6,4,Airport Housing Society,Lower Portion,2004.0,3.0,1.0,1.0,2,2,For Sale
+171600000,9.0,Kanal,Islamabad,7,4,Mumtaz City,Farm House,2004.0,1.0,1.0,1.0,1,1,For Sale
+15200000,12.0,Marla,Islamabad,5,3,Sector C-14,House,2013.0,2.0,1.0,1.0,2,2,For Sale
+11000000,3.0,Marla,Islamabad,2,1,Gulberg Residencia,House,2005.0,1.0,0.0,0.0,1,1,For Sale
+91700000,5.0,Kanal,Islamabad,5,4,Top City-1,Upper Portion,2017.0,2.0,0.0,0.0,1,2,For Sale
+71000000,20.0,Marla,Islamabad,6,5,Gulberg Greens,Upper Portion,2006.0,3.0,0.0,0.0,2,2,For Sale
+18600000,15.0,Marla,Islamabad,5,4,I-14,House,2023.0,2.0,0.0,0.0,1,2,For Sale
+64000000,10.0,Marla,Islamabad,4,2,E-7,House,2022.0,2.0,1.0,0.0,1,1,For Sale
+48500000,10.0,Marla,Islamabad,4,3,DHA Phase 4,House,2016.0,1.0,1.0,0.0,1,2,For Sale
+39600000,10.0,Marla,Islamabad,5,2,Gulberg Greens,House,2006.0,3.0,1.0,1.0,2,1,For Sale
+206700000,12.0,Kanal,Islamabad,7,3,Margalla Hills,Farm House,,2.0,0.0,0.0,1,2,For Sale
+12400000,6.1,Marla,Islamabad,4,2,Bahria Town Phase 7,Flat,2016.0,0.0,0.0,,1,2,For Sale
+90200000,15.0,Marla,Islamabad,7,3,DHA Phase 4,Upper Portion,,3.0,0.0,0.0,1,1,For Sale
+36700000,13.0,Marla,Islamabad,5,5,F-10,Flat,2001.0,0.0,0.0,1.0,1,1,For Sale
+93400000,20.0,Marla,Islamabad,4,4,DHA Phase 5,House,2000.0,2.0,1.0,1.0,1,2,For Sale
+130900000,4.0,Kanal,Islamabad,7,3,Bahria Town Phase 7,Farm House,2009.0,1.0,0.0,1.0,1,1,For Sale
+14900000,7.6,Marla,Islamabad,3,3,G-9,Flat,2004.0,0.0,0.0,0.0,1,1,For Sale
+19800000,15.0,Marla,Islamabad,5,3,Capital Smart City,Upper Portion,2023.0,1.0,1.0,0.0,1,1,For Sale
+384800000,10.0,Kanal,Islamabad,7,4,G-14,House,,1.0,1.0,0.0,1,1,For Sale
+418800000,20.0,Kanal,Islamabad,7,5,Blue World City,House,,2.0,1.0,0.0,1,2,For Sale
+10400000,5.0,Marla,Islamabad,2,1,G-13,Lower Portion,,1.0,0.0,0.0,1,1,For Sale
+14600000,6.9,Marla,Islamabad,4,3,PECHS,Flat,2011.0,0.0,0.0,0.0,1,1,For Sale
+6900000,3.0,Marla,Islamabad,2,2,I-10,House,2021.0,1.0,,0.0,1,1,For Sale
+16300000,8.3,Marla,Islamabad,4,3,PWD Housing Society,Flat,2002.0,0.0,0.0,0.0,1,1,For Sale
+243100000,7.0,Kanal,Islamabad,4,3,Bahria Town Phase 8,Farm House,2006.0,2.0,0.0,1.0,1,1,For Sale
+204200000,12.0,Kanal,Islamabad,7,5,Park View City,Upper Portion,2016.0,1.0,1.0,0.0,1,2,For Sale
+110400000,4.0,Kanal,Islamabad,5,4,G-15,Farm House,2001.0,1.0,0.0,1.0,1,2,For Sale
+10000000,5.0,Marla,Islamabad,2,1,PECHS,House,2011.0,,0.0,0.0,1,1,For Sale
+55300000,3.0,Kanal,Islamabad,5,3,I-16,House,2011.0,2.0,0.0,1.0,2,2,For Sale
+430900000,8.0,Kanal,Islamabad,5,5,Bahria Town Phase 1,Farm House,2004.0,2.0,1.0,0.0,2,2,For Sale
+43500000,12.0,Marla,Islamabad,5,4,F-11,House,2010.0,1.0,0.0,0.0,1,1,For Sale
+17400000,8.7,Marla,Islamabad,4,3,PWD Housing Society,Flat,,0.0,,0.0,1,2,For Sale
+5700000,5.0,Marla,Islamabad,2,1,CBR Town,House,,1.0,0.0,0.0,1,1,For Sale
+63500000,14.6,Marla,Islamabad,4,4,E-11,Penthouse,,1.0,1.0,1.0,1,1,For Sale
+19400000,20.0,Marla,Islamabad,5,4,Airport Housing Society,House,,3.0,0.0,0.0,1,2,For Sale
+1677500000,18.0,Kanal,Islamabad,7,5,F-8,Farm House,,1.0,0.0,0.0,1,1,For Sale
+346600000,17.0,Kanal,Islamabad,6,5,Airport Housing Society,Farm House,2015.0,2.0,1.0,0.0,2,1,For Sale
+1370300000,14.0,Kanal,Islamabad,7,3,E-7,Lower Portion,,1.0,0.0,0.0,2,1,For Sale
+14300000,7.0,Marla,Islamabad,3,3,I-8,Upper Portion,2006.0,2.0,0.0,0.0,1,1,For Sale
+15000000,7.3,Marla,Islamabad,4,3,G-11,Flat,2013.0,0.0,0.0,,1,2,For Sale
+17500000,15.0,Marla,Islamabad,5,5,Margalla Hills,Upper Portion,,1.0,1.0,1.0,2,1,For Sale
+13800000,11.8,Marla,Islamabad,4,4,Faisal Town,Flat,,0.0,0.0,0.0,1,2,For Sale
+534300000,14.0,Kanal,Islamabad,4,4,G-13,Farm House,2015.0,3.0,0.0,0.0,1,2,For Sale
+10600000,5.0,Marla,Islamabad,3,1,I-10,House,2012.0,2.0,0.0,0.0,1,1,For Sale
+1363800000,20.0,Kanal,Islamabad,4,4,Gulberg Residencia,Upper Portion,,2.0,0.0,1.0,1,2,For Sale
+880200000,15.0,Kanal,Islamabad,7,4,Gulberg Greens,Farm House,,1.0,0.0,0.0,1,2,For Sale
+51100000,15.0,Marla,Islamabad,7,4,E-11,Lower Portion,2008.0,3.0,1.0,1.0,1,1,For Sale
+71600000,14.2,Marla,Islamabad,7,3,F-8,Flat,2016.0,0.0,1.0,0.0,2,1,For Sale
+674200000,19.0,Kanal,Islamabad,7,4,Bahria Town Phase 7,Farm House,2014.0,2.0,0.0,1.0,2,2,For Sale
+12600000,10.0,Marla,Islamabad,3,3,CBR Town,House,2013.0,2.0,0.0,0.0,1,1,For Sale
+215300000,4.0,Kanal,Islamabad,5,4,Gulberg Residencia,Farm House,2005.0,1.0,1.0,0.0,2,1,For Sale
+35600000,14.0,Marla,Islamabad,5,5,G-14,House,,2.0,1.0,0.0,1,1,For Sale
+89300000,5.0,Kanal,Islamabad,4,3,Margalla Hills,Lower Portion,2010.0,2.0,0.0,1.0,1,2,For Sale
+11300000,10.0,Marla,Islamabad,4,3,Blue World City,Upper Portion,2013.0,2.0,0.0,0.0,1,1,For Sale
+13500000,12.0,Marla,Islamabad,5,5,Capital Smart City,House,2012.0,1.0,0.0,0.0,1,2,For Sale
+522500000,14.0,Kanal,Islamabad,5,4,G-11,Lower Portion,,2.0,1.0,1.0,1,2,For Sale
+326700000,10.0,Kanal,Islamabad,5,5,I-8,Lower Portion,2007.0,3.0,0.0,0.0,1,1,For Sale
+382300000,5.0,Kanal,Islamabad,5,5,E-7,House,2009.0,,,1.0,1,1,For Sale
+10700000,10.0,Marla,Islamabad,4,2,Blue World City,House,2010.0,2.0,1.0,0.0,1,1,For Sale
+396500000,13.0,Kanal,Islamabad,5,4,G-15,Farm House,2009.0,1.0,0.0,0.0,1,2,For Sale
+208800000,12.0,Kanal,Islamabad,6,3,Top City-1,Farm House,2010.0,2.0,0.0,0.0,2,2,For Sale
+8900000,7.9,Marla,Islamabad,3,2,Margalla Hills,Penthouse,2020.0,1.0,0.0,0.0,1,1,For Sale
+22900000,10.7,Marla,Islamabad,5,5,G-8,Penthouse,,2.0,0.0,0.0,2,2,For Sale
+24600000,20.0,Marla,Islamabad,4,4,Naval Anchorage,House,,1.0,1.0,1.0,1,1,For Sale
+208400000,12.0,Kanal,Islamabad,6,4,Airport Housing Society,Lower Portion,2004.0,3.0,1.0,1.0,2,2,For Sale
+13800000,7.0,Marla,Islamabad,5,2,PWD Housing Society,Lower Portion,2018.0,3.0,0.0,1.0,2,2,For Sale
+14800000,15.0,Marla,Islamabad,6,5,Margalla Hills,House,2003.0,2.0,0.0,0.0,2,2,For Sale
+18700000,5.0,Marla,Islamabad,3,1,Bahria Town Phase 2,Lower Portion,2023.0,1.0,0.0,0.0,1,1,For Sale
+19700000,10.3,Marla,Islamabad,4,4,Bahria Town Phase 7,Flat,2022.0,0.0,0.0,0.0,1,1,For Sale
+9600000,7.5,Marla,Islamabad,5,3,Sector C-14,Flat,2021.0,0.0,0.0,0.0,2,2,For Sale
+33700000,14.0,Marla,Islamabad,5,3,G-15,Upper Portion,2020.0,1.0,1.0,0.0,1,2,For Sale
