@@ -1,26 +1,11 @@
-"""
-Zameen.com Property Listing Scraper - Islamabad
-================================================
-Scrapes 300-400 property listings from Zameen.com for Islamabad.
-Uses requests + BeautifulSoup with fallback to Selenium for JS-heavy pages.
-
-Usage:
-    pip install requests beautifulsoup4 selenium pandas lxml
-    python zameen_scraper.py
-"""
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
 import random
-import json
 import re
 import logging
-from datetime import datetime
-from pathlib import Path
 
-# ── Optional Selenium import (used only if requests fails) ──────────────────
 try:
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
@@ -34,7 +19,6 @@ except ImportError:
 logging.basicConfig(level=logging.INFO, format="%(asctime)s  %(levelname)s  %(message)s")
 log = logging.getLogger(__name__)
 
-# ── Configuration ────────────────────────────────────────────────────────────
 BASE_URL   = "https://www.zameen.com"
 CITY_SLUG  = "islamabad"
 CITY_ID    = "2"          # Zameen internal city ID for Islamabad
@@ -55,8 +39,6 @@ HEADERS = {
 
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
-
-# ── Helpers ──────────────────────────────────────────────────────────────────
 
 def sleep():
     time.sleep(random.uniform(*REQUEST_DELAY))
@@ -97,8 +79,6 @@ def get_page_selenium(url: str) -> BeautifulSoup | None:
     finally:
         driver.quit()
 
-# ── Price Parser ─────────────────────────────────────────────────────────────
-
 def parse_price(text: str) -> float | None:
     """Convert 'PKR 1.5 Crore' → 15000000.0"""
     if not text:
@@ -135,8 +115,6 @@ def parse_area(text: str) -> tuple[float | None, str | None]:
             pass
     return None, None
 
-# ── Listing Page Parser ───────────────────────────────────────────────────────
-
 def parse_listing_detail(url: str) -> dict:
     """Scrape a single property detail page."""
     soup = get_page(url)
@@ -148,7 +126,6 @@ def parse_listing_detail(url: str) -> dict:
 
     data = {"source_url": url}
 
-    # ── Price ──
     for sel in ["span[class*='price']", "div[class*='price']", "strong[class*='price']"]:
         el = soup.select_one(sel)
         if el:
@@ -156,24 +133,20 @@ def parse_listing_detail(url: str) -> dict:
             data["price_pkr"] = parse_price(el.get_text(strip=True))
             break
 
-    # ── Title / Property Type ──
     title_el = soup.select_one("h1")
     if title_el:
         data["title"] = title_el.get_text(strip=True)
 
-    # ── Location ──
     for sel in ["div[class*='location']", "span[class*='location']", "li[class*='location']"]:
         el = soup.select_one(sel)
         if el:
             data["location"] = el.get_text(strip=True)
             break
 
-    # ── Key details table (beds, baths, area, type) ──
     for item in soup.select("li[class*='IconItem'], div[class*='iconItem'], ul[class*='features'] li"):
         label = item.select_one("span[class*='label'], span[class*='Label']")
         value = item.select_one("span[class*='value'], span[class*='Value']")
         if not label or not value:
-            # Try aria-label pattern
             aria = item.get("aria-label", "")
             text = item.get_text(separator=" ", strip=True)
             if "bed" in aria.lower() or "bed" in text.lower():
@@ -202,7 +175,6 @@ def parse_listing_detail(url: str) -> dict:
         elif "purpose" in lbl:
             data["purpose"] = val
 
-    # ── Additional features (parking, servant, kitchens, etc.) ──
     for row in soup.select("div[class*='Detail'], table tr, div[class*='feature']"):
         text = row.get_text(separator="|", strip=True).lower()
         val_match = re.search(r"\|(\d+)", row.get_text(separator="|"))
@@ -232,19 +204,15 @@ def _safe_int(s: str) -> int | None:
     except (ValueError, TypeError):
         return None
 
-# ── Listing Index Parser ──────────────────────────────────────────────────────
-
 def get_listing_urls_from_page(soup: BeautifulSoup) -> list[str]:
     """Extract individual listing URLs from a search results page."""
     urls = []
-    # Zameen uses <li> cards with an <a> wrapping each listing
     for a in soup.select("li[class*='_2b0c6'] a, li[class*='listing'] a, article a, div[class*='listingCard'] a"):
         href = a.get("href", "")
         if href and ("/property/" in href or "/homes/" in href or "-" in href):
             full = href if href.startswith("http") else BASE_URL + href
             if full not in urls:
                 urls.append(full)
-    # Fallback: any link containing /property/
     if not urls:
         for a in soup.find_all("a", href=True):
             href = a["href"]
@@ -291,7 +259,7 @@ def scrape(target: int = TARGET_LISTINGS) -> pd.DataFrame:
             detail = parse_listing_detail(url)
             if detail.get("price_pkr"):   # only keep listings with a price
                 all_data.append(detail)
-                log.info(f"    ✓ Price: {detail.get('price_pkr')}, Beds: {detail.get('bedrooms')}")
+                log.info(f"    Price: {detail.get('price_pkr')}, Beds: {detail.get('bedrooms')}")
             if len(all_data) >= target:
                 break
             sleep()
@@ -306,11 +274,10 @@ def scrape(target: int = TARGET_LISTINGS) -> pd.DataFrame:
 
     df = pd.DataFrame(all_data)
     df.to_csv(OUTPUT_CSV, index=False)
-    log.info(f"\n✅ Saved {len(df)} listings to '{OUTPUT_CSV}'")
+    log.info(f"\nSaved {len(df)} listings to '{OUTPUT_CSV}'")
     return df
 
 
-# ── Entry point ───────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     log.info("=" * 60)
     log.info("  Zameen.com Islamabad Property Scraper")

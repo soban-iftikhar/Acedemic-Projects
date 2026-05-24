@@ -9,7 +9,6 @@ import json
 import numpy as np
 import os
 
-# ── Color codes for terminal ──────────────────────────────────────────────────
 G  = "\033[92m"   # green
 B  = "\033[94m"   # blue
 Y  = "\033[93m"   # yellow
@@ -24,7 +23,7 @@ def cls():
 def banner():
     print(f"""
 {B}{BOLD}╔══════════════════════════════════════════════════════╗
-║     🏠  ISLAMABAD HOUSE PRICE PREDICTOR  🏠          ║
+║     ISLAMABAD HOUSE PRICE PREDICTOR                  ║
 ║        Trained on Zameen.com Listings                ║
 ╚══════════════════════════════════════════════════════╝{RS}
 """)
@@ -103,7 +102,6 @@ def run():
     cls()
     banner()
 
-    # ── Load model ─────────────────────────────────────────────────────────
     try:
         with open("best_model.pkl", "rb") as f:
             model = pickle.load(f)
@@ -117,22 +115,19 @@ def run():
     prop_types   = meta["property_type_classes"]
     feature_cols = meta["feature_cols"]
 
-    print(f"{G}  ✓ Model loaded: {meta['best_model_name']}{RS}\n")
+    print(f"{G}  Model loaded: {meta['best_model_name']}{RS}\n")
 
     while True:
         print(f"{B}{'─'*56}{RS}")
         print(f"  {W}Enter property details to get an estimated price{RS}")
         print(f"{B}{'─'*56}{RS}\n")
 
-        # ── Location ─────────────────────────────────────────────────────
         location = pick_from_list("Select Location", sorted(locations))
         loc_enc  = sorted(locations).index(location)
 
-        # ── Property type ─────────────────────────────────────────────────
         prop_type = pick_from_list("Select Property Type", sorted(prop_types))
         type_enc  = sorted(prop_types).index(prop_type)
 
-        # ── Area ──────────────────────────────────────────────────────────
         print(f"\n  {W}Area Unit:{RS}")
         print(f"    {Y}1.{RS} Marla   {Y}2.{RS} Kanal   {Y}3.{RS} Square Feet")
         unit = ask("Choose unit (1/2/3)", str, choices=["1","2","3"])
@@ -140,21 +135,18 @@ def run():
         area_val   = ask(f"Area in {unit_label}", float, min_val=0.5, max_val=500)
         area_marla = to_marla(area_val, unit)
 
-        # ── Rooms ─────────────────────────────────────────────────────────
         print(f"\n  {W}Room Details:{RS}")
         beds     = ask("Bedrooms  (1–10)", int, min_val=1, max_val=10)
         baths    = ask("Bathrooms (1–8)",  int, min_val=1, max_val=8)
         kitchens = ask("Kitchens  (1–4)",  int, min_val=1, max_val=4)
         drawing  = ask("Drawing Rooms (0–3)", int, min_val=0, max_val=3)
 
-        # ── Extras ────────────────────────────────────────────────────────
         print(f"\n  {W}Additional Features:{RS}")
         parking = ask("Parking Spaces (0–5)", int, min_val=0, max_val=5)
         servant = ask("Servant Quarters? (0=No / 1=Yes)", int, choices=[0, 1])
         store   = ask("Store Room?       (0=No / 1=Yes)", int, choices=[0, 1])
         built_yr = ask("Built Year (1990–2024)", int, min_val=1990, max_val=2024)
 
-        # ── Predict ───────────────────────────────────────────────────────
         X        = make_features(area_marla, beds, baths, loc_enc, type_enc,
                                  parking, servant, store, kitchens, drawing,
                                  built_yr, feature_cols)
@@ -163,10 +155,9 @@ def run():
         low      = price * 0.88
         high     = price * 1.12
 
-        # ── Result ────────────────────────────────────────────────────────
         print(f"""
-{G}{BOLD}╔══════════════════════════════════════════════════════╗
-║              💰  ESTIMATED PRICE                     ║
+    {G}{BOLD}╔══════════════════════════════════════════════════════╗
+    ║              ESTIMATED PRICE                         ║
 ╠══════════════════════════════════════════════════════╣
 ║  Property : {prop_type:<40}║
 ║  Location : {location:<40}║
@@ -182,7 +173,7 @@ def run():
 
         again = input(f"  {Y}▶{RS} Predict another property? (y/n): ").strip().lower()
         if again != "y":
-            print(f"\n{B}  Goodbye! 👋{RS}\n")
+            print(f"\n{B}  Goodbye!{RS}\n")
             break
         cls()
         banner()
