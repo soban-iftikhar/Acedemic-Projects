@@ -6,7 +6,26 @@ function DiffieChallenge({ challenge }) {
   const [shared, setShared] = useState('');
   const [result, setResult] = useState('');
   const [showHint, setShowHint] = useState(false);
-  const expectedSharedSecret = String(2);
+  const p = 23;
+  const g = 5;
+  const a = 6; // Alice private
+  const A = 6; // Alice public (given)
+  const b = 15; // Bob private
+  const B = 8; // Bob public (given)
+
+  const modPow = (base, exp, mod) => {
+    let result = 1;
+    let bval = base % mod;
+    let e = exp;
+    while (e > 0) {
+      if (e % 2 === 1) result = (result * bval) % mod;
+      bval = (bval * bval) % mod;
+      e = Math.floor(e / 2);
+    }
+    return result;
+  };
+
+  const expectedSharedSecret = String(modPow(B, a, p));
 
   const handleRevealParams = (e) => {
     e.preventDefault();
@@ -16,7 +35,8 @@ function DiffieChallenge({ challenge }) {
   const handleCheckShared = (e) => {
     e.preventDefault();
     
-    if (shared === expectedSharedSecret || shared === 'shared_secret' || shared.toLowerCase().includes('diffie')) {
+    const normalized = shared.trim();
+    if (normalized === expectedSharedSecret || normalized === 'shared_secret') {
       setResult(`✓ Correct! You computed the shared secret in the Diffie-Hellman key exchange!\n\nFlag: ${CHALLENGE_FLAGS.diffie}`);
     } else {
       setResult('✗ Incorrect. Use modular exponentiation to calculate the shared secret.');

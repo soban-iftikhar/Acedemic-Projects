@@ -1,4 +1,4 @@
-import { useState } from 'react';
+ import { useState } from 'react';
 import { CHALLENGE_FLAGS } from '../../constants/challengeFlags';
 
 function CryptoChallenge({ challenge }) {
@@ -6,13 +6,14 @@ function CryptoChallenge({ challenge }) {
   const [guess, setGuess] = useState('');
   const [result, setResult] = useState('');
   const [showHint, setShowHint] = useState(false);
-  const expectedPlaintext = ['c', 'a', 'e', 's', 'a', 'r', ' ', 'c', 'i', 'p', 'h', 'e', 'r', ' ', 'd', 'e', 'c', 'o', 'd', 'e', 'd'].join('');
-
   const rot13 = (str) => {
     return str.replace(/[a-zA-Z]/g, function(c) {
       return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
     });
   };
+
+  const encrypted = 'Gur dhvpx oebja sbk whzcf bire gur ynml qbt';
+  const expectedPlaintext = rot13(encrypted);
 
   const handleRevealEncrypted = (e) => {
     e.preventDefault();
@@ -21,8 +22,11 @@ function CryptoChallenge({ challenge }) {
 
   const handleCheckGuess = (e) => {
     e.preventDefault();
-    
-    if (guess.toLowerCase().includes('caesar') || guess.toLowerCase() === expectedPlaintext || guess.toLowerCase().includes('decoded')) {
+    const normalize = (s) => s.replace(/\s+/g, ' ').trim().toLowerCase();
+    const normalizedGuess = normalize(guess);
+    const normalizedExpected = normalize(expectedPlaintext);
+
+    if (normalizedGuess === normalizedExpected) {
       setResult(`✓ Correct! You successfully decrypted the ROT13 message!\n\nFlag: ${CHALLENGE_FLAGS.crypto}`);
     } else {
       setResult('✗ Incorrect. ROT13 shifts each letter by 13 positions.');
@@ -60,7 +64,7 @@ function CryptoChallenge({ challenge }) {
             fontFamily: 'monospace',
             fontSize: '13px'
           }}>
-            Encrypted (ROT13): Gur dhvpx oebja sbk whzcf bire gur ynml qbt
+            Encrypted (ROT13): {encrypted}
           </div>
         )}
       </div>
